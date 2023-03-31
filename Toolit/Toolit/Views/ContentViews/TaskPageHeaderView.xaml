@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="Toolit.Views.ContentViews.TaskPageHeaderView">
+    <ContentView.Content>
+        
+        <pancakeView:PancakeView Style="{StaticResource TopBoxBig}"
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="240">
+            
+            <pancakeView:PancakeView.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0" />
+                    <On Platform="iOS" Value="0, -20, 0, 0" />
+                </OnPlatform>
+            </pancakeView:PancakeView.Margin>
+
+            <!-- safe area compensator -->
+            <pancakeView:PancakeView.Triggers>
+                <DataTrigger TargetType="pancakeView:PancakeView"
+                             Binding="{Binding HasSafeArea}"
+                             Value="True">
+                    <Setter Property="HeightRequest" Value="276" />
+                    <Setter Property="Margin" Value="0, -52, 0, 0" />
+                </DataTrigger>
+            </pancakeView:PancakeView.Triggers>
+
+            <Grid>
+
+                <!--  Bg Image  -->
+                <Image Aspect="AspectFill"
+                       Source="{Binding DisplayedTask.TitleImageUrl}" />
+
+                <!--  Gradient  -->
+                <BoxView
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <BoxView.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0.1" Color="{StaticResource DarkGreenFade}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource DarkGreen}" />
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+
+                <!--  Pattern  -->
+                <Image Style="{StaticResource BigTopPatternDrop}" />
+                <Image Style="{StaticResource BigTopPatternStripe}" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource BigTopBackBtnStack}"
+                             xct:SafeAreaEffect.SafeArea="True">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                </StackLayout>
+
+                <!--  VideoBtn  -->
+                <StackLayout Style="{StaticResource BigTopRightStack}"
+                             xct:SafeAreaEffect.SafeArea="True"
+                             IsVisible="{Binding DisplayedTask.HasVideo}"
+                             xct:TouchEffect.Command="{Binding OpenFullVideoCommand}">
+                    <Label
+                        Margin="0,0,8,0"
+                        Style="{StaticResource SemiBoldSmallLabel}"
+                        Text="{x:Static resources:AppResources.PlayVideoAction}"
+                        TextColor="{StaticResource WhiteTextColor}"
+                        VerticalOptions="Center" />
+                    <Image
+                        HeightRequest="20"
+                        Source="play_alt"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <!--  Header  -->
+                <StackLayout Style="{StaticResource HeaderTextStack}">
+                    <Label Style="{StaticResource BigTopHeader}"
+                           Text="{Binding DisplayedTask.Title}" />
+                    <StackLayout Margin="0,8,0,0"
+                                 Orientation="Horizontal">
+
+                        <Image HeightRequest="16"
+                               Source="map_marker" />
+
+                        <!--  Address  -->
+                        <Label Style="{StaticResource BigTopSmallHeader}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding DisplayedTask.Address}" />
+                                    <Span Text=", " />
+                                    <Span Text="{Binding DisplayedTask.City}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </StackLayout>
+                        
+                    <Label Style="{StaticResource BigTopSmallHeader}"
+                           Text="{Binding DisplayedTask.Craft}"
+                           Margin="0, 8, 0, 0" />
+                </StackLayout>
+            </Grid>
+        </pancakeView:PancakeView>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.AddTaskCategoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True"
+    x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--  Frames  -->
+            <Style x:Key="NeedHelpHeader" TargetType="Label"
+                   BasedOn="{StaticResource BoldSmallLabel}">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="1" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="NeedHelpText" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="1" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="NeedHelpImage" TargetType="Image">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="NeedHelpGrid" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="52, *" />
+                <Setter Property="RowDefinitions" Value="Auto, Auto" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <customRenderer:CustomScrollView VerticalScrollBarVisibility="Never">
+        <!--  Topbox  -->
+        <StackLayout>
+            <Grid BackgroundColor="{StaticResource DarkGreen}"
+                  HeightRequest="92">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.AddNewTaskTabTitle}"
+                       xct:SafeAreaEffect.SafeArea="True" />
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout
+                Padding="36, 20, 36, 48"
+                Spacing="20">
+
+                <!--  header  -->
+                <Label Style="{StaticResource BoldLargeLabel}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.WhatDoYouNeedHelpWithPrompt}" />
+
+                <!--  task craft list  -->
+                <StackLayout BindableLayout.ItemsSource="{Binding CraftList}"
+                             Spacing="12">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <custom:PancakeView Padding="16"
+                                                xct:TouchEffect.Command="{Binding BindingContext.OpenCreateTaskPopupCommand, 
+                                                        Source={x:Reference Root}}"
+                                                xct:TouchEffect.CommandParameter="{Binding .}">
+                                <Grid Style="{StaticResource NeedHelpGrid}">
+                                    <Image Source="{Binding AddTaskIcon}"
+                                           Style="{StaticResource NeedHelpImage}" />
+
+                                    <Label Style="{StaticResource NeedHelpHeader}"
+                                           Text="{Binding LocalName}" />
+                                    <Label Style="{StaticResource NeedHelpText}"
+                                           Text="{Binding LocalDescription}" />
+                                </Grid>
+                            </custom:PancakeView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <!--  Worker  -->
+                <custom:PancakeView
+                    Padding="16"
+                    BackgroundColor="{StaticResource LightSelectedGreen}">
+                    <Grid Style="{StaticResource NeedHelpGrid}">
+                        <Image Source="screwdriver_green"
+                               Style="{StaticResource NeedHelpImage}" />
+
+                        <Label Style="{StaticResource NeedHelpHeader}"
+                               Text="{x:Static resources:AppResources.ApplyForCraftsmanActionTitle}" />
+                        <Label Style="{StaticResource NeedHelpText}"
+                               Text="{x:Static resources:AppResources.ApplyForCraftsmanActionCaption}" />
+                    </Grid>
+                    <custom:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenCraftsmanRegistrationPopupCommand}" />
+                    </custom:PancakeView.GestureRecognizers>
+                </custom:PancakeView>
+            </StackLayout>
+        </StackLayout>
+    </customRenderer:CustomScrollView>
+
+</ContentPage>

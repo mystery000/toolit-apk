@@ -1,0 +1,57 @@
+# Xamarin.iOS
+# Build a Xamarin.iOS project.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- dev
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+    mobileProjectMSbuildArgumentsForIOS: '/p:SetVersion=true /p:VersionNumber=0.2.0 /p:BuildNumber=$(Build.BuildId)'
+
+steps:
+# To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
+# configure this task with the *Mono* version that is associated with the
+# Xamarin SDK version that you need, and set the "enabled" property to true.
+# See https://go.microsoft.com/fwlink/?linkid=871629
+- script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_12_0
+  displayName: 'Select the Xamarin SDK version'
+  enabled: false
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'toolit_dist.p12'
+    certPwd: '$(P12password)'
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provProfileSecureFile: 'Adhoc_Toolit.mobileprovision'
+
+- task: XamariniOS@2
+  inputs:
+    solutionFile: '**/*.sln'
+    configuration: 'Appcenter'
+    args: '$(mobileProjectMSbuildArgumentsForIOS)'
+    buildForSimulator: false
+    packageApp: true
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    signingProvisioningProfileID: '$(APPLE_PROV_PROFILE_UUID)'
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'toolit-ios-appcenter'
+    appSlug: 'toolitapp/Toolit'
+    appFile: '../s/Toolit/Toolit.iOS/bin/iPhone/Appcenter/Toolit.iOS.ipa'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'If you ain''t first, you''re last.'
+    destinationType: 'groups'
+    distributionGroupId: '31fca1a1-41bd-44c1-8e24-222aebc71c10'

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Toolit.Controls.RatingBar">
+    <ContentView.Content>
+        <StackLayout x:Name="StarContainer"
+                     Orientation="Horizontal"
+                     Spacing="4">
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

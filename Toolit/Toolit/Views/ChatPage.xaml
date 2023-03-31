@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.ChatPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    xmlns:ui="clr-namespace:Toolit.Helpers.Ui;assembly=Toolit"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    xmlns:system="clr-namespace:System;assembly=netstandard"
+    BackgroundColor="{StaticResource LightTabBarBackgroundColor}"
+    x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+
+            <Style x:Key="SentMessage" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="20,20,20,0" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Margin" Value="52,0,0,0" />
+            </Style>
+            <Style x:Key="ReceivedMessage" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="20,20,0,20" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="0,0,52,0" />
+            </Style>
+
+            <DataTemplate x:Key="SentMessageDataTemplate">
+                <StackLayout Spacing="8"
+                             Padding="16"
+                             FlowDirection="LeftToRight"
+                             Rotation="180">
+                    
+                    <custom:PancakeView Style="{StaticResource SentMessage}">
+                        
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger TargetType="custom:PancakeView"
+                                         Binding="{Binding ImageUrl, 
+                                                Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                         Value="True">
+                                <Setter Property="HeightRequest" Value="256" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                        
+                        <StackLayout Spacing="8">
+                            <forms:CachedImage Source="{Binding ImageUrl}"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="CenterAndExpand"
+                                               HeightRequest="256"
+                                               LoadingPlaceholder="loading_indicator_gif.gif"
+                                               IsVisible="{Binding ImageUrl, 
+                                                Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                               xct:TouchEffect.Command="{Binding BindingContext.OpenFullImageCommand, 
+                                                    Source={x:Reference Root}}"
+                                               xct:TouchEffect.CommandParameter="{Binding .}" />
+                            <Label
+                                FontSize="15"
+                                Text="{Binding Text}"
+                                TextColor="{StaticResource BlackTextColor}" />
+                        </StackLayout>
+                    </custom:PancakeView>
+                    
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="8"
+                                 HorizontalOptions="End">
+                        <ActivityIndicator WidthRequest="12"
+                                           HeightRequest="12"
+                                           IsRunning="True"
+                                           Color="{StaticResource LightGreen}"
+                                           IsVisible="False">
+                            <ActivityIndicator.Triggers>
+                                <DataTrigger TargetType="ActivityIndicator"
+                                             Binding="{Binding Status}"
+                                             Value="Sending">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </ActivityIndicator.Triggers>
+                        </ActivityIndicator>
+                    
+                        <Label Text="{Binding Sent, StringFormat={x:Static resources:AppResources.TimeFormatString}}"
+                               TextColor="{StaticResource BlackTextColor}"
+                               Style="{StaticResource RegularTinyLabel}"
+                               HorizontalOptions="End" />
+                    </StackLayout>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ReceivedMessageDataTemplate">
+                <StackLayout Spacing="8"
+                             Padding="16"
+                             FlowDirection="LeftToRight"
+                             Rotation="180">
+                    <custom:PancakeView Style="{StaticResource ReceivedMessage}">
+                        
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger TargetType="custom:PancakeView"
+                                         Binding="{Binding ImageUrl, 
+                                                Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                         Value="True">
+                                <Setter Property="HeightRequest" Value="256" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+
+                        <StackLayout Spacing="0">
+                            <forms:CachedImage Source="{Binding ImageUrl}"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="CenterAndExpand"
+                                               LoadingPlaceholder="loading_indicator_gif.gif"
+                                               IsVisible="{Binding ImageUrl, 
+                                                Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                               Margin="0, 0, 0, 8"
+                                               xct:TouchEffect.Command="{Binding BindingContext.OpenFullImageCommand, 
+                                                    Source={x:Reference Root}}"
+                                               xct:TouchEffect.CommandParameter="{Binding .}" />
+                            <Label
+                                FontSize="15"
+                                Text="{Binding Text}"
+                                TextColor="{StaticResource WhiteTextColor}" />
+                        </StackLayout>
+                    </custom:PancakeView>
+                    <Label Text="{Binding Sent, StringFormat={x:Static resources:AppResources.TimeFormatString}}"
+                           TextColor="{StaticResource BlackTextColor}"
+                           FontSize="11"
+                           HorizontalOptions="Start" />
+                </StackLayout>
+            </DataTemplate>
+
+            <ui:ChatMessageTemplateSelector x:Key="ChatMessageTemplateSelector"
+                                            SentMessageTemplate="{StaticResource SentMessageDataTemplate}"
+                                            ReceivedMessageTemplate="{StaticResource ReceivedMessageDataTemplate}" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout x:Name="ChatContainer"
+                         Spacing="0"
+                         xct:SafeAreaEffect.SafeArea="True">
+
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS">0, 68, 0, 72</On>
+                        <On Platform="Android">0, 68, 0, 0</On>
+                    </OnPlatform>
+                </StackLayout.Margin>
+
+                <CollectionView ItemsSource="{Binding Messages}"
+                                ItemTemplate="{StaticResource ChatMessageTemplateSelector}"
+                                VerticalScrollBarVisibility="Never"
+                                ItemsUpdatingScrollMode="KeepLastItemInView"
+                                ItemSizingStrategy="MeasureAllItems"
+                                VerticalOptions="FillAndExpand"
+                                FlowDirection="RightToLeft"
+                                Rotation="180"
+                                BackgroundColor="{StaticResource PageColorLight}">
+                    <CollectionView.Header>
+                        <BoxView HeightRequest="24" />
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <BoxView HeightRequest="48" />
+                    </CollectionView.Footer>
+                </CollectionView>
+                
+                <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                         HeightRequest="1"
+                         Opacity="0.25"/>
+
+                <StackLayout x:Name="MessageEntryContainer"
+                             Orientation="Horizontal"
+                             Spacing="12"
+                             VerticalOptions="End"
+                             BackgroundColor="{StaticResource PageColorLight}"
+                             Padding="16, 12, 16, 24">
+
+                    <!-- attach image button -->
+                    <Image Source="camera"
+                           WidthRequest="24"
+                           HeightRequest="24"
+                           VerticalOptions="Start"
+                           Margin="0, 6, 0, 0"
+                           xct:TouchEffect.Command="{Binding AttachImageCommand}" />
+
+                    <!-- message input -->
+                    <toolit:CustomEditor Text="{Binding MessageText, Mode=TwoWay}"
+                            Placeholder="{x:Static resources:AppResources.NewChatMessagePlaceholder}"
+                            HorizontalOptions="FillAndExpand"
+                            AutoSize="Disabled"
+                            Keyboard="Chat"
+                            BackgroundColor="Transparent"
+                            />
+
+                    <!-- send button -->
+                    <Image Source="arrow_right"
+                           WidthRequest="24"
+                           HeightRequest="24"
+                           VerticalOptions="Start"
+                           Margin="0, 6, 0, 0"
+                           xct:TouchEffect.Command="{Binding SendMessageCommand}"
+                           xct:IconTintColorEffect.TintColor="{StaticResource LightGreen}" />
+                </StackLayout>
+            </StackLayout>
+            
+            <!--  Topbox  -->
+            <Grid Margin="0"
+                  BackgroundColor="{StaticResource DarkGreen}"
+                  VerticalOptions="Start">
+                
+                <!--  BackBtn  -->
+                <StackLayout Orientation="Horizontal"
+                             xct:SafeAreaEffect.SafeArea="False, True, False, False"
+                             Spacing="12"
+                             Margin="24, 8, 0, 12"
+                             VerticalOptions="Center">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}"
+                           VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <controls:CachedAvatarView ImageUrl="{Binding Recipient.ImageUrl}"
+                                               Margin="8, 0, 0, 0"
+                                               UserInitials="{Binding Recipient, 
+                                                        Converter={StaticResource UserToInitialsConverter}}"
+                                               HeightRequest="48" />
+
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        Text="{Binding Recipient.FullName}"
+                        TextColor="{StaticResource WhiteTextColor}"
+                        VerticalOptions="Center" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

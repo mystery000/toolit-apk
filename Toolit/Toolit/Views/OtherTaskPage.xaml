@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+             xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:behaviors="clr-namespace:Toolit.Behaviors;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             x:Class="Toolit.Views.OtherTaskPage"
+             x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolit:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+            <!--  Entry And Errors  -->
+            <Style x:Key="ValidationPancake" TargetType="pancakeView:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow"
+                        Value="{pancakeView:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorStack" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="84" />
+                <Setter Property="Padding" Value="0, 0, 0, 12" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,16,0,0" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="toolit:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="16, 12, 16, 16" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+                <Setter Property="ReturnType" Value="Next" />
+            </Style>
+
+            <!-- control templates -->
+            <ControlTemplate x:Key="NewBidInfoView">
+                <StackLayout Spacing="0"
+                             BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                             Margin="24, 12, 24, 108">
+
+
+                    <!-- title -->
+                    <Label Style="{StaticResource BoldSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Text="{x:Static resources:AppResources.NewBidInfoTitle}" />
+
+                    <!-- caption -->
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource RegularXtraSmallLabel}"
+                        Text="{x:Static resources:AppResources.NewBidInfoCaption}"
+                        Margin="16, 8, 16, 24" />
+
+                    <!--  Bid Message  -->
+                    <pancakeView:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout BackgroundColor="{StaticResource PageColorLight}"
+                                     Spacing="0">
+
+                            <Label Style="{StaticResource EditEntryHeader}"
+                                   Text="{x:Static resources:AppResources.NewBidMessagePrompt}" />
+
+                            <toolit:CustomEditor
+                                Margin="12"
+                                FontSize="{StaticResource SmallFontSize}"
+                                HeightRequest="160"
+                                BackgroundColor="Transparent"
+                                Placeholder="{x:Static resources:AppResources.BidMessagePlaceholder}"
+                                PlaceholderColor="{StaticResource GrayTextColor}"
+                                Text="{Binding BidMessage.Value, Mode=TwoWay}"
+                                TextColor="{StaticResource BlackTextColor}" />
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding BidMessage.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding BidMessage.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <pancakeView:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding BidMessage.IsInvalidAndChanged}"
+                                TargetType="pancakeView:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </pancakeView:PancakeView.Triggers>
+                    </pancakeView:PancakeView>
+
+                    <!--  Cost header  -->
+                    <Label Style="{StaticResource BoldSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Text="{x:Static resources:AppResources.NewBidCostsTitle}"
+                           Margin="0, 24" />
+
+                    <!-- cost caption -->
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource RegularXtraSmallLabel}"
+                        Text="{x:Static resources:AppResources.NewBidCostsCaption}"
+                        Margin="16, 0, 16, 24" />
+
+                    <!--  labor cost  -->
+                    <pancakeView:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout Spacing="0">
+
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                <Label Style="{StaticResource EditEntryHeader}"
+                                       Text="{x:Static resources:AppResources.NewBidLaborCostPrompt}" />
+
+                                <toolit:CustomEntry
+                                    Keyboard="Numeric"
+                                    Style="{StaticResource EditEntry}"
+                                    Text="{Binding LaborCost.Value, Mode=OneWayToSource}"
+                                    ReturnCommand="{Binding ValidateCommand}"
+                                    MaxLength="9">
+                                    <toolit:CustomEntry.Behaviors>
+                                        <behaviors:NextEntryBehavior NextEntry="{x:Reference MaterialCostEntry}" />
+                                    </toolit:CustomEntry.Behaviors>
+                                </toolit:CustomEntry>
+
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding LaborCost.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding LaborCost.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <pancakeView:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Price.IsInvalidAndChanged}"
+                                TargetType="pancakeView:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </pancakeView:PancakeView.Triggers>
+
+                    </pancakeView:PancakeView>
+
+                    <!--  Material Cost  -->
+                    <pancakeView:PancakeView Style="{StaticResource ValidationPancake}"
+                                             Margin="0, 12, 0, 0">
+                        <StackLayout Spacing="0">
+
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                <Label Style="{StaticResource EditEntryHeader}"
+                                       Text="{x:Static resources:AppResources.NewBidMaterialCostPrompt}" />
+
+                                <toolit:CustomEntry x:Name="MaterialCostEntry"
+                                                    Keyboard="Numeric"
+                                                    Style="{StaticResource EditEntry}"
+                                                    Text="{Binding MaterialCost.Value, Mode=OneWayToSource}"
+                                                    ReturnType="Done"
+                                                    ReturnCommand="{Binding ValidateCommand}"
+                                                    MaxLength="9" />
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding MaterialCost.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding MaterialCost.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <pancakeView:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding MaterialCost.IsInvalidAndChanged}"
+                                TargetType="pancakeView:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </pancakeView:PancakeView.Triggers>
+
+                    </pancakeView:PancakeView>
+
+                    <!-- bid cost info -->
+                    <contentViews:BidCostView DisplayedBid="{Binding NewBid}"
+                                              IsRotRut="{Binding DisplayedTask.UseRotRut}"
+                                              IsInEditMode="False"
+                                              Margin="0, 16"
+                                              MoveToToSCommand="{Binding MoveToToSCommand}"
+                                              IsVisible="{Binding IsNewBidCostInfoVisible}" />
+
+                </StackLayout>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="SentBidInfoView">
+                <StackLayout Spacing="0"
+                             BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                             Margin="24, 12, 24, 108">
+                    
+                    <!-- bid message -->
+                    <pancakeView:PancakeView>
+                        <Grid BackgroundColor="{StaticResource PageColorLight}"
+                              RowDefinitions="Auto, Auto"
+                              ColumnDefinitions="*, Auto"
+                              RowSpacing="16">
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Style="{StaticResource BoldMediumLabel}"
+                                   Text="{x:Static resources:AppResources.BidMessageTitle}"
+                                   Margin="16, 16, 0, 0" />
+
+                            <!-- edit button -->
+                            <StackLayout Grid.Row="0"
+                                         Grid.Column="1"
+                                         HorizontalOptions="End"
+                                         Orientation="Horizontal"
+                                         Spacing="0"
+                                         Margin="0, 16, 16, 16"
+                                         IsVisible="{Binding HasUserAcceptedBid, Converter={StaticResource InvertedBoolConverter}}">
+
+                                <Label
+                                    Margin="0,0,8,0"
+                                    Style="{StaticResource RegularXtraSmallLabel}"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="{x:Static resources:AppResources.EditAction}"
+                                    VerticalOptions="Center" />
+                                <Image
+                                    HeightRequest="16"
+                                    Source="edit_square"
+                                    VerticalOptions="Center" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditMessageCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Margin="16, 0, 16, 16"
+                                   Style="{StaticResource RegularSmallLabel}"
+                                   BackgroundColor="Transparent"
+                                   Text="{Binding TaskBid.BidMessage}" />
+
+                        </Grid>
+                    </pancakeView:PancakeView>
+
+                    <!-- bid cost info -->
+                    <contentViews:BidCostView DisplayedBid="{Binding TaskBid}"
+                                              IsRotRut="{Binding DisplayedTask.UseRotRut}"
+                                              IsInEditMode="{Binding HasUserAcceptedBid, Converter={StaticResource InvertedBoolConverter}}"
+                                              Margin="0, 16"
+                                              EditCommand="{Binding EditOfferCommand}"
+                                              MoveToToSCommand="{Binding MoveToToSCommand}" />
+                </StackLayout>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="TaskInfoView">
+                <contentViews:TaskInfoView IsInEditMode="False"
+                                           BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                                           OpenFullImageCommand="{Binding OpenFullImageCommand}"
+                                           OpenFullVideoCommand="{Binding OpenFullVideoCommand}" />
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="*, *">
+            <toolit:CustomScrollView VerticalScrollBarVisibility="Never"
+                                     Grid.ColumnSpan="2">
+                <StackLayout Spacing="0">
+
+                    <!-- task info header -->
+                    <contentViews:TaskPageHeaderView />
+
+                    <!--  segmented Btn  -->
+                    <pancakeView:PancakeView Margin="16,24"
+                                             Style="{StaticResource DoubleBtnFrame}"
+                                             IsVisible="{Binding IsACraftsman}">
+
+                        <Grid ColumnDefinitions="*,*"
+                              ColumnSpacing="0">
+
+                            <!--  submitted bids  -->
+                            <Button
+                                Command="{Binding ShowBidsCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{x:Static resources:AppResources.NewBidTitle}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsShowingInfo}"
+                                        TargetType="Button"
+                                        Value="False">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+
+                                    <DataTrigger
+                                        Binding="{Binding HasAddedBid}"
+                                        TargetType="Button"
+                                        Value="True">
+                                        <Setter Property="Text" Value="{x:Static resources:AppResources.YourBidTitle}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+
+                            <!--  Info  -->
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding ShowInfoCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{x:Static resources:AppResources.TaskInfoTitle}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsShowingInfo}"
+                                        TargetType="Button"
+                                        Value="True">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+
+                    </pancakeView:PancakeView>
+
+                    <!-- content -->
+                    <ContentView>
+                        <ContentView.Triggers>
+                            <!-- new bid info -->
+                            <MultiTrigger TargetType="ContentView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding HasAddedBid}"
+                                                      Value="False" />
+                                    <BindingCondition Binding="{Binding IsShowingInfo}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="ControlTemplate" Value="{StaticResource NewBidInfoView}" />
+                            </MultiTrigger>
+
+                            <!-- sent bid info -->
+                            <MultiTrigger TargetType="ContentView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding HasAddedBid}"
+                                                      Value="True" />
+                                    <BindingCondition Binding="{Binding IsShowingInfo}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="ControlTemplate" Value="{StaticResource SentBidInfoView}" />
+
+                            </MultiTrigger>
+
+
+                            <!-- task info -->
+                            <DataTrigger TargetType="ContentView"
+                                         Binding="{Binding IsShowingInfo}"
+                                         Value="True">
+
+                                <Setter Property="ControlTemplate" Value="{StaticResource TaskInfoView}" />
+                            </DataTrigger>
+
+                        </ContentView.Triggers>
+                    </ContentView>
+                </StackLayout>
+            </toolit:CustomScrollView>
+
+
+            <!--  send bid btn  -->
+            <!--  visible if bid not sent  -->
+            <controls:PancakeButton
+                Grid.Column="1"
+                Style="{StaticResource PrimaryBtnSmall}"
+                VerticalOptions="End"
+                BackgroundColor="{StaticResource LightGreen}"
+                Text="{x:Static resources:AppResources.AddBidAction}"
+                Command="{Binding AddBidCommand}"
+                IsVisible="False"
+                IsEnabled="{Binding IsACraftsman}"
+                xct:SafeAreaEffect.SafeArea="True">
+
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="12, 0, 24, 36" />
+                        <On Platform="iOS" Value="12, 0, 24, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasAddedBid}"
+                                              Value="False" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+
+                    <Trigger TargetType="pancakeView:PancakeView"
+                             Property="IsEnabled"
+                             Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </Trigger>
+                </controls:PancakeButton.Triggers>
+
+            </controls:PancakeButton>
+
+            <!--  open chat btn  -->
+            <!--  Visible if bid sent & accepted  -->
+            <controls:PancakeButton
+                Grid.Column="0"
+                VerticalOptions="End"
+                Style="{StaticResource PrimaryBtnSmall}"
+                BackgroundColor="{StaticResource LightBlue}"
+                Text="{x:Static resources:AppResources.TaskOpenChatAction}"
+                ImageSource="comment"
+                ImagePosition="Left"
+                Command="{Binding OpenChatCommand}"
+                IsVisible="False"
+                xct:SafeAreaEffect.SafeArea="True">
+
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="24, 0, 12, 36" />
+                        <On Platform="iOS" Value="24, 0, 12, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasUserAcceptedBid}"
+                                              Value="True" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </controls:PancakeButton.Triggers>
+
+            </controls:PancakeButton>
+
+            <!--  complete job btn  -->
+            <!--  Visible if bid sent & accepted  -->
+            <controls:PancakeButton
+                Grid.Column="1"
+                VerticalOptions="End"
+                Style="{StaticResource PrimaryBtnSmall}"
+                BackgroundColor="{StaticResource LightGreen}"
+                Text="{x:Static resources:AppResources.CompleteJobAction}"
+                Command="{Binding CompleteJobCommand}"
+                IsVisible="False"
+                IsEnabled="{Binding CanFinish}"
+                xct:SafeAreaEffect.SafeArea="True">
+
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="12, 0, 24, 36" />
+                        <On Platform="iOS" Value="12, 0, 24, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasUserAcceptedBid}"
+                                              Value="True" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </controls:PancakeButton.Triggers>
+
+            </controls:PancakeButton>
+
+            <!--  Delete bid Btn  -->
+            <!--  visible if bid sent, but not accepted  -->
+            <controls:PancakeButton HorizontalOptions="Fill"
+                                    VerticalOptions="End"
+                                    Grid.Column="1"
+                                    Style="{StaticResource PrimaryBtnSmall}"
+                                    BackgroundColor="{StaticResource Red}"
+                                    Command="{Binding DeleteBidCommand}"
+                                    Text="{x:Static resources:AppResources.DeleteBidAction}"
+                                    IsVisible="False"
+                                    xct:SafeAreaEffect.SafeArea="True">
+
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="12, 0, 24, 36" />
+                        <On Platform="iOS" Value="12, 0, 24, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasAddedBid}"
+                                              Value="True" />
+                            <BindingCondition Binding="{Binding HasUserAcceptedBid}"
+                                              Value="False" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </controls:PancakeButton.Triggers>
+
+            </controls:PancakeButton>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

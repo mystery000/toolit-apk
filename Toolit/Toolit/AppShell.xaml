@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="Toolit.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Views="clr-namespace:Toolit.Views"
+    xmlns:resourses="clr-namespace:Toolit.Resourses;assembly=Toolit"
+    xmlns:misc="clr-namespace:Toolit.Models.Misc;assembly=Toolit"
+    xmlns:badge="clr-namespace:Xam.Shell.Badge;assembly=Xam.Shell.Badge"
+    Navigating="ShellNavigating"
+    Navigated="ShellNavigated"
+    Opacity="1"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:TabbedPage.TranslucencyMode="Opaque"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="{StaticResource TabBarBackgroundColor}"
+    Shell.TabBarTitleColor="{StaticResource WhiteTextColor}"
+    Shell.TabBarUnselectedColor="{StaticResource TabBarUnselectedTextColor}"
+    x:Name="Root">
+
+    <ShellItem Route="login">
+        <ShellContent ContentTemplate="{DataTemplate Views:LoadUserPage}" />
+    </ShellItem>
+    
+    <TabBar Route="main">
+        <Tab Title="{x:Static resourses:AppResources.TabBarTasksTitle}" 
+             Icon="paint_roller">
+            <ShellContent>
+                <Views:TasksPage />
+            </ShellContent>
+        </Tab>
+        <Tab Title="{x:Static resourses:AppResources.TabBarAddTaskTitle}" 
+             Icon="bell_alt_ring">
+            <ShellContent>
+                <Views:AddTaskCategoryPage />
+            </ShellContent>
+        </Tab>
+        <Tab Title="{x:Static resourses:AppResources.TabBarChatsTitle}" 
+             Icon="comment"
+             badge:Badge.Text="{Binding BindingContext.UnreadMessagesBadgeValue, Source={x:Reference Root}}"
+             badge:Badge.BackgroundColor="{StaticResource Red}"
+             badge:Badge.TextColor="{StaticResource WhiteTextColor}">
+            <ShellContent>
+                <Views:ChatsPage />
+            </ShellContent>
+        </Tab>
+        <Tab Title="{x:Static resourses:AppResources.TabBarAccountTitle}" 
+             Icon="smile">
+            <ShellContent>
+                <Views:ProfilePage />
+            </ShellContent>
+        </Tab>
+    </TabBar>
+</Shell>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             xmlns:pages="http://rotorgames.com"
+             x:Class="Toolit.Views.ContentViews.DeleteAccountModalView">
+    <pages:PopupPage.Content>
+        <pancakeView:PancakeView
+            CornerRadius="8"
+            VerticalOptions="Center"
+            Margin="16, 0">
+
+            <!--  Background  -->
+            <Grid>
+                
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0"/>
+                
+                <StackLayout Padding="24,16,24,24" 
+                             Spacing="16">
+                    
+                    <Image Source="call_to_action_red_clock" />
+
+                    <!--  Header  -->
+                    <Label
+                        Margin="0,-32,0,0"
+                        Style="{StaticResource BoldMediumLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.DeleteAccountConfirmationPrompt}" />
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Text="{x:Static resources:AppResources.DeleteAccountDescription}" />
+
+                    <!--  Btn  -->
+                    <controls:PancakeButton
+                        Margin="0,16,0,0"
+                        Style="{StaticResource PrimaryBtn}"
+                        BackgroundColor="{StaticResource Red}"
+                        Text="{x:Static resources:AppResources.ConfirmDeleteAccountAction}"
+                        Command="{Binding ConfirmDeleteAccountCommand}"
+                        VerticalOptions="EndAndExpand" />
+                    
+                </StackLayout>
+                
+                <Image Style="{StaticResource CloseModalImage}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+                
+            </Grid>
+        </pancakeView:PancakeView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

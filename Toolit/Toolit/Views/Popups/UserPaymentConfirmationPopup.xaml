@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="http://rotorgames.com"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+                 xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                 x:Class="Toolit.Views.Popups.UserPaymentConfirmationPopup">
+    <pages:PopupPage.Content>
+        <pancakeView:PancakeView
+            Margin="16, 0"
+            BackgroundColor="{StaticResource PageColorLight}"
+            CornerRadius="8"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center"
+            HeightRequest="460">
+            <!--  Background  -->
+            <Grid>
+
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0" />
+
+                <StackLayout Padding="36,36,36,48" Spacing="16">
+
+                    <Image HeightRequest="160" Source="call_to_action_payment" />
+                    <!--  Header  -->
+                    <Label
+                        Margin="0,-12,0,0"
+                        Style="{StaticResource BoldMediumLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.UserPaymentConfirmationTitle}" />
+
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Text="{x:Static resources:AppResources.UserPaymentConfirmationCaption}" />
+
+                    <!--  Btn  -->
+                    <controls:PancakeButton
+                        Command="{Binding CloseCommand}"
+                        Style="{StaticResource PrimaryBtn}"
+                        Text="{x:Static resources:AppResources.GoBackToMenuAction}"
+                        VerticalOptions="EndAndExpand" />
+                </StackLayout>
+                
+                <Image Style="{StaticResource CloseModalImage}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </pancakeView:PancakeView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

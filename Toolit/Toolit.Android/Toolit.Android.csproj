@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C0094603-3828-48DB-A4A4-F298E3455203}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Toolit.Droid</RootNamespace>
+    <AssemblyName>Toolit.Android</AssemblyName>
+    <Deterministic>True</Deterministic>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Appcenter|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Appcenter\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Crashes">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>2.0.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.7.335</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Shell.Badge">
+      <Version>1.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Core.Utils">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>1.2.0-pre2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.7.944</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations">
+      <Version>2.4.7.944</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Messaging">
+      <Version>71.1740.4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms.PancakeView">
+      <Version>2.3.0.763-beta</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Base">
+      <Version>117.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\NotificationHelper.cs" />
+    <Compile Include="LibraryPath.cs" />
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CustomEditorRenderer.cs" />
+    <Compile Include="Renderers\CustomEntryRenderer.cs" />
+    <Compile Include="Renderers\CustomScrollViewRenderer.cs" />
+    <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
+    <Compile Include="Renderers\ShellTabbarRenderer.cs" />
+    <Compile Include="Renderers\ZoomableScrollViewRenderer.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AppTrackingService.cs" />
+    <Compile Include="Services\BankId.cs" />
+    <Compile Include="Services\DeviceInstallationService.cs" />
+    <Compile Include="Services\PushNotificationFirebaseMessagingService.cs" />
+    <Compile Include="Services\Swish.cs" />
+    <Compile Include="Services\ThumbnailService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\search.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\video.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\down_right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\search.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\star.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\video.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\yt_image.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\down_right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\search.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\video.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\yt_image.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\down_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\search.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\video.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\yt_image.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\down_right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\search.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\video.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\yt_image.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ad_image.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\arrow_left.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\avatar.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\avatar1.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bank_id.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bathroom.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bell_alt_ring.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_drop.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_one.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_three.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_two.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\blue_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bolt.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\briefcase.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\call_to_action.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\call_to_action_payment.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\call_to_action_red_clock.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\call_to_action_thumb.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\camera.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\checkmark_square.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\close_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\close_icon_black.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\delete_icon_red.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\demand.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\down_left.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\down_right.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\DropIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\edit_square.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\edit_square_white.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\filter.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\gallery_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\hammer.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\hammer_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\heart.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\heart_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\mail.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\map_marker.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\map_marker_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\MasterIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\modal_pastel_background.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\money_bill.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\paint_brush.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\paint_brush_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\paint_roller.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\paint_roller_grren.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\people_image.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\phone.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\photo_button.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\play_alt.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\pluss_green_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\saw.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\saw_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\screwdriver.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\screwdriver_fade.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\screwdriver_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\screwdriver_light.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\search.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\settings_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\shopping_cart.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\shovel.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\shovel_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\small_circle.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\smile.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\splash_background.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\star_empty.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\swish_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\switch_camera.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\switch_camera_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\task_craft_electrician_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_blub.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_blue.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_blue_light.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_blue_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_carrot.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_dotts.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_geen_rounded.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_green_left_down.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_green_two.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_orange.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_red.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_small_red_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_spiral.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\The_strips.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_yellow.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\the_yellow_light.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\toolit_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\toolit_logo_text.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\up_right.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\users_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\video.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\VisaIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\wrensh.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\wrensh_green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\yt_image.png" />
+    <AndroidResource Include="Resources\drawable\loading_indicator_gif.gif" />
+    <AndroidResource Include="Resources\drawable\toolit_new_logo.xml" />
+    <AndroidResource Include="Resources\layout\Tabbar.xml" />
+    <AndroidResource Include="Resources\layout\Toolbar.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Toolit\Toolit.csproj">
+      <Project>{5FDB3296-102F-4A2C-AF35-5D75E0B169C6}</Project>
+      <Name>Toolit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\nunito_bold.ttf" />
+    <AndroidAsset Include="Assets\nunito_regular.ttf" />
+    <AndroidAsset Include="Assets\nunito_semi_bold.ttf" />
+    <AndroidAsset Include="Assets\OFL.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

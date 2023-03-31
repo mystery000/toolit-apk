@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             xmlns:resourses="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             x:Class="Toolit.Views.LoadUserPage"
+             x:Name="Root">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid IsVisible="{Binding IsFirstLoad}">
+            <!-- background -->
+            <Image Source="splash_background"
+                   Aspect="AspectFill" />
+            
+            <!-- content -->
+            <StackLayout VerticalOptions="End"
+                         Spacing="16">
+                
+                <Label Style="{StaticResource BoldLargeLabel}"
+                       Text="{x:Static resourses:AppResources.SplashScreenText}"
+                       TextColor="{StaticResource LightGreen}"
+                       HorizontalTextAlignment="Center" />
+                
+                <ActivityIndicator Color="{StaticResource LightGreen}"
+                                   IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand" />
+                
+                <BoxView HeightRequest="{Binding Height, 
+                    Source={x:Reference Root},
+                    Converter={StaticResource MathExpressionConverter},
+                    ConverterParameter='x/4'}" />
+                
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

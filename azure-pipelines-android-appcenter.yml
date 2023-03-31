@@ -1,0 +1,51 @@
+# Xamarin.Android
+# Build a Xamarin.Android project.
+# Add steps that test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- dev-todo
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
+- task: XamarinAndroid@1
+  inputs:
+    projectFile: '**/*droid*.csproj'
+    outputDirectory: '$(outputDirectory)'
+    configuration: '$(buildConfiguration)'
+
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '**/*.apk' 
+    apksign: true
+    apksignerKeystoreFile: toolit.keystore
+    apksignerKeystorePassword: $(APKSIGNERPASSWORD)
+    apksignerKeystoreAlias: toolit
+    apksignerKeyPassword: $(APKSIGNERPASSWORD)
+    #apksignerArguments: '--verbose' # Optional
+    #apksignerFile: # Optional
+    #zipalign: true # Optional
+    #zipalignFile: # Optional
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'toolit-android-appcenter'
+    appSlug: 'toolitapp/Toolit-1'
+    appFile: '../b/Release/se.toolit.android.apk'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'If you ain''t first, you''re last!'
+    destinationType: 'groups'
+    distributionGroupId: 'b4d7e11f-ca6b-4e32-83bd-3021836ba6b9'

@@ -1,0 +1,9 @@
+/* Localized versions of Info.plist keys */
+
+NSPhotoLibraryAddUsageDescription = "This application needs permission to access photos for better assistance experience.";
+NSPhotoLibraryUsageDescription = "This application needs permission to access photos for better assistance experience.";
+NSCameraUsageDescription = "This app uses camera for video recording.";
+NSContactsUsageDescription = "This application needs permission to use your contacts for better assistance experience.";
+NSUserTrackingUsageDescription = "Your data will be used to provide you with a better ad experience.";
+NSMicrophoneUsageDescription = "This app uses microphone for video recording.";
+NSLocationWhenInUseUsageDescription = "Can we use your location when your application is being used in order for us to provide proper assistance?";

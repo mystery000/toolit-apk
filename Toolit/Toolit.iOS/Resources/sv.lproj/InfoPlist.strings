@@ -1,0 +1,9 @@
+/* Localized versions of Info.plist keys */
+
+NSPhotoLibraryAddUsageDescription = "Appen behöver access till dina foton för att bättre kunna hjälpa dig.";
+NSPhotoLibraryUsageDescription = "Appen behöver access till dina foton för att bättre kunna hjälpa dig.";
+NSCameraUsageDescription = "Appen använder kameran för videoinspelning.";
+NSContactsUsageDescription = "Appen behöver tillgång till dina kontakter för att kunna upprätta ett videosamtal.";
+NSUserTrackingUsageDescription = "Din data kommer användas för att ge dig en bättre upplevelse vid annonsering.";
+NSMicrophoneUsageDescription = "Appen använder mikrofon för videoinspelning.";
+NSLocationWhenInUseUsageDescription = "Vi behöver veta din position för att kunna ge dig snabb & säker assistans.";

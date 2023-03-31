@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="http://rotorgames.com"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+                 xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                 x:Class="Toolit.Views.Popups.DeleteTaskPopup">
+    <ContentPage.Content>
+        <pancakeView:PancakeView
+            BackgroundColor="{StaticResource PageColorLight}"
+            CornerRadius="8"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center"
+            Margin="16, 0"
+            HeightRequest="400">
+
+            <!--  Background  -->
+            <Grid>
+                
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0"/>
+
+                <StackLayout Padding="36,16,36,48"
+                             Spacing="16"
+                             VerticalOptions="Center">
+                    <Image HeightRequest="188"
+                           Source="call_to_action_red_clock" />
+
+                    <!--  Header  -->
+                    <Label
+                        Margin="0,-32,0,0"
+                        Style="{StaticResource BoldMediumLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.DeleteTaskConfirmationTitle}" />
+
+                    <!--  Buttons  -->
+                    <Grid
+                        Margin="0,24,0,0"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="24">
+
+                        <!--  Abort  -->
+                        <controls:PancakeButton
+                            Style="{StaticResource PrimaryBtnSmall}"
+                            Grid.Column="0"
+                            BackgroundColor="{StaticResource WhiteTextColor}"
+                            CornerRadius="8"
+                            HeightRequest="56"
+                            Command="{Binding CloseCommand}"
+                            Text="{x:Static resources:AppResources.DeleteTaskCancelAction}"
+                            TextColor="{StaticResource Red}" />
+
+                        <!--  Delete  -->
+                        <controls:PancakeButton
+                            Style="{StaticResource PrimaryBtnSmall}"
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource Red}"
+                            CornerRadius="8"
+                            Text="{x:Static resources:AppResources.DeleteTaskConfirmAction}"
+                            TextColor="{StaticResource WhiteTextColor}"
+                            VerticalOptions="Center"
+                            Command="{Binding DeleteCommand}" />
+
+                    </Grid>
+                </StackLayout>
+
+                <Image Style="{StaticResource CloseModalImage}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </pancakeView:PancakeView>
+    </ContentPage.Content>
+</pages:PopupPage>

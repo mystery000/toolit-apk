@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.PaymentsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolInvertConverter x:Key="bool" />
+            <converters:CollectionCountToBoolConverter x:Key="CollectionCountToBoolConverter" />
+            
+            <Style x:Key="PaymentsWrapper" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout effects:SafeAreaEffect.SafeArea="True">
+
+            <!--  Topbox  -->
+            <Grid Style="{StaticResource SmallTopGrid}"
+                  RowDefinitions="Auto, *">
+                <Grid Style="{StaticResource TopBoxSmall}"
+                      Grid.Row="0">
+
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid"
+                                     Binding="{Binding HasSafeArea}"
+                                     Value="True">
+                            <Setter Property="Margin" Value="0, -52, 0, 0" />
+                            <Setter Property="HeightRequest" Value="128" />
+                        </DataTrigger>
+                    </Grid.Triggers>
+
+                    <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+                    <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+                    <Label Style="{StaticResource TopBoxSmallHeader}"
+                           Text="{x:Static resources:AppResources.PaymentsPageTitle}"
+                           effects:SafeAreaEffect.SafeArea="True" />
+
+                    <!--  BackBtn  -->
+                    <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                                 effects:SafeAreaEffect.SafeArea="True">
+
+                        <!--  arrow  -->
+                        <Image Style="{StaticResource ArrowLeft}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+
+                <!-- no payments placeholder -->
+                <Label Grid.Row="1"
+                       Style="{StaticResource RegularSmallLabel}"
+                       Text="{x:Static resources:AppResources.NoPaymentsPlaceholder}"
+                       TextColor="{StaticResource GrayTextColor}"
+                       Margin="8, 16"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="{Binding Payments, 
+                    Converter={StaticResource CollectionCountToBoolConverter}, 
+                    ConverterParameter='i'}"/>
+                
+                <!--  content  -->
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding Payments}">
+
+                    <CollectionView.Header>
+                        <!--  Paid or  -->
+                        <StackLayout
+                            Padding="16"
+                            HorizontalOptions="End"
+                            Orientation="Horizontal"
+                            Spacing="12">
+                            <Frame
+                                Padding="0"
+                                BackgroundColor="{StaticResource Yellow}"
+                                CornerRadius="4"
+                                HasShadow="False"
+                                HeightRequest="12"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="Center"
+                                WidthRequest="12" />
+                            <Label
+                                Style="{StaticResource BoldXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.OngoingTasksTitle}"
+                                TextColor="{StaticResource Yellow}"
+                                VerticalOptions="Center" />
+                            <Frame
+                                Padding="0"
+                                BackgroundColor="{StaticResource LightGreen}"
+                                CornerRadius="4"
+                                HasShadow="False"
+                                HeightRequest="12"
+                                VerticalOptions="Center"
+                                WidthRequest="12" />
+                            <Label
+                                Style="{StaticResource BoldXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.CompletedTasksTitle}"
+                                TextColor="{StaticResource LightGreen}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="12"
+                                           Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!--  Content  -->
+                            <StackLayout Padding="16,4"
+                                         effects:TouchEffect.Command="{Binding BindingContext.MoveToPaymentTaskCommand, 
+                                                        Source={x:Reference Root}}"
+                                         effects:TouchEffect.CommandParameter="{Binding .}">
+                                <custom:PancakeView Style="{StaticResource PaymentsWrapper}">
+                                    <Grid
+                                        Padding="16,0"
+                                        ColumnDefinitions="Auto, *, 72"
+                                        RowDefinitions="36,36">
+                                        <!-- task title -->
+                                        <Label
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Style="{StaticResource BoldXtraSmallLabel}"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Task.Title}"
+                                            VerticalOptions="End" />
+                                        <!-- payer's name -->
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Style="{StaticResource RegularXtraSmallLabel}"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Craftsman.User.FullName}"
+                                            TextColor="{StaticResource GrayTextColor}"
+                                            Margin="0, 0, 12, 0"
+                                            VerticalOptions="Start" />
+                                        <!-- separator -->
+                                        <BoxView
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            HorizontalOptions="End"
+                                            WidthRequest="1"
+                                            Margin="0,0,0,16"
+                                            BackgroundColor="{StaticResource GrayTextColor}"
+                                            VerticalOptions="Start" />
+                                        <!-- date done -->
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Style="{StaticResource RegularXtraSmallLabel}"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Modified, StringFormat='{0:dd/MM/yy HH:mm}'}"
+                                            TextColor="{StaticResource GrayTextColor}"
+                                            Margin="0, 0, 12, 0"
+                                            VerticalOptions="Start" />
+                                        <!-- final bid -->
+                                        <Label
+                                            Grid.RowSpan="2"
+                                            Grid.Column="2"
+                                            Style="{StaticResource BoldSmallLabel}"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Bid.FinalBid}"
+                                            TextColor="{StaticResource Yellow}"
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding IsPaid, Converter={StaticResource bool}, ConverterParameter=true}"
+                                                    TargetType="Label"
+                                                    Value="True">
+                                                    <Setter Property="TextColor" Value="{StaticResource LightGreen}" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Bid.FinalBid}" />
+                                                    <Span Text=" Kr" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </custom:PancakeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="Toolit.Views.ContentViews.CraftsmanInfoView"
+             x:Name="View">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            
+            <converters:RatingsToRangeConverter x:Key="RatingsToRangeConverter" />
+            <converters:RatingsToPercentConverter x:Key="RatingsToPercentConverter" />
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+            
+            <Style x:Key="OfferIconStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="13" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowText" TargetType="Label"
+                   BasedOn="{StaticResource BoldSmallLabel}">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowInfo" TargetType="Span">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            </Style>
+            <Style x:Key="OfferRowStackWrapper" TargetType="StackLayout">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Spacing" Value="10" />
+                <Setter Property="Margin" Value="16" />
+            </Style>
+            <Style x:Key="StarText" TargetType="Label"
+                   BasedOn="{StaticResource RegularSmallLabel}">
+                <Setter Property="Grid.Column" Value="0" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="StarNumber" TargetType="Label"
+                   BasedOn="{StaticResource RegularSmallLabel}">
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BidTextColor}" />
+            </Style>
+            <Style x:Key="XSStar" TargetType="Image">
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Source" Value="star" />
+                <Setter Property="Grid.Column" Value="1" />
+            </Style>
+            <Style x:Key="ProgressBar" TargetType="ProgressBar">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Grid.Column" Value="2" />
+                <Setter Property="ProgressColor" Value="{StaticResource Yellow}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <StackLayout Spacing="24"
+                     Margin="0, 0, 0, 48">
+            <pancakeView:PancakeView Style="{StaticResource DisplayInfoFrame}"
+                                     BackgroundColor="{StaticResource White}">
+                <StackLayout>
+                    <!--  craftsman info  -->
+                    <StackLayout Style="{StaticResource DisplayInfoFrameHeaderStack}">
+                        <!-- about info -->
+                        <Label
+                            Style="{StaticResource BoldMediumLabel}"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding Craftsman.AboutHeader}"
+                            VerticalOptions="Center" />
+                        <!-- edit action -->
+                        <Label
+                            Style="{StaticResource RegularXtraSmallLabel}"
+                            HorizontalOptions="End"
+                            Text="{x:Static resources:AppResources.EditAction}"
+                            VerticalOptions="Center"
+                            IsVisible="{Binding IsInEditMode, Source={x:Reference View}}" />
+                        <!-- edit button -->
+                        <Image
+                            HeightRequest="16"
+                            Source="edit_square"
+                            VerticalOptions="Center"
+                            IsVisible="{Binding IsInEditMode, Source={x:Reference View}}"  />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoveToEditCraftsmanBioCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- about text -->
+                    <Label
+                        Margin="16,8,16,16"
+                        Style="{StaticResource RegularSmallLabel}"
+                        Text="{Binding Craftsman.AboutText}" />
+                </StackLayout>
+            </pancakeView:PancakeView>
+
+            <!--  Info  -->
+            <pancakeView:PancakeView Style="{StaticResource DisplayInfoFrame}">
+                <Grid RowDefinitions="52,1,*">
+
+                    <!-- info title -->
+                    <Label Style="{StaticResource DisplayInfoFrameSoloHeader}"
+                           Text="{x:Static resources:AppResources.CraftsmanInfoTitle}" />
+
+                    <BoxView Grid.Row="1" BackgroundColor="{StaticResource PageColorLight}" />
+
+                    <!-- completed jobs -->
+                    <StackLayout Style="{StaticResource OfferRowStackWrapper}">
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <Image Source="bolt" Style="{StaticResource OfferIconStyle}" />
+                            <Label Style="{StaticResource OfferRowText}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.CraftsmanCompletedJobsString}" />
+                                        <Span Style="{StaticResource OfferRowInfo}"
+                                              Text="{Binding Craftsman.CompletedJobs, 
+                                                            StringFormat={x:Static resources:AppResources.PiecesFormatString}}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <!-- work certificates -->
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <Image Source="checkmark_square" Style="{StaticResource OfferIconStyle}" />
+                            <Label Style="{StaticResource OfferRowText}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.CraftsmanWorkCertificateString}" />
+                                        <Span Style="{StaticResource OfferRowInfo}"
+                                              Text="{Binding Craftsman.NumberOfWorkCertificates}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <!-- member since -->
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <Image Source="users_green" Style="{StaticResource OfferIconStyle}" />
+                            <Label Style="{StaticResource OfferRowText}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.CraftsmanMemberSinceString}" />
+                                        <Span Style="{StaticResource OfferRowInfo}"
+                                              Text="{Binding Craftsman.MemberSince}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <!-- company name -->
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <Image Source="map_marker_green" Style="{StaticResource OfferIconStyle}" />
+                            <Label Style="{StaticResource OfferRowText}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.CraftsmanCompanyNameString}" />
+                                        <Span Style="{StaticResource OfferRowInfo}"
+                                              Text="{Binding Craftsman.CompanyName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Grid>
+            </pancakeView:PancakeView>
+
+            <!--  Rating  -->
+            <pancakeView:PancakeView Style="{StaticResource DisplayInfoFrame}">
+                <Grid RowDefinitions="52, 1, Auto, 1, *, 1">
+
+                    <!--  Rating Header  -->
+                    <Label Style="{StaticResource DisplayInfoFrameSoloHeader}"
+                           Text="{x:Static resources:AppResources.CraftsmanRatingListTitle}" />
+
+                    <BoxView Grid.Row="1" BackgroundColor="{StaticResource PageColorLight}" />
+
+                    <StackLayout Margin="36,0" Style="{StaticResource OfferRowStackWrapper}">
+
+                        <!--  rating bar  -->
+                        <controls:RatingBar
+                            HeightRequest="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Margin="0, 24, 0, 16"
+                            Rating="{Binding Craftsman.AverageRating}"
+                            Scale="2"/>
+                        
+                        <Label Style="{StaticResource BoldLargeLabel}"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding Craftsman.AverageRating, StringFormat='{0:0.0}'}" />
+
+                        <!--  5 Star  -->
+                        <Grid ColumnDefinitions="12, 20, *, 48"
+                              RowDefinitions="28">
+                            <Label Style="{StaticResource StarText}" Text="5" />
+                            <Image Style="{StaticResource XSStar}" />
+                            <ProgressBar
+                                Progress="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToRangeConverter},
+                                                        ConverterParameter=5}"
+                                Style="{StaticResource ProgressBar}" />
+                            <Label Style="{StaticResource StarNumber}"
+                                   Grid.Column="3"
+                                   Text="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToPercentConverter},
+                                                        ConverterParameter=5,
+                                                        StringFormat={x:Static resources:AppResources.PercentFormatString}}" />
+                        </Grid>
+
+                        <!--  4 Star  -->
+                        <Grid ColumnDefinitions="12, 20, *, 48"
+                              RowDefinitions="28">
+                            <Label Style="{StaticResource StarText}" Text="4" />
+                            <Image Style="{StaticResource XSStar}" />
+                            <ProgressBar
+                                Progress="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToRangeConverter},
+                                                        ConverterParameter=4}"
+                                Style="{StaticResource ProgressBar}" />
+                            <Label Style="{StaticResource StarNumber}"
+                                   Grid.Column="3"
+                                   Text="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToPercentConverter},
+                                                        ConverterParameter=4,
+                                                        StringFormat={x:Static resources:AppResources.PercentFormatString}}" />
+                        </Grid>
+
+                        <!--  3 Star  -->
+                        <Grid ColumnDefinitions="12, 20, *, 48"
+                              RowDefinitions="28">
+                            <Label Style="{StaticResource StarText}" Text="3" />
+                            <Image Style="{StaticResource XSStar}" />
+                            <ProgressBar
+                                Progress="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToRangeConverter},
+                                                        ConverterParameter=3}"
+                                Style="{StaticResource ProgressBar}" />
+                            <Label Style="{StaticResource StarNumber}"
+                                   Grid.Column="3"
+                                   Text="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToPercentConverter},
+                                                        ConverterParameter=3,
+                                                        StringFormat={x:Static resources:AppResources.PercentFormatString}}" />
+                        </Grid>
+
+                        <!--  2 Star  -->
+                        <Grid ColumnDefinitions="12, 20, *, 48"
+                              RowDefinitions="28">
+                            <Label Style="{StaticResource StarText}" Text="2" />
+                            <Image Style="{StaticResource XSStar}" />
+                            <ProgressBar
+                                Progress="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToRangeConverter},
+                                                        ConverterParameter=2}"
+                                Style="{StaticResource ProgressBar}" />
+                            <Label Style="{StaticResource StarNumber}"
+                                   Grid.Column="3"
+                                   Text="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToPercentConverter},
+                                                        ConverterParameter=2,
+                                                        StringFormat={x:Static resources:AppResources.PercentFormatString}}" />
+                        </Grid>
+
+                        <!--  1 Star  -->
+                        <Grid ColumnDefinitions="12, 20, *, 48"
+                              RowDefinitions="28">
+                            <Label Style="{StaticResource StarText}" Text="1" />
+                            <Image Style="{StaticResource XSStar}" />
+                            <ProgressBar
+                                Progress="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToRangeConverter},
+                                                        ConverterParameter=1}"
+                                Style="{StaticResource ProgressBar}" />
+                            <Label Style="{StaticResource StarNumber}"
+                                   Grid.Column="3"
+                                   Text="{Binding Craftsman.Ratings, 
+                                                        Converter={StaticResource RatingsToPercentConverter},
+                                                        ConverterParameter=1,
+                                                        StringFormat={x:Static resources:AppResources.PercentFormatString}}" />
+                        </Grid>
+                    </StackLayout>
+
+                    <!-- ratings list -->
+                    <StackLayout Grid.Row="4" BindableLayout.ItemsSource="{Binding Ratings}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0">
+                                    <BoxView BackgroundColor="{StaticResource PageColorLight}" 
+                                             HeightRequest="2" />
+                                    <StackLayout Padding="16,4"
+                                                 Spacing="0">
+                                        <Grid
+                                            ColumnDefinitions="60,*"
+                                            ColumnSpacing="10"
+                                            RowDefinitions="20, 20, 20, *, 20">
+                                            
+                                            <controls:CachedAvatarView ImageUrl="{Binding User.ImageUrl}"
+                                                              Grid.Row="0"
+                                                              Grid.RowSpan="3"
+                                                              Grid.Column="0"
+                                                              HeightRequest="60"
+                                                              VerticalOptions="Start"
+                                                              UserInitials="{Binding User, Converter={StaticResource UserToInitialsConverter}}" />
+                                            
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Style="{StaticResource SemiBoldSmallLabel}"
+                                                Text="{Binding User.FullName}" />
+
+                                            <!--  Stars  -->
+                                            <controls:RatingBar
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Rating="{Binding Amount}"
+                                                 IsInDisplayMode="True" />
+
+                                            <!--  Text  -->
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Style="{StaticResource RegularSmallLabel}"
+                                                Text="{Binding Text}"
+                                                Margin="0, 8, 0, 0"/>
+
+                                            <!--  Date  -->
+                                            <Label
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Style="{StaticResource RegularXtraSmallLabel}"
+                                                HorizontalOptions="End"
+                                                Text="{Binding Created}"
+                                                TextColor="{StaticResource GrayTextColor}" />
+                                        </Grid>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </Grid>
+            </pancakeView:PancakeView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

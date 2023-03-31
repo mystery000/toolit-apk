@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    x:Name="Root"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            
+            <!-- control templates -->
+            <ControlTemplate x:Key="ProfileInfoView">
+                <contentViews:CraftsmanInfoView Padding="16"
+                                                BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                                                IsInEditMode="True" />
+            </ControlTemplate>
+            
+            <ControlTemplate x:Key="ProfileSettingsView">
+                <contentViews:ProfileSettingsView
+                    BindingContext="{Binding BindingContext, Source={x:Reference Root}}" />
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <AbsoluteLayout>
+            <local:CustomScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                    AbsoluteLayout.LayoutFlags="All"
+                                    VerticalScrollBarVisibility="Never">
+                
+                <StackLayout Padding="0,0,0,40" 
+                             Spacing="12">
+                    
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="0" />
+                            <On Platform="iOS" Value="0, -20, 0, 0" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+                    
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout"
+                                     Binding="{Binding HasSafeArea}"
+                                     Value="True">
+                            <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    
+                    <!--#region Top Grid Big-->
+                    <custom:PancakeView
+                        x:Name="Top"
+                        Margin="0"
+                        Style="{StaticResource TopBoxBig}"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="220">
+                        
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger TargetType="custom:PancakeView"
+                                         Binding="{Binding HasSafeArea}"
+                                         Value="True">
+                                <Setter Property="HeightRequest" Value="256" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                        
+                        
+                        <Grid BackgroundColor="{StaticResource DarkGreen}">
+
+                            <!--  Pattern  -->
+                            <Image Style="{StaticResource BigTopPatternDrop}" />
+                            <Image Style="{StaticResource BigTopPatternStripe}" />
+
+                            <!--  rating bar  -->
+                            <controls:RatingBar
+                                xct:SafeAreaEffect.SafeArea="True"
+                                Margin="36,56,0,0"
+                                HeightRequest="16"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start"
+                                Rating="{Binding Craftsman.AverageRating}"
+                                IsVisible="{Binding IsACraftsman}"/>
+
+                            <!--  Edit  -->
+                            <StackLayout Spacing="12" 
+                                         Style="{StaticResource BigTopStarsStack}"
+                                         xct:SafeAreaEffect.SafeArea="True">
+                                <Label Style="{StaticResource SemiBoldSmallLabel}"
+                                    Text="{x:Static resources:AppResources.EditProfileAction}"
+                                    TextColor="{StaticResource WhiteTextColor}"
+                                    VerticalOptions="Center" />
+                                <Image
+                                    HeightRequest="16"
+                                    Source="edit_square_white"
+                                    VerticalOptions="Center" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding MoveToEditProfileCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+
+                            <!--  Header  -->
+                            <StackLayout Style="{StaticResource HeaderTextStack}">
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{StaticResource BigTopHeader}" Text="{Binding User.PreferredName}" />
+                                            <Span Text="&#x0a;" />
+                                            <Span Style="{StaticResource BigTopHeader}" Text="{Binding User.LastName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <controls:CachedAvatarView 
+                                            HorizontalOptions="End"
+                                            VerticalOptions="End"
+                                            HeightRequest="80"
+                                            ImageUrl="{Binding User.ImageUrl}"
+                                            UserInitials="{Binding User, Converter={StaticResource UserToInitialsConverter}}"
+                                            xct:TouchEffect.Command="{Binding EditProfilePictureCommand}"
+                                            Margin="0,0,40,40" />
+
+                        </Grid>
+                    </custom:PancakeView>
+                    <!--#endregion-->
+                    
+                    <!--  segmented Btn  -->
+                    <custom:PancakeView Margin="16,24" 
+                                        Style="{StaticResource DoubleBtnFrame}"
+                                        IsVisible="{Binding IsACraftsman}">
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="0">
+                            <Button
+                                Command="{Binding ShowInfoCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{x:Static resources:AppResources.YourInformationTitle}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsSettingsTabSelected}"
+                                        TargetType="Button"
+                                        Value="False">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding ShowSettingsCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{x:Static resources:AppResources.ShowSettingsTitle}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsSettingsTabSelected}"
+                                        TargetType="Button"
+                                        Value="True">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                    </custom:PancakeView>
+                    
+                    <ContentView>
+                        <ContentView.Triggers>
+                            <!--  craftsman info  -->
+                            <MultiTrigger TargetType="ContentView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition
+                                        Binding="{Binding IsSettingsTabSelected}"
+                                        Value="False" />
+                                    <BindingCondition
+                                        Binding="{Binding IsACraftsman}"
+                                        Value="True" />
+                                </MultiTrigger.Conditions>
+                                
+                                <Setter Property="ControlTemplate" Value="{StaticResource ProfileInfoView}" />
+                            </MultiTrigger>
+                                
+                            <!-- profile settings -->
+                            <DataTrigger TargetType="ContentView"
+                                         Binding="{Binding IsSettingsTabSelected}"
+                                         Value="True">
+                                
+                                <Setter Property="ControlTemplate" Value="{StaticResource ProfileSettingsView}" />
+                            </DataTrigger>
+                            
+                        </ContentView.Triggers>
+                    </ContentView>
+                    
+                </StackLayout>
+            </local:CustomScrollView>
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>

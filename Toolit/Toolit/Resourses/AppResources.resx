@@ -1,0 +1,2473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceptDataPolicy" xml:space="preserve">
+    <value>Du måste acceptera dataskyddspolicyn</value>
+  </data>
+  <data name="AcceptUserTerms" xml:space="preserve">
+    <value>Du måste acceptera användarvillkoren</value>
+  </data>
+  <data name="AddressCannotBeEmpty" xml:space="preserve">
+    <value>Din hemadress kan inte vara tom.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="ChooseObjekt" xml:space="preserve">
+    <value>Välj Objekt</value>
+  </data>
+  <data name="ChooseRotRut" xml:space="preserve">
+    <value>Välj om du vill nyttja Rot/Rut</value>
+  </data>
+  <data name="ChooseTags" xml:space="preserve">
+    <value>välj minst en av taggarna</value>
+  </data>
+  <data name="CityCannotBeEmpty" xml:space="preserve">
+    <value>Stad kan inte vara tom.</value>
+  </data>
+  <data name="CompanyAddressCannotBeEmpty" xml:space="preserve">
+    <value>Företagsadress kan inte vara tom.</value>
+  </data>
+  <data name="CompanyNameCannotBeEmpty" xml:space="preserve">
+    <value>Bolagsnamn kan inte vara tom.</value>
+  </data>
+  <data name="CostCannotBeEmpty" xml:space="preserve">
+    <value>Övriga kostnader kan inte vara tom.</value>
+  </data>
+  <data name="DescriptionCannotBeEmpty" xml:space="preserve">
+    <value>Beskrivning kan inte vara tom.</value>
+  </data>
+  <data name="EmailCannotBeEmpty" xml:space="preserve">
+    <value>Email kan inte vara tom.</value>
+  </data>
+  <data name="EmailNotValid" xml:space="preserve">
+    <value>Email ej giltig</value>
+  </data>
+  <data name="FirstNameCannotBeEmpty" xml:space="preserve">
+    <value>Förnamn kan inte vara tom.</value>
+  </data>
+  <data name="HeaderCannotBeEmpty" xml:space="preserve">
+    <value>Rubrik kan inte vara tom.</value>
+  </data>
+  <data name="MatirialCostCannotBeEmpty" xml:space="preserve">
+    <value>Material kostnad kan inte vara tom.</value>
+  </data>
+  <data name="MessageCannotBeEmpty" xml:space="preserve">
+    <value>Ditt medelande kan inte vara tom.</value>
+  </data>
+  <data name="NameCannotBeEmpty" xml:space="preserve">
+    <value>Ditt fullständiga namn kan inte vara tom.</value>
+  </data>
+  <data name="OrgNumberCannotBeEmpty" xml:space="preserve">
+    <value>Org Nummer kan inte vara tom.</value>
+  </data>
+  <data name="OrgNumberToShort" xml:space="preserve">
+    <value>Org Nummer är för kort -  tecken krävs</value>
+  </data>
+  <data name="PhoneCannotBeEmpty" xml:space="preserve">
+    <value>Telefon kan inte vara tom.</value>
+  </data>
+  <data name="PostNumberCannotBeEmpty" xml:space="preserve">
+    <value>Postnummer kan inte vara tom.</value>
+  </data>
+  <data name="PostOfficeCannotBeEmpty" xml:space="preserve">
+    <value>Postort kan inte vara tom.</value>
+  </data>
+  <data name="ReadNext" xml:space="preserve">
+    <value>Läs nästa steg</value>
+  </data>
+  <data name="RegistratedCompanyNameCannotBeEmpty" xml:space="preserve">
+    <value>Registrerat företag kan inte vara tom.</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Skippa</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Toolit är Sveriges
+bästa hantverkarapp</value>
+  </data>
+  <data name="String10" xml:space="preserve">
+    <value>Jag vill bara skapa ett konto</value>
+  </data>
+  <data name="String100" xml:space="preserve">
+    <value>Sortera efter bästa betyg</value>
+  </data>
+  <data name="BidDetailBidInfo" xml:space="preserve">
+    <value>Bud information</value>
+  </data>
+  <data name="BidDetailCraftsmanInfo" xml:space="preserve">
+    <value>Om hantverkaren</value>
+  </data>
+  <data name="BidDetailBidMessageTitle" xml:space="preserve">
+    <value>Meddelande från hantverkaren</value>
+  </data>
+  <data name="BidCraftsmansOfferTitle" xml:space="preserve">
+    <value>Offert från hantverkaren</value>
+  </data>
+  <data name="BidLaborCostTitle" xml:space="preserve">
+    <value>Arbetskostnad ink moms</value>
+  </data>
+  <data name="NewBidMaterialCostPrompt" xml:space="preserve">
+    <value>Material kostnad (ex moms)</value>
+  </data>
+    <data name="BidMaterialCostTitle" xml:space="preserve">
+    <value>Material kostnad ink moms</value>
+  </data>
+  <data name="BidRootDeductionTitle" xml:space="preserve">
+    <value>Med Rotavdrag:</value>
+  </data>
+  <data name="BidFinalPriceTitle" xml:space="preserve">
+    <value>Slutsumma för bud:</value>
+  </data>
+  <data name="String109" xml:space="preserve">
+    <value>Skrivet av hantverkaren</value>
+  </data>
+  <data name="String11" xml:space="preserve">
+    <value>Snickare</value>
+  </data>
+  <data name="CraftsmanInfoTitle" xml:space="preserve">
+    <value>Information om hantverkaren</value>
+  </data>
+  <data name="CraftsmanCompletedJobsString" xml:space="preserve">
+    <value>Antal avklarade jobb: </value>
+  </data>
+  <data name="PiecesFormatString" xml:space="preserve">
+    <value>{0} stk</value>
+  </data>
+  <data name="CraftsmanWorkCertificateString" xml:space="preserve">
+    <value>Arbetscertifikat: </value>
+  </data>
+  <data name="CraftsmanMemberSinceString" xml:space="preserve">
+    <value>Medlem sedan: </value>
+  </data>
+  <data name="CraftsmanWorkAreaString" xml:space="preserve">
+    <value>Arbetsområde: </value>
+  </data>
+  <data name="CraftsmanRatingListTitle" xml:space="preserve">
+    <value>Betyg och recensioner</value>
+  </data>
+  <data name="AddTaskGoToStep5Action" xml:space="preserve">
+    <value>Forstätt till steg 5/5</value>
+  </data>
+  <data name="AddTaskSelectTagsPrompt" xml:space="preserve">
+    <value>Välj en av följande taggar:</value>
+  </data>
+  <data name="GoBackToMenuAction" xml:space="preserve">
+    <value>Återgå till menyn</value>
+  </data>
+  <data name="String12" xml:space="preserve">
+    <value>För alla typer av snickerier</value>
+  </data>
+  <data name="UserCompletedTaskRatingPrompt" xml:space="preserve">
+    <value>Hur upplevde du jobbet?</value>
+  </data>
+  <data name="UserCompletedTaskSendRatingAction" xml:space="preserve">
+    <value>Skicka in ditt svar</value>
+  </data>
+  <data name="BidMessagePlaceholder" xml:space="preserve">
+    <value>Fri text</value>
+  </data>
+  <data name="UserCompletedTaskReviewPrompt" xml:space="preserve">
+    <value>Skriv en review</value>
+  </data>
+  <data name="ChatMessageListTitle" xml:space="preserve">
+    <value>Drag åt vänster för att radera en chatt</value>
+  </data>
+  <data name="ChatPageTitle" xml:space="preserve">
+    <value>Dina meddelanden</value>
+  </data>
+  <data name="String127" xml:space="preserve">
+    <value>Dina betalkort</value>
+  </data>
+  <data name="String128" xml:space="preserve">
+    <value>Lägg till kort</value>
+  </data>
+  <data name="String129" xml:space="preserve">
+    <value>Min jobb historik</value>
+  </data>
+  <data name="String13" xml:space="preserve">
+    <value>Målare</value>
+  </data>
+  <data name="SeeFullHistoryAction" xml:space="preserve">
+    <value>Se full historik</value>
+  </data>
+  <data name="InfoSettingsTitle" xml:space="preserve">
+    <value>Information &amp; tillåtelser</value>
+  </data>
+  <data name="AllowSharingAction" xml:space="preserve">
+    <value>Tillåt delning av din plats</value>
+  </data>
+  <data name="AboutUsTitle" xml:space="preserve">
+    <value>Om oss</value>
+  </data>
+  <data name="ContactUsAction" xml:space="preserve">
+    <value>Kontakta oss</value>
+  </data>
+  <data name="FaqAction" xml:space="preserve">
+    <value>FAQ &amp; Hjälp</value>
+  </data>
+  <data name="OpenTosAction" xml:space="preserve">
+    <value>Användarvillkor</value>
+  </data>
+  <data name="OpenDataPolicyAction" xml:space="preserve">
+    <value>Data Policy</value>
+  </data>
+  <data name="SeeMoreAction" xml:space="preserve">
+    <value>Läs mer</value>
+  </data>
+  <data name="EnableNotificationsAction" xml:space="preserve">
+    <value>Tillåt notiser för appen</value>
+  </data>
+  <data name="String14" xml:space="preserve">
+    <value>För alla typ av målning</value>
+  </data>
+  <data name="LogOutAction" xml:space="preserve">
+    <value>Logga ut</value>
+  </data>
+  <data name="DeleteAccountAction" xml:space="preserve">
+    <value>Radera kontot</value>
+  </data>
+  <data name="EditProfileTitle" xml:space="preserve">
+    <value>Redigera din profil</value>
+  </data>
+  <data name="TapCardsToEditAction" xml:space="preserve">
+    <value>Tryck på korten för att redigera</value>
+  </data>
+  <data name="String144" xml:space="preserve">
+    <value>Ditt fullständiga namn</value>
+  </data>
+  <data name="String145" xml:space="preserve">
+    <value>Ida Hammarvik</value>
+  </data>
+  <data name="String146" xml:space="preserve">
+    <value>Din hemadress</value>
+  </data>
+  <data name="String147" xml:space="preserve">
+    <value>Villavägen 5, Täby</value>
+  </data>
+  <data name="String148" xml:space="preserve">
+    <value>Din emailadress</value>
+  </data>
+  <data name="String149" xml:space="preserve">
+    <value>idahammarvik@gmail.com</value>
+  </data>
+  <data name="String15" xml:space="preserve">
+    <value>VVS</value>
+  </data>
+  <data name="String150" xml:space="preserve">
+    <value>Ditt telefonnummer</value>
+  </data>
+  <data name="String151" xml:space="preserve">
+    <value>+46 70 523 63 189</value>
+  </data>
+  <data name="SaveProfileDataAction" xml:space="preserve">
+    <value>Spara dina ändringar</value>
+  </data>
+  <data name="String153" xml:space="preserve">
+    <value>Dina betalningsmedel</value>
+  </data>
+  <data name="String154" xml:space="preserve">
+    <value>Lägg till nytt betalningsmedel</value>
+  </data>
+  <data name="String155" xml:space="preserve">
+    <value>Visa Card</value>
+  </data>
+  <data name="String156" xml:space="preserve">
+    <value>Skriv ditt kortnummer här...</value>
+  </data>
+  <data name="String157" xml:space="preserve">
+    <value>Utgångsdatum</value>
+  </data>
+  <data name="String158" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="String159" xml:space="preserve">
+    <value>Lägg till kort</value>
+  </data>
+  <data name="String16" xml:space="preserve">
+    <value>För VVB, reperation och service</value>
+  </data>
+  <data name="ConfirmDeleteAccountAction" xml:space="preserve">
+    <value>Ja radera konto!</value>
+  </data>
+  <data name="DeleteAccountConfirmationPrompt" xml:space="preserve">
+    <value>Är du säker på att du vill radera detta konto?</value>
+  </data>
+  <data name="PaymentsPageTitle" xml:space="preserve">
+    <value>Dina inbetalningar</value>
+  </data>
+  <data name="String163" xml:space="preserve">
+    <value>Betaning väntar</value>
+  </data>
+  <data name="String164" xml:space="preserve">
+    <value>Betald</value>
+  </data>
+  <data name="PaymentHistoryTitle" xml:space="preserve">
+    <value>Betalnings historik</value>
+  </data>
+  <data name="ContactEmailTitle" xml:space="preserve">
+    <value>Email: </value>
+  </data>
+  <data name="ContactPhoneTitle" xml:space="preserve">
+    <value>Telefon: </value>
+  </data>
+  <data name="ContactAddressTitle" xml:space="preserve">
+    <value>Adress: </value>
+  </data>
+  <data name="ContactInfoTitle" xml:space="preserve">
+    <value>Kontaktinformation</value>
+  </data>
+  <data name="String17" xml:space="preserve">
+    <value>Golvläggare</value>
+  </data>
+  <data name="TosPageTitle" xml:space="preserve">
+    <value>Användarvillkor</value>
+  </data>
+  <data name="YourTosTitle" xml:space="preserve">
+    <value>Våra Användarvillkor</value>
+  </data>
+  <data name="FaqPageTitle" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="FaqPageActionString" xml:space="preserve">
+    <value>Tryck på korten för att läsa svaret</value>
+  </data>
+  <data name="String174" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="String175" xml:space="preserve">
+    <value>Din adress</value>
+  </data>
+  <data name="String176" xml:space="preserve">
+    <value>Ange adrsss</value>
+  </data>
+  <data name="PostalCodePrompt" xml:space="preserve">
+    <value>Postnummer</value>
+  </data>
+  <data name="String178" xml:space="preserve">
+    <value>xxx xx</value>
+  </data>
+  <data name="String179" xml:space="preserve">
+    <value>Postort</value>
+  </data>
+  <data name="String18" xml:space="preserve">
+    <value>Lorem Ipsum mena derbe</value>
+  </data>
+  <data name="String180" xml:space="preserve">
+    <value>Ange postort</value>
+  </data>
+  <data name="DataPolicyPromot" xml:space="preserve">
+    <value>dataskyddspolicyn</value>
+  </data>
+  <data name="SignUpAction" xml:space="preserve">
+    <value>Registrera konto!</value>
+  </data>
+  <data name="AddTaskModalHeaderFormatString" xml:space="preserve">
+    <value>Vad kan en {0} göra?</value>
+  </data>
+  <data name="String184" xml:space="preserve">
+    <value>Snickare</value>
+  </data>
+  <data name="String185" xml:space="preserve">
+    <value> kan hjälpa dig med allt från stora byggprojekt till mindre sniderier  
+Tex Husbyggnation, nya väggar, stuckatur, montera kök och garderob, altan, trädäck, staket, och mycket mer.</value>
+  </data>
+  <data name="String186" xml:space="preserve">
+    <value>Vad kan en målare göra?</value>
+  </data>
+  <data name="String187" xml:space="preserve">
+    <value>Målare</value>
+  </data>
+  <data name="String188" xml:space="preserve">
+    <value> kan hjälpa dig att spackla, måla väggar och lister samt tapetserar.</value>
+  </data>
+  <data name="String189" xml:space="preserve">
+    <value>Vad kan en VVS-montör göra?</value>
+  </data>
+  <data name="String19" xml:space="preserve">
+    <value>Plattsättare</value>
+  </data>
+  <data name="String190" xml:space="preserve">
+    <value>VVS</value>
+  </data>
+  <data name="String191" xml:space="preserve">
+    <value>-montör installerar förutom att dra rör, värmepumpar och elpannor, solvärme, varmvattenberedare, element och det som ingår i ett badrum så som toalettstol, badkar och handfat</value>
+  </data>
+  <data name="String192" xml:space="preserve">
+    <value>Vad kan en golvläggare göra?</value>
+  </data>
+  <data name="String193" xml:space="preserve">
+    <value>Golvläggare</value>
+  </data>
+  <data name="String194" xml:space="preserve">
+    <value> arbetar med att lägga mattor och golv av olika material som textil, linoleum eller parkett.</value>
+  </data>
+  <data name="String195" xml:space="preserve">
+    <value>Vad kan en plattsättare göra?</value>
+  </data>
+  <data name="String196" xml:space="preserve">
+    <value>Skapar och renoverar ditt badrum, kök och andra ytor. Monterar kakel, klinker, mosaik och konstbetongplattor på väggar och golv.</value>
+  </data>
+  <data name="AddTaskTipsHeaderFormatString" xml:space="preserve">
+    <value>Vad roligt {0}! Nu är det dags att beskriva vad du behöver hjälp med.</value>
+  </data>
+  <data name="AddTaskTipContent1" xml:space="preserve">
+    <value>Beskriv så noggrant du kan vad du behöver hjälp med i en beskrivande video.</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Vi finns för att vara 
+lättare för dig</value>
+  </data>
+  <data name="String20" xml:space="preserve">
+    <value>Lorem Ipsum mena derbe</value>
+  </data>
+  <data name="AddTaskTipContent2" xml:space="preserve">
+    <value>Visa om du har något material till jobbet i film, bild och text.</value>
+  </data>
+  <data name="AddTaskTipHeader3" xml:space="preserve">
+    <value>Tips 3: Komplettera med text</value>
+  </data>
+  <data name="AddTaskTipContent3" xml:space="preserve">
+    <value>Exempel: Vägg skall byggas, isolerad vägg och gärna med luftventil, 3x3m, Öppning för dörr. Ingen el behöver dras nytt eller flyttas. 
+
+Material: Har karm och dörr 210x70cm yttermått på karm, inget material i övrigt.</value>
+  </data>
+  <data name="String203" xml:space="preserve">
+    <value>Eluttag </value>
+  </data>
+  <data name="String204" xml:space="preserve">
+    <value>Dimmer </value>
+  </data>
+  <data name="String205" xml:space="preserve">
+    <value>Lampknapp </value>
+  </data>
+  <data name="String206" xml:space="preserve">
+    <value>Spotlights </value>
+  </data>
+  <data name="String207" xml:space="preserve">
+    <value>Ledlist </value>
+  </data>
+  <data name="String208" xml:space="preserve">
+    <value>Lampa </value>
+  </data>
+  <data name="String209" xml:space="preserve">
+    <value>Kabeldragning </value>
+  </data>
+  <data name="ApplyForCraftsmanActionTitle" xml:space="preserve">
+    <value>Ansök till hantverkare </value>
+  </data>
+  <data name="String210" xml:space="preserve">
+    <value>Elskåp </value>
+  </data>
+  <data name="String211" xml:space="preserve">
+    <value>Armatur </value>
+  </data>
+  <data name="String212" xml:space="preserve">
+    <value>Jordfelsbrytare </value>
+  </data>
+  <data name="String213" xml:space="preserve">
+    <value>Struckatur </value>
+  </data>
+  <data name="String214" xml:space="preserve">
+    <value>Dörr </value>
+  </data>
+  <data name="String215" xml:space="preserve">
+    <value>Dörr med karm </value>
+  </data>
+  <data name="String216" xml:space="preserve">
+    <value>Golvlist </value>
+  </data>
+  <data name="String217" xml:space="preserve">
+    <value>Kök </value>
+  </data>
+  <data name="String218" xml:space="preserve">
+    <value>Garderob </value>
+  </data>
+  <data name="String219" xml:space="preserve">
+    <value>Hylla </value>
+  </data>
+  <data name="String22" xml:space="preserve">
+    <value>Lorem Ipsum mena derbe</value>
+  </data>
+  <data name="String220" xml:space="preserve">
+    <value>Måla </value>
+  </data>
+  <data name="String221" xml:space="preserve">
+    <value>Tapetsera </value>
+  </data>
+  <data name="String222" xml:space="preserve">
+    <value>Element </value>
+  </data>
+  <data name="String223" xml:space="preserve">
+    <value>Toalett </value>
+  </data>
+  <data name="String224" xml:space="preserve">
+    <value>Rördragning </value>
+  </data>
+  <data name="String225" xml:space="preserve">
+    <value>Kranar </value>
+  </data>
+  <data name="String226" xml:space="preserve">
+    <value>Dush </value>
+  </data>
+  <data name="String227" xml:space="preserve">
+    <value>Dushkarbin </value>
+  </data>
+  <data name="String228" xml:space="preserve">
+    <value>Handfat </value>
+  </data>
+  <data name="String229" xml:space="preserve">
+    <value>Badkar </value>
+  </data>
+  <data name="String23" xml:space="preserve">
+    <value>Kontakta en målare</value>
+  </data>
+  <data name="String230" xml:space="preserve">
+    <value>Solvärme</value>
+  </data>
+  <data name="String231" xml:space="preserve">
+    <value>Värmepumpar och elpannor </value>
+  </data>
+  <data name="String232" xml:space="preserve">
+    <value>Heltäckningsmatta </value>
+  </data>
+  <data name="String233" xml:space="preserve">
+    <value>Golv </value>
+  </data>
+  <data name="String234" xml:space="preserve">
+    <value>Kakel </value>
+  </data>
+  <data name="String235" xml:space="preserve">
+    <value>Klinkers </value>
+  </data>
+  <data name="LearnMoreAboutRotRutAction" xml:space="preserve">
+    <value>Vem kan nyttja rot/rut?</value>
+  </data>
+  <data name="AddTaskForCondominiumsPrompt" xml:space="preserve">
+    <value>För dig som bor i lägenhet:</value>
+  </data>
+  <data name="AddTaskCondominiumHousingNamePlaceholder" xml:space="preserve">
+    <value>Bostadrättsförening</value>
+  </data>
+  <data name="AddTaskCondominiumApartmentNumberPlaceholder" xml:space="preserve">
+    <value>Lägenhets nr</value>
+  </data>
+  <data name="CreateTaskCompletionModelDescription" xml:space="preserve">
+    <value>Välj hantverkare efter rating, tidigare jobb, rekommendationer, pris samt tidsram! 
+
+Snart är hjälp på väg!</value>
+  </data>
+  <data name="AddTaskForHousesPrompt" xml:space="preserve">
+    <value>För dig som bor i villa:</value>
+  </data>
+  <data name="AddTaskHousePropertyDesignationPlaceholder" xml:space="preserve">
+    <value>Fastighetsbeteckning</value>
+  </data>
+  <data name="FaqQuestionTitle" xml:space="preserve">
+    <value>Vanliga frågor</value>
+  </data>
+  <data name="FaqQuestion1" xml:space="preserve">
+    <value>Kan jag få ut kvitto?</value>
+  </data>
+  <data name="FaqAnswer1" xml:space="preserve">
+    <value>Ja! Per automatik skickar hantverkaren över kvitto och underlag för jobbet till dig per mail vid godkännande av jobb.</value>
+  </data>
+  <data name="FaqQuestion2" xml:space="preserve">
+    <value>Är mitt hem försäkrat via er tjänst?</value>
+  </data>
+  <data name="FaqAnswer2" xml:space="preserve">
+    <value>Nej. Toolit är en marknadsplats där privatpersoner och hantverkare sammanförs dvs Toolit har ingen part i själva avtalet er emellan. 
+
+Vid olycka runt jobbet ta kontakt med ditt försäkringsbolag och hantverkaren som utförde jobbet så får ni hjälpas åt att lösa det.</value>
+  </data>
+  <data name="FaqQuestion3" xml:space="preserve">
+    <value>Måste jag betala skatt?</value>
+  </data>
+  <data name="FaqAnswer3" xml:space="preserve">
+    <value>Toolit är en marknadsplats och som hantverkare behöver du själv ta reda på vilka skatter och avgifter, inklusive sociala avgifter som du omfattas av. Som kund ser du priserna inklusive moms.
+
+Om du behöver mer information eller har frågor relaterade till skatt så hänvisar vi till din lokala skattemyndighet.</value>
+  </data>
+  <data name="String249" xml:space="preserve">
+    <value>Vad kan en elektriker göra?</value>
+  </data>
+  <data name="MoveToTipsAction" xml:space="preserve">
+    <value>Skapa ett nytt jobb</value>
+  </data>
+  <data name="String250" xml:space="preserve">
+    <value>Elektriker </value>
+  </data>
+  <data name="String251" xml:space="preserve">
+    <value>kan hjälpa dig med allt från installationer i villa, lägenheter, sommarhus och på kontor. Dra ledningar, montera elcentraler, strömbrytare, dimmers, ljus och ljud lösningar är vanliga uppgifter för en elektriker.</value>
+  </data>
+  <data name="YourTosSubtitle" xml:space="preserve">
+    <value>Viktigt för alla som vill använda Toolits tjänster.</value>
+  </data>
+  <data name="String253" xml:space="preserve">
+    <value>Om våra allmänna villkor</value>
+  </data>
+  <data name="String254" xml:space="preserve">
+    <value>Nedan hittar du våra allmänna villkor (”Allmänna Villkor”). De handlar i stora drag om att:
+
+(a) du förbinder dig att hålla dig uppdaterad om innehållet i de Allmänna Villkoren för all användning av Toolits tjänster;
+(b)  du måste respektera Toolits immateriella rättigheter och inte reproducera vår tjänst någon annanstans;
+(c)  du måste ha rätt att lägga upp all information när du skapar annonser i Tjänsten och inte inkludera något som kan vara olagligt;
+(d)  du ska vara medveten om att Toolit använder sig av tredjeparts betallösning Payex (Payex.se), för att förmedla betalningar mellan Tjänstens användare och att du, för att utföra eller motta betalningar för annonser i Tjänsten, även måste acceptera Payex användarvillkor;
+(e)  du måste förstå att Toolit har ett begränsat ansvar för tjänstens tillgänglighet och tillhandahållandet av korrekt information.
+(f)  du ska vara medveten om att vi behandlar dina personuppgifter i enlighet med vår 
+
+Personuppgiftspolicy.</value>
+  </data>
+  <data name="String255" xml:space="preserve">
+    <value>1. Allmänna Villkor</value>
+  </data>
+  <data name="String256" xml:space="preserve">
+    <value>1.1 Toolit AB, organisationsnummer 559021-8250 (”Toolit”) tillhandahåller en digital marknadsplats för förmedling av hantverkartjänster (“Tjänsten”) samt är en annonsplatform för annonsörer. 
+1.2 Användarna i Tjänsten defineras som (Användarna) om det avser någon skyldighet som rör dem båda. (Kunden) och (Hantverkaren) om det är något som rör dessa Användare enskilt.  
+1.3 Privatpersoner och företag (Kunden) kan lägga upp annonser för hantverksjobb de vill ha utförda.     
+1.4 Hantverkare (“Hantverkaren”) kan buda på olika uppdrag beskrivna av Kunden och utförda dessa tjänster och vid godkännande av Kunden få betalt eller via beslut från allmänna reklamationsnämnden.
+1.5 (”Annonsör=)En extern annonsör som annonerar i Appen eller på Webbplatsen.
+1.6 Genom att skapa ett konto i Tjänsten accepterar Kunden och Hantverkaren vid var tid gällande Användarvillkoren (“Villkoren”) för användning av Tjänsten. Villkoren finns alltid tillgängliga på Toolits webbplats.
+1.7 Toolit förbehåller sig rätten att ändra dessa Allmänna Villkor från tid till annan och kommer då att publicera de ändrade Allmänna Villkoren på Webbplatsen och i Appen. De ändrade villkoren blir gällande för nya Användare från och med det datum de publiceras på Webbplatsen eller i Appen och efter 30 dagar från publicering för befintliga Användare.</value>
+  </data>
+  <data name="String257" xml:space="preserve">
+    <value>2. Allmänt om tjänsten och registrering</value>
+  </data>
+  <data name="String258" xml:space="preserve">
+    <value>2.1 Toolit erbjuder användare en möjlighet att nyttja Tjänsten genom att registrera sig. För att ingå avtal och registera dig som Användare måste du vara minst 18 år gammal. Endast fysiska personer kan registrera sig som Kunder av Tjänsten. Hantverkaren får ingå avtal med Tjänsten med bolagsnamn förutsatt att all nödvändig information, så som Hantverkarens namn, adress, organisationsnummer, innehavande av f-skattsedel som är knutet till dess bolag finns med.
+2.2 Tjänsten tillhandahålls inte personer som tidigare har brutit mot de Allmänna Villkoren, eller tidigare av Toolit tillhandahållna villkor eller tillämplig lag. Eller om användaren har blivit neckad eller blockerad av Toolit. 
+2.3 Toolit förbehåller sig även rätten, att efter eget gottfinnande, stänga av användare som använder Tjänsten i strid med de Allmänna Villkoren, tillämplig lag eller på ett sätt som annars framstår som oacceptabelt för Toolit.
+2.4 Toolit äger rätt att begränsa tillgängligheten till Tjänsten i den omfattning som Toolit bedömer är nödvändig för att uppdatera och förbättra Tjänsten. Kompensation kan ej utkrävas för sådana störningar.</value>
+  </data>
+  <data name="String259" xml:space="preserve">
+    <value>3. Immateriella rättighete</value>
+  </data>
+  <data name="String26" xml:space="preserve">
+    <value>Skapa ett konto med Bank ID</value>
+  </data>
+  <data name="String260" xml:space="preserve">
+    <value>3.1 Toolit innehar de immateriella rättigheterna till film, text, bild, design och det övriga material och information som görs tillgängligt för Användaren i Tjänsten. Detsamma gäller den bakomliggande programkoden för Tjänsten. Sådant material och information får inte användas på annat sätt än inom ramen för normal användning av Tjänsten.    3.2 Toolit innehar de immateriella rättigheterna till de uppdragsbeskrivningar, inklusive film, text samt bilder, som lämnas i Tjänsten av Användaren. Dessa kan komma att publiceras i Toolits kanaler och användas i marknadsföringssyfte.   	                    3.3 Generellt är det godkänt att länka till Toolit, men däremot vill vi att besökare flyttas till vår domän och att länken inte är integrerad på andra webbsidor. Alla former av inbäddning och “hot-linking” är förbjudet. Detta kräver vårt godkännande. Detsamma gäller länkning i större skala eller i en kommersiell kontext.      		
+3.4 Du får inte indexera innehållet på Webbplatsen eller Appen.                                          
+3.5 All otillåten användning av Toolit immateriella rättigheter kan medföra ersättningsskyldighet och/eller straffansvar.</value>
+  </data>
+  <data name="String261" xml:space="preserve">
+    <value>4. Användargenererat innehåll</value>
+  </data>
+  <data name="String262" xml:space="preserve">
+    <value>4.1 Med användargenererat innehåll avses allt sådant innehåll som en användare av Tjänsten skapar och lägger upp på Webbplatsen eller i Appen, som t.ex. film, bild, ljudinspelningar och text (”Användargenererat Innehåll”). 
+4.2 Du garanterar att du innehar nödvändiga rättigheter till det Användargenererade Innehållet, antingen genom att du själv har skapat detta (vare sig det är exempelvis film, bild eller en annonstext), eller att alla som har medverkat har gett dig tillstånd att använda det Användargenererade Innehållet på Webbplatsen och i Appen enligt de Allmänna Villkoren.
+4.3 Du garanterar att det Användargenererade Innehållet inte innehåller annans upphovsrättsligt skyddade material, logotyp eller annan immateriell rättighet som du inte har fått rättighetshavarens tillstånd att använda.
+4.4 Du garanterar att du sett till att de personer som kan identifieras i det Användargenererade Innehållet (exempelvis i en bild eller enbart genom sitt namn) är medvetna om hur materialet kommer att användas och att de uttryckligen har godkänt att förekomma i det Användargenererade Innehållet och att Toolit även kan komma att använda det Användargenererade Innehållet i marknadsföringssyfte. 
+4.5 Genom att lägga upp Användargenererat Innehåll vid införandet av en annons, ger du Toolit en oinskränkt rätt att fritt förfoga över det Användargenererade Innehållet, genom att till exempel bearbeta, formatanpassa, lagra eller kopiera det och göra det tillgängligt för allmänheten oavsett mediekanal och att vidare upplåta dessa rättigheter till eventuella samarbetspartners. Toolit får även använda det Användargenererade Innehållet i marknadsföringssyfte. Toolits rättigheter kvarstår även efter att en annons har tagits bort.
+4.6 Du efterger härmed alla krav på ersättning från Toolit för Toolits användning av det Användargenererade Innehållet.
+4.7 Om Användaren publicerar copyright skyddat material är Användare betalningsansvarig för det skadestånds anspråk som riktats mot Toolit.
+Användaren åtar sig att betala hela beloppet för copyright intrånget som Toolit kommer att fakturera Användaren.</value>
+  </data>
+  <data name="String263" xml:space="preserve">
+    <value>5. Användning av tjänsten</value>
+  </data>
+  <data name="String264" xml:space="preserve">
+    <value>5.1 Användaren är ansvarig för att de namn- och kontaktuppgifter som finns registrerade i Tjänsten är korrekta och aktuella. Vidare ansvarar Användaren för att uppdragsbeskrivningen innehåller korrekt och relevant information om det jobb som Kunden önskar få utfört. Toolit har rätt att göra ändringar i uppdragsbeskrivningen i syfte att göra den mer relevant och tydlig eller i syfte att ta bort otillåtet eller olämpligt innehåll, utan att meddela Användaren. Toolit kan även komma att kontakta Användaren för att inhämta ytterligare information om det uppdrag som Kund önskar få utfört.					                   	                    5.2 Det är endast du som har registrerat dig som användare som får lägga upp arbeten eller annonsera utifrån det registrerade kontot. Det är inte tillåtet att låta en annan person använda ditt konto i Toolit. Du åtar dig att se till att andra personer inte kan få tillgång till ditt konto eller använder Tjänsten i ditt namn. Om du har anledning att misstänka att någon obehörig har tillgång till ditt konto i Toolit åtar du dig att omedelbart kontakta oss så att vi kan spärra ditt konto i avvaktan på utredning. 
+5.3 När Hantverkaren svarar och blir godkänd att genomföra ett jobb genom Tjänsten så är du att anse som part i ett avtal i relation till Kund part. 
+Efter ett godkännande av priset som hantverkaren har uppgett sker en kortbetalning till Toolits klientmedelskonto med detta belopp. Kunden och Hantverkaren har genom godkännande av Allmänna villkoren godkänt att pengarna ska deponeras på Toolits klientmedelskonto. Pengarna deponeras på Toolits klientmedelskonto tills arbetet är utfört. Godkännande av arbetet sker efter det är utfört och gärna tillsammans med hantverkaren och genom att Kunden godkänner arbetet medger ni som användare att Toolit får utbetala Hantverkarens belopp till Hantverkarens angivna konto. 
+Hantverkaren får det redovisade deponerade beloppet när arbetet är godkänt, Toolit får i samband med redovisningen av utbetalning på det deponerade beloppet avräkna och erhålla avtalad och förfallen betalning för tjänsten. 
+Om tvist mellan Kund och Hantverkare avseende redovisningen uppstår, ska redovisningen ske först när tvisten löst enligt förlikning eller genom lagakraftvunnen dom. 
+Redovisning kan även ske i enlighet med Kunden och Hantverkarens gemensamma skriftliga begäran, Toolit har då rätt att ta ut det avtalade beloppet enligt avtalet om Toolit inte har stridigt mot något i Allmänna villkoren eller Lag. 
+5.4 Användaren ansvarar för allt innehåll som Kund laddar upp eller på annat sätt genererar inom ramen för Tjänsten och är skyldig att tillse att det inte strider mot lag eller gör intrång i tredje mans rättigheter, samt att det inte har ett innehåll som kan uppfattas som kränkande eller stötande för vare sig folkgrupper eller enskilda individer. Detta gäller såväl film, texter som bilder. Detta gäller även innehållet på andra webbplatser som Användaren länkar till i Tjänsten. Överträdelse mot dessa Villkor kan innebära att annons raderas och i allvarliga fall att Användaren blir permanent avstängd från Tjänsten.
+5.5 Du som användare ansvarar själv för att till Skattemyndigheten på ett korrekt sätt deklarera den ersättning som du får när du utför uppdrag mot betalning som har annonserats i Tjänsten. Kunden ansvarar själv vid i bekräftelse i Tjänsten om att använda ROT-avdrag att Kunden uppfyller villkoren från skatteverket. Användaren ansvarar själva för eventuella skattekonsekvenser som kan uppkomma i och med användande av Tjänsten, t ex för betalning av eventuella skatter och avgifter inklusive sociala avgifter som kan komma att utgå. För vidare information om frågor relaterade till skatt så hänvisar Toolit till din lokala skattemyndighet. Toolit hålls inte ansvariga för fel uppgifter angivna av Kunder eller Hantverkare och kan inte ställas till svars eller krävas på skadestånd för fel uppgifter. 
+5.6 Hantverkaren förbinder sig att under hela perioden som Hantverkaren är ansluten till Tjänsten inneha F-skattsedel, följa svensk lag samt följa beslut och rekommendationer från Allmänna reklamationsnämnden (ARN), Konsumentombudsmannen (KO), Branchorganisationer och andra relevanta myndigheter i händelse av tvist med Kund.</value>
+  </data>
+  <data name="String265" xml:space="preserve">
+    <value>6. Regler för annonsering</value>
+  </data>
+  <data name="String266" xml:space="preserve">
+    <value>6.1 Det är inte tillåtet att annonsera ovederhäftiga/orealistiska erbjudanden. Toolit förbehåller sig rätten att ta bort en annons eller ett jobb som anses falla inom denna kategori.
+6.2 
+6.3 Det är inte tillåtet att som Kund lägga till mer saker i ett jobb efter det att en annons har publicerats. Skapa då istället en till annons.
+6.4 Du åtar dig att lämna de upplysningar om det material eller de saker som din annons innehåller och som Toolit vid var tid efterfrågar samt garanterar genom din publiceringen av annonsen att de lämnade upplysningarna är korrekta och fullständiga.
+6.5 Missbruk kan komma att polisanmälas.</value>
+  </data>
+  <data name="String267" xml:space="preserve">
+    <value>7. Relationen mellan användare</value>
+  </data>
+  <data name="String268" xml:space="preserve">
+    <value>7.1 Toolit är inte part i avtalet mellan Kund och Hantverkare Part utan tillhandahåller en förmedlingstjänst. Toolit har således inget ansvar eller någon ersättningsskyldighet gentemot Tjänstens användare för avtal de träffat med varandra genom nyttjandet av Tjänsten, inte heller kan Toolit ses som part vid reklamation eller dolt fel, där ansvarar Hantverkaren direkt mot kunden. 
+
+Toolit är endast part mellan användarna i enligthet med överenskommen summa för deponering av pengar på klientmedelskontot tills att arbetet är utfört och godkänt. Vid tivst betalar Toolit ut pengarna i enlighet med Lagakraftvunnen dom och Toolit kan inte hållas ansvariga för det som beslutats enligt Lag</value>
+  </data>
+  <data name="String269" xml:space="preserve">
+    <value>7. Omdömen</value>
+  </data>
+  <data name="TosPrompt1" xml:space="preserve">
+    <value>Jag har läst ingenom och godkänner </value>
+  </data>
+  <data name="String270" xml:space="preserve">
+    <value>Toolit strävar efter att hålla hög kvalitet i Tjänsten och förmedla kontakt med seriösa Hantverkare till Kunder . Därför uppmuntrar Toolit Kunder att lämna ett omdöme om Hantverkaren efter utfört uppdrag. Med anledning av detta kan Kunden komma att bli kontaktad av Toolits Kundservice i syfte att utvärdera Hantverkarens arbete. Kunden kan även på eget initiativ lämna omdöme om en Hantverkare på Toolits webbplats.
+För att säkerställa omdömets äkthet måste Kunden uppge sitt fullständiga namn vid lämnande av omdöme. Omdömet publiceras sedan antingen med Kundens fullständiga namn eller endast med förnamn beroende på Kundens önskan.
+Toolit tar inte ansvar för innehållet i omdömen lämnade av Kunders eller svar lämnade av Hantverkare, men förbehåller sig rätten att ej publicera, respektive avlägsna omdömen/svar som är i strid med lag eller som kan uppfattas som kränkande eller stötande eller på annat sätt otillbörliga.
+Konsumentens omdömen om Hantverkaren
+Hantverkaren godkänner att Kunder kan lämna omdömen om uppdrag som Hantverkaren utfört. Toolit är inte ansvarigt för innehållet i Kundernas omdömen men åtar sig att ej publicera omdömen vars innehåll bryter mot svensk lag eller som Toolit på annat sätt anser vara olämpligt.
+Hantverkaren äger inte rätt att begära borttag eller korrigering i lämnade omdömen, men har möjlighet att svara på Konsumentens omdömen. Hantverkarens svar publiceras på Toolits webbplats i anslutning till Kund omdöme. Toolit förbehåller sig dock rätten att ej publicera svar som är olämpliga, står i strid med lag eller som kan uppfattas som kränkande</value>
+  </data>
+  <data name="String271" xml:space="preserve">
+    <value>8. Betalningar</value>
+  </data>
+  <data name="String272" xml:space="preserve">
+    <value>8.1 Genom Tjänsten har Kunden och Hantverkare möjlighet att skicka och ta emot betalningar för annonsering eller av Kund annonserade arbeten. 
+8.2 Toolit tar betalt från Kunden för annonsering av arbete. Tollit tar betalt från Hantverkaren för förmedling av kontaktuppgifter. Toolit tillhandahåller ett klientmedleskonto och detta anses inte rent juridiskt vara en betalning, utan det är en deponering och utbetals först villkoren är uppfyllda och då pengarna överförs till den rättmättiga motagaren. Toolit tar betalt för annonsplatser från aktörer som vill annonsera i tjänsten eller på Toolits hemsida. 
+8.3 Det är inte tillåtet att som Hantverkare part be om betalning utanför plattformen eller att be om en högre ersättning utanför Tjänsten.
+8.4 När Kunden och Hantverkaren har bekräftat pris via appen förbehåller toolit sig rätten att att ta ut sitt arvode på det avtalade beloppet även fast det sker en priskorregering nedåt. Då kommer Toolit göra en enskild bedömning utifrån vad som har skett. Detta för att förhindra systematiskt priskorrigering i efterhand och undvika andra betallösningar utanför applikationen. Om detta uppdagas kan Toolit välja att stänga av Kunden och/eller Hantverkaren
+Kunden har upp till 2 veckor att begära ett kostnadsfritt förbättringsjobb om arbetet uppdagas att det att det är undermånligt och/eller ej fackmannamässigt utfört. Kontakten sker direkt mellan Kunden och Hantverkaren. 
+Hantverkaren åtar sig att utföra ett förbättringsjobb kostnadsfritt om arbetet faktiskt är undermånligt och/eller ej fackmannamässigt utfört. Båda parter skall agera solidariskt I ärendet.</value>
+  </data>
+  <data name="String273" xml:space="preserve">
+    <value>9. Tredjepart samarbeten</value>
+  </data>
+  <data name="String274" xml:space="preserve">
+    <value>9.1 (www.payex.se). Genom att godkänna dessa Allmänna Villkor eller genom att fortsätta använda Appen och utföra jobb för vilka du får betalt, blir du också bunden av Payex allmänna villkor, som kan ändras från tid till annan av Payex. Som ett villkor för att möjliggöra betalningstjänster på Webbplatsen och i Appen genom Payex försorg, ska du genom Toolit förse Payex med korrekt information om dig själv.”
+9.2 Utbetalningar till den hämtande användarens registrerade bankkonto aktiveras när jobbet i Appen godkänts av Kund part.
+9.3 Toolit tar en transaktionsavgift för varje utförd jobb, vilken kan variera i tid och för marknad. I Sverige är transaktionsavgiften 5%- 20% beroende på vilken typ av premiumtjänst Hantverkaren har enligt prislista.
+9.4 Transaktionsavgiften dras ifrån Hantverkarens ersättning som erhåller 80-95%, av det belopp som är accepterat av Kunden i kostnad vid utfört arbete.</value>
+  </data>
+  <data name="String275" xml:space="preserve">
+    <value>10. Användande av kampanjkod</value>
+  </data>
+  <data name="String276" xml:space="preserve">
+    <value>10.1 För att nyttja rabatten relaterad till en kampanjkod ska koden senast anges i samband med publicering av en annons. En kampanjkod som berättigar en rabatt kan endast göras gällande för de annonskategorier där en annonsör betalar för att få hjälp.
+Om inget annat kommuniceras i samband med kampanjkoden är den förknippade rabatten endast giltig vid det första tillfället en annonsör bekräftar och betalar en hämtning eller leverans</value>
+  </data>
+  <data name="String277" xml:space="preserve">
+    <value>11. Skadeersättning</value>
+  </data>
+  <data name="String278" xml:space="preserve">
+    <value>11.1 Du som Användare åtar dig att hålla Toolit skadeslöst för det fall att någon tredje part ställer krav på ersättning på grund av Användargenererat eller copyright skyddat innehåll, eller på grund av att du som användare i övrigt har agerat i strid med dessa Allmänna Villkor eller i strid med gällande lag eller tredje parts rättighet</value>
+  </data>
+  <data name="String279" xml:space="preserve">
+    <value>12. Toolit ansvar</value>
+  </data>
+  <data name="TosPrompt2" xml:space="preserve">
+    <value>Användarvillkoren</value>
+  </data>
+  <data name="String280" xml:space="preserve">
+    <value>12.1 Toolit tillhandahåller Tjänsten i befintligt skick. Toolit förbehåller sig rätten att förändra Tjänsten utan föregående meddelande till dig som användare.
+12.2 Toolit lämnar inga garantier gällande Tjänstens funktion eller tillgänglighet och garanterar inte kontinuerlig, oavbruten eller säker tillgång till Tjänsten. Som användare är du medveten om att driften av Webbplatsen och/eller Appen kan komma att störas av ett antal faktorer utanför Toolit kontroll.
+12.3 Toolit ansvarar inte för skada som beror på uteblivna eller fördröjda annonssvar eller på felaktig information i annonstexten, och ansvarar inte heller i övrigt gentemot dig för direkta eller indirekta skador eller förluster som direkt eller indirekt orsakats av din användning av Tjänsten eller av att du inte kunnat använda Tjänsten eller av dess innehåll.  
+12.4 Bestämmelser i dessa Allmänna Villkor ska inte begränsa Toolit ansvar vid uppsåt eller grov vårdslöshet eller enligt tvingande lag.
+12.5 Toolit förbehåller sig rätten att stänga av dig som användare från Tjänsten samt att upphöra att tillhandahålla del eller hela Tjänsten om det sker en regulatorisk förändring eller genom myndighetsbeslut som begränsar Toolits möjligheter att tillhandahålla Tjänsten</value>
+  </data>
+  <data name="String281" xml:space="preserve">
+    <value>13. Personuppgifter</value>
+  </data>
+  <data name="String282" xml:space="preserve">
+    <value>13.1 Toolit behandlar dina personuppgifter i enlighet med GDPR vid var tid gällande Personuppgiftspolicy och kommer spara Användarens uppgifter endast så länge som det är nödvändigt, Vi raderar din information när den inte längre är relevant.</value>
+  </data>
+  <data name="String283" xml:space="preserve">
+    <value>14. Ångerrätt &amp; avbokming</value>
+  </data>
+  <data name="String284" xml:space="preserve">
+    <value>14.1 Du är medveten om att det inte föreligger någon ångerrätt om du påbörjar utnyttjandet av Tjänsten inom 24 timmar av överenskommen tid med Hantverkare, avbokningskydd gäller upp till senast 24 timmar före överenskommen tid med Hantverkaren. Vid avbokning återbetalas överenskommet belopp minus avgifter till Kund. Vid systematisk avbokning inför ett jobb av någon av Användarna kan Toolit efter undersökning förbehålla sig rätten att vid misstanke av betalning utanför Appen stänga av Kund och / eller Hantverkare.</value>
+  </data>
+  <data name="String285" xml:space="preserve">
+    <value>15. Överlåtelse av ditt avtal med Tooli</value>
+  </data>
+  <data name="String286" xml:space="preserve">
+    <value>15.1 Genom att acceptera Användarvillkoren godkänner du att avtalet som du har ingått med Toolit, utan ditt samtycke, kan överlåtas till annat bolag.</value>
+  </data>
+  <data name="String287" xml:space="preserve">
+    <value>16. Force majeure</value>
+  </data>
+  <data name="String288" xml:space="preserve">
+    <value>16.1 Toolit ska vara befriad från skadestånd och andra påföljder om fullgörandet av ett visst åtagande förhindras eller väsentligen försvåras av omständighet som part inte rimligen kunnat råda över eller förutse. Som befriande omständighet kan bl.a. anses lagändringar, blixtnedslag, eldsvåda, myndighetsbestämmelse eller annan offentlig reglering, krig, naturkatastrof, epedemi, pandemi eller fel i större tele- eller datanät.</value>
+  </data>
+  <data name="String289" xml:space="preserve">
+    <value>17 Allmänt</value>
+  </data>
+  <data name="String29" xml:space="preserve">
+    <value>Skape ett nytt jobb</value>
+  </data>
+  <data name="String290" xml:space="preserve">
+    <value>17.1 Har du generella frågor kring din upplevelse med Toolit är du alltid välkommen att kontakta oss. Vi läser, undersöker, utvärderar och svarar på alla inkommande frågor. Krävs det så hör vi av oss till eventuellt andra involverade parter, såsom t.ex. en annan Toolit-användare. Vi håller dig uppdaterad med utveckling och status i just ditt ärende via mail eller chatten i appen. Du kan närsomhelst du vill höra av dig med kompletterande information eller övriga frågor rörande ditt ärende</value>
+  </data>
+  <data name="String291" xml:space="preserve">
+    <value>Kontaktuppgifter</value>
+  </data>
+  <data name="String292" xml:space="preserve">
+    <value>Toolit AB  
+Tillämplig lag och tvistelösning
+Svensk lag skall gälla avseende dessa Allmänna Villkor och tvister ska lösas i svensk domstol.
+
+Senast uppdaterat den 8:e mars 2021</value>
+  </data>
+  <data name="String293" xml:space="preserve">
+    <value>Data Policy</value>
+  </data>
+  <data name="String294" xml:space="preserve">
+    <value>Vår dataskyddspolicy</value>
+  </data>
+  <data name="String295" xml:space="preserve">
+    <value>Vi hanterar dina personuppgifter enligt nedan.</value>
+  </data>
+  <data name="String296" xml:space="preserve">
+    <value>För att kunna ge dig tillgång till Tjänsten och möjlighet att nyttja den behöver vi behandla personuppgifter om dig. Din integritet är viktig för oss och vi samlar ej in mer än nödvändig information för att Användarna skall kunna nyttja Tjänsten. Toolit AB är personuppgiftsansvarig för behandling av personuppgifter för alla Användare och Annonsörer som nyttjar Tjänsten. 
+Då behandling av dina personuppgifter är nödvändiga för att fullgöra ett avtal, accepterar du vår dataskyddspolicy och godkänner att vi använder e-post, telefon eller Appens chat funktion för att skicka information till dig. 
+Det är viktigt att du läser och förstår denna dataskyddspolicy innan du använder våra tjänster.</value>
+  </data>
+  <data name="String297" xml:space="preserve">
+    <value>Vilka personuppgifter behandlar vi?</value>
+  </data>
+  <data name="String298" xml:space="preserve">
+    <value>När du blir Användare i Tjänsten lämnar du ut personuppgifter till oss
+Direkt identifierande personuppgifter för alla</value>
+  </data>
+  <data name="String299" xml:space="preserve">
+    <value>Användare.</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>Vår tjänst ska kännas
+trygg och säker</value>
+  </data>
+  <data name="BankIdSignUpModalHeader" xml:space="preserve">
+      <value>Innan vi börjar fixa behöver du fylla i dina uppgifter nedan.</value>
+  </data>
+  <data name="String300" xml:space="preserve">
+    <value>Fullständigt namn
+E-postadress 
+Telefonnummer
+Ditt personnummer</value>
+  </data>
+  <data name="String301" xml:space="preserve">
+    <value>Indirekt identifierande information:</value>
+  </data>
+  <data name="String302" xml:space="preserve">
+    <value>Din adress och postnr.
+Typ av boende, villa förteckning eller lägenhets nr,   Våning.</value>
+  </data>
+  <data name="String303" xml:space="preserve">
+    <value>För Hantverkare</value>
+  </data>
+  <data name="String304" xml:space="preserve">
+    <value>Namn
+Adress
+Företagsnamn
+F-skatt 
+Organisations nummer
+
+Dessa personuppgifter är endast avsett för att kunna ge Användare möjlighet att nyttja Tjänsten. Tjänsten, Appen samt Webbplatsen är byggd i enlighet med GDPR</value>
+  </data>
+  <data name="String305" xml:space="preserve">
+    <value>Ändamål och rättslig grund</value>
+  </data>
+  <data name="String306" xml:space="preserve">
+    <value>Informationen vi samlar in är antingen nödvändig för att du ska kunna ingå ett avtal med oss eller för att vi ska kunna kommunicera med dig.</value>
+  </data>
+  <data name="String307" xml:space="preserve">
+    <value>Vi använder dina personuppgifter för att: 
+1. Möjlighet för att skapa ditt konto i Appen.
+2. Ge dig möjlighet att utnyttja Tjänsten och få kontakt och kommunicera med andra Användare. 
+3. Kommunicera med dig som Användare eller Annonsör. 
+4. Skicka faktura externt från Tjänsten.</value>
+  </data>
+  <data name="String308" xml:space="preserve">
+    <value>Om du inte vill ha information eller liknande från oss kan du kontakta oss (mailto:info@toolit.se)
+
+
+Kommer någon annan kunna ta del av informationen</value>
+  </data>
+  <data name="String309" xml:space="preserve">
+    <value>Vi kommer aldrig att sälja eller ge något företag eller privatperson dina personuppgifter utanför Tjänsten utan ditt tillstånd. 
+
+Däremot kan vi behöva dela din information med våra samarbetspartners för att vi ska kunna utföra det uppdrag vi har avtalat om. Vi följer legala, tekniska och organisatoriska krav för att din information ska hanteras säkert.</value>
+  </data>
+  <data name="String31" xml:space="preserve">
+    <value>Din emailadress</value>
+  </data>
+  <data name="String310" xml:space="preserve">
+    <value>Var behandlar vi dina personuppgifter?</value>
+  </data>
+  <data name="String311" xml:space="preserve">
+    <value>Vi strävar efter att alltid lagra dina personuppgifter inom EU/EES. Dock kan de i vissa situationer behandlas utanför EU/EES av en tredje part då vi vidtar alla rimliga legala, tekniska och organisatoriska åtgärder för att dina personuppgifter ska hanteras med samma nivå på säkerhet som krävs inom EU/EES.</value>
+  </data>
+  <data name="String312" xml:space="preserve">
+    <value>Hur länge sparar vi dina personuppgifter?</value>
+  </data>
+  <data name="String313" xml:space="preserve">
+    <value>Vi sparar din information endast så länge som det är nödvändig, Vi raderar din information när den inte längre är relevant.</value>
+  </data>
+  <data name="String314" xml:space="preserve">
+    <value>Cookies på Webbplatsen.</value>
+  </data>
+  <data name="String315" xml:space="preserve">
+    <value>Här är de cookies som används på vår webbplats www.toolit.se:
+
+Google Analytics
+Yoast SEO  					                           
+WPForms Lite
+
+Permanenta eller icke permanenta cookies som bl.a. samlar in uppgifter i anonym form i syfte att identifiera och registrera användare. Uppgifterna används bl.a. för att mäta och analysera besöksmönster, beteenden och antal besökare på webbplatsen. Informationen kan därefter användas för att förbättra webbplatsens funktioner och din användarupplevelse. Uppgifterna sparas så länge de är relevanta för tjänsten, När dessa ej behövs längre raderas dem.</value>
+  </data>
+  <data name="String316" xml:space="preserve">
+    <value>Användarens rättigheter</value>
+  </data>
+  <data name="String317" xml:space="preserve">
+    <value>Rätt till tillgång
+Du har rätt att få bekräftelse på att vi behandlar personuppgifter om dig och du kan begära en kopia av den information vi har om dig.
+
+Rätt till rättelse 
+Du har rätt att be oss korrigera felaktig information om dig eller komplettera information som är bristfällig, så länge den inte bryter mot folkbokföring eller svensk lag. 
+
+Rätt att bli raderad
+Du har rätt att begära att vi raderar dina personuppgifter om informationen inte längre är nödvändig för det syfte den blev insamlad för. Det kan dock finnas lagkrav som gör att vi inte kan radera dina uppgifter. Det kan till exempel styras av bokförings- och skattelagstiftning eller konsumenträttslagstiftning. 
+
+Rätt att begära begränsning 
+Du har rätt att begära begränsning av behandling av dina personuppgifter så länge de inte bryter för att du skall kunna utnyttja Tjänsten. 
+Rätt till dataportabilitet 
+Du har rätt till s.k. dataportabilitet, dvs rätt att få ut de personuppgifter om dig som du har lämnat till oss och få dem överförda till annan personuppgiftsansvarig när det är tekniskt möjligt. 
+
+Rätt att inge klagomål 
+Du har rätt att inge klagomål till Datainspektionen om du anser att vår behandling av dina personuppgifter strider mot dataskyddsregelverket</value>
+  </data>
+  <data name="String318" xml:space="preserve">
+    <value>Kontakta oss I första hand</value>
+  </data>
+  <data name="String319" xml:space="preserve">
+    <value>Kontakta oss på 0727050033 eller info@toolit.se 
+
+(uppdaterad 17/03/21)</value>
+  </data>
+  <data name="String32" xml:space="preserve">
+    <value>exempel@gmail.com</value>
+  </data>
+  <data name="String320" xml:space="preserve">
+    <value>Information för att kommunicera med dig</value>
+  </data>
+  <data name="FullNamePrompt" xml:space="preserve">
+    <value>Ditt fullständiga namn</value>
+  </data>
+  <data name="HomeAddressPrompt" xml:space="preserve">
+    <value>Din hemadress</value>
+  </data>
+  <data name="EmailAddressPrompt" xml:space="preserve">
+    <value>Din emailadress</value>
+  </data>
+  <data name="PhoneNumberPrompt" xml:space="preserve">
+    <value>Ditt telefonnummer</value>
+  </data>
+  <data name="String325" xml:space="preserve">
+    <value>Elektriker</value>
+  </data>
+  <data name="String326" xml:space="preserve">
+    <value>Enklare eljobb</value>
+  </data>
+  <data name="String327" xml:space="preserve">
+    <value>Diverse inom trä.</value>
+  </data>
+  <data name="String328" xml:space="preserve">
+    <value>Målning och tapetsering</value>
+  </data>
+  <data name="String329" xml:space="preserve">
+    <value>Värme, Ventilation, Sanitet</value>
+  </data>
+  <data name="String33" xml:space="preserve">
+    <value>Ditt telefonnummer</value>
+  </data>
+  <data name="String330" xml:space="preserve">
+    <value>Lägga mattor och golv</value>
+  </data>
+  <data name="String331" xml:space="preserve">
+    <value>Kakel, klinker, mosaik och 
+konstbetongplattor på väggar
+och golv</value>
+  </data>
+  <data name="ApplyForCraftsmanActionCaption" xml:space="preserve">
+    <value>Fyll i din ansökan här</value>
+  </data>
+  <data name="WelcomeBankIdTitle" xml:space="preserve">
+    <value>Är du hantverkare?</value>
+  </data>
+  <data name="WelcomeBankIdDescription" xml:space="preserve">
+    <value>Skapa ett konto med BankID! Gå till profilen och ansök som hantverkare! Appen tillhandahålls av Toolit AB</value>
+  </data>
+  <data name="String335" xml:space="preserve">
+    <value>exempel@gmail.com</value>
+  </data>
+  <data name="String336" xml:space="preserve">
+    <value>Ange adrsss</value>
+  </data>
+  <data name="CityPlaceholder" xml:space="preserve">
+    <value>Ange postort</value>
+  </data>
+  <data name="PhoneNumberFormatPlaceholder" xml:space="preserve">
+    <value>XXXXXXXXX</value>
+  </data>
+  <data name="PostalCodeFormatPlaceholder" xml:space="preserve">
+    <value>XXX XX</value>
+  </data>
+  <data name="AddNewTaskTabTitle" xml:space="preserve">
+    <value>Skapa nytt jobb</value>
+  </data>
+  <data name="AboutUsContentTitle" xml:space="preserve">
+    <value>Vår resa började med
+en renovering.</value>
+  </data>
+  <data name="AboutUsContent1" xml:space="preserve">
+    <value>Toolits resa började med en renovering, en renovering där letandet i djungeln efter rätt hantverkare, en som kunde leverera inom en rimlig tidsram, pris och standard kändes utmattande. Därför skapade vi denna tjänst, för dig som vill slippa krångel och få ditt jobb utfört till bästa branchstandard och till ett bra pris.</value>
+  </data>
+  <data name="AboutUsContent2" xml:space="preserve">
+    <value>Till alla otroliga hantverkare där ute, för att få en marknadsplattform där ni i tryggheten från er soffa kan utföra allt offert arbete och fokusera dagarna på att göra det ni är bäst på.</value>
+  </data>
+  <data name="AboutUsContent3" xml:space="preserve">
+    <value>Med vänlig hälsning.</value>
+  </data>
+  <data name="AboutUsContent4" xml:space="preserve">
+    <value>Patrik &amp; Oscar</value>
+  </data>
+  <data name="YourInformationTitle" xml:space="preserve">
+    <value>Din information</value>
+  </data>
+  <data name="ShowSettingsTitle" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="EditProfileAction" xml:space="preserve">
+    <value>Redigera</value>
+  </data>
+  <data name="String348" xml:space="preserve">
+    <value>Är du säker på att du vill radera ditt konto?</value>
+  </data>
+  <data name="String349" xml:space="preserve">
+    <value>Ditt konto kommer raderas och alla uppgifter om dig tas bort när dessa ej är nödvändiga längre. 
+Tex Hantverkaren har fått godkänt och utbetalt Rot eller Rut för arbete utfört hos dig. Du är välkommen att skapa nytt konto med bankID när du behöver någon mer hjälp i framtiden.</value>
+  </data>
+  <data name="String35" xml:space="preserve">
+    <value>+46</value>
+  </data>
+  <data name="String350" xml:space="preserve">
+    <value>Ja radera konto!</value>
+  </data>
+  <data name="CraftsmanApplyCompanyCompanyNamePrompt" xml:space="preserve">
+    <value>Ditt bolagsnamn</value>
+  </data>
+  <data name="CraftsmanApplyCompanyOrganizationNumberPrompt" xml:space="preserve">
+    <value>Ditt Org Nummer</value>
+  </data>
+  <data name="CraftsmanApplyCompanyCompanyAddressPrompt" xml:space="preserve">
+    <value>Din företagsadress</value>
+  </data>
+  <data name="String354" xml:space="preserve">
+    <value>Ditt telefonnummer</value>
+  </data>
+  <data name="String355" xml:space="preserve">
+    <value>Din emailadress</value>
+  </data>
+  <data name="String356" xml:space="preserve">
+    <value>Dina valda hantverkar-yrken</value>
+  </data>
+  <data name="String357" xml:space="preserve">
+    <value>Ditt fullständiga namn</value>
+  </data>
+  <data name="CraftsmanApplyCompanyPageTitle" xml:space="preserve">
+    <value>Ansökning</value>
+  </data>
+  <data name="CraftsmanRegistrationSelectTypeTitle" xml:space="preserve">
+    <value>Vilken typ av hantverkare är du?</value>
+  </data>
+  <data name="String36" xml:space="preserve">
+    <value>Starta!</value>
+  </data>
+  <data name="CraftsmanRegistrationSelectTypeCaption" xml:space="preserve">
+    <value>Välj en eller fler av taggarna:</value>
+  </data>
+  <data name="CraftsmanRegistrationMoveToStep2Action" xml:space="preserve">
+    <value>Forstätt till steg 2/3</value>
+  </data>
+  <data name="CraftsmanApplyCompanyTitle" xml:space="preserve">
+    <value>Fyll i alla uppgifter rörande din verksamhet</value>
+  </data>
+  <data name="CraftsmanApplyCompanyCaption" xml:space="preserve">
+    <value>Tryck på korten för att redigera</value>
+  </data>
+  <data name="String37" xml:space="preserve">
+    <value>Här är en rubrik för steg 1 då man tar en bild eller video</value>
+  </data>
+  <data name="CraftsmanApplyCompanyFTaxToggle" xml:space="preserve">
+    <value>Innehar du f-skatt?</value>
+  </data>
+  <data name="YesAction" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="NoAction" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="CraftsmanRegistrationMoveToStep3Action" xml:space="preserve">
+    <value>Forstätt till steg 3/3</value>
+  </data>
+  <data name="String374" xml:space="preserve">
+    <value>Fyll i alla uppgifter rörande din verksamhet</value>
+  </data>
+  <data name="String375" xml:space="preserve">
+    <value>Skriv en text om dig till användarna:</value>
+  </data>
+  <data name="String376" xml:space="preserve">
+    <value>Tips: Tänk på att berätta om dina tidigare erfarenheter, för att skapa tillit.</value>
+  </data>
+  <data name="String377" xml:space="preserve">
+    <value>Fri text</value>
+  </data>
+  <data name="String378" xml:space="preserve">
+    <value>Ladda upp ett eller flera certifikat</value>
+  </data>
+  <data name="String379" xml:space="preserve">
+    <value>Ladda upp certifikat</value>
+  </data>
+  <data name="String38" xml:space="preserve">
+    <value>Jag vill spela
+in en video</value>
+  </data>
+  <data name="String380" xml:space="preserve">
+    <value>1 Pdf-fil är uppladdad</value>
+  </data>
+  <data name="String381" xml:space="preserve">
+    <value>Skicka in ansökan</value>
+  </data>
+  <data name="CraftsmanEditBioTitle" xml:space="preserve">
+    <value>Fyll i alla uppgifter rörande din verksamhet</value>
+  </data>
+  <data name="CraftsmanEditBioSubtitle" xml:space="preserve">
+    <value>Skriv en text om dig till användarna:</value>
+  </data>
+  <data name="CraftsmanEditBioDescription" xml:space="preserve">
+    <value>Tips: Tänk på att berätta om dina tidigare erfarenheter, för att skapa tillit.</value>
+  </data>
+  <data name="CraftsmanBioHeaderPlaceholder" xml:space="preserve">
+    <value>Fri text</value>
+  </data>
+  <data name="CraftsmanApplyInfoLoadCertificatePrompt" xml:space="preserve">
+    <value>Ladda upp ett eller flera certifikat</value>
+  </data>
+  <data name="CraftsmanApplyInfoLoadCertificateAction" xml:space="preserve">
+    <value>Ladda upp certifikat</value>
+  </data>
+  <data name="CraftsmanApplyInfoLoadCertificatesUploadedFormatString" xml:space="preserve">
+    <value>1 fil är uppladdad</value>
+  </data>
+  <data name="CraftsmanApplyInfoSubmitAction" xml:space="preserve">
+    <value>Skicka in ansökan</value>
+  </data>
+  <data name="String39" xml:space="preserve">
+    <value>Jag vill
+ta en bild</value>
+  </data>
+  <data name="CraftsmanApplyConfirmationTitle" xml:space="preserve">
+    <value>Snyggt Jobbat!</value>
+  </data>
+  <data name="CraftsmanApplyConfirmationCaption" xml:space="preserve">
+    <value>Vi kontaktar er snarast!</value>
+  </data>
+  <data name="CraftsmanApplyConfirmationCloseAction" xml:space="preserve">
+    <value>Starta!</value>
+  </data>
+    <data name="NewBidTitle" xml:space="preserve">
+    <value>Nytt bud</value>
+  </data>
+  <data name="YourBidTitle" xml:space="preserve">
+    <value>Ditt bud</value>
+  </data>
+  <data name="BidYourOfferTitle" xml:space="preserve">
+    <value>Din offert</value>
+  </data>
+  <data name="OtherTaskDescriptionTitle" xml:space="preserve">
+    <value>Beskrivning av jobb</value>
+  </data>
+  <data name="String396" xml:space="preserve">
+    <value>Vägg</value>
+  </data>
+  <data name="AddTaskDescriptionPlaceholder" xml:space="preserve">
+    <value>Skriv din beskrivning här...</value>
+  </data>
+  <data name="CraftsmanBioPlaceholder" xml:space="preserve">
+    <value>Ange fri text</value>
+  </data>
+  <data name="CraftsmanBioHeaderPrompt" xml:space="preserve">
+    <value>Ange rubrik</value>
+  </data>
+  <data name="String4" xml:space="preserve">
+    <value>Matcha och välj mellan flera
+hantverkare utifrån vad den tidsram
+som passer dig bäst.</value>
+  </data>
+  <data name="NewJobPageTitle" xml:space="preserve">
+    <value>Nytt jobb</value>
+  </data>
+  <data name="CraftsmanEditBioPageTitle" xml:space="preserve">
+    <value>Redigera din bio</value>
+  </data>
+  <data name="CraftsmanEditOfferPageTitle" xml:space="preserve">
+    <value>Redigera din Offert</value>
+  </data>
+  <data name="NewBidLaborCostPrompt" xml:space="preserve">
+    <value>Arbetskostnad (ex moms)</value>
+  </data>
+  <data name="String403" xml:space="preserve">
+    <value>Ditt fullständiga pris</value>
+  </data>
+  <data name="NewBidOtherCostPrompt" xml:space="preserve">
+    <value>Övriga kostnader</value>
+  </data>
+  <data name="VatFormatString" xml:space="preserve">
+    <value>Priset är ink moms.</value>
+  </data>
+  <data name="BidPaymentNoticePart1" xml:space="preserve">
+    <value>Priset avser att hantverken ska utföra </value>
+  </data>
+  <data name="BidPaymentNoticePart2" xml:space="preserve">
+    <value>. Det är hantverken och användaren som själva kommer överens om förväntat leveransdatum genom Toolits chattfunktion.</value>
+  </data>
+  <data name="BidPaymentNoticePart3" xml:space="preserve">
+    <value>Vid betalning kan eventuella skatter, avgifter, försändelseavgifter och andra avgifter förekomma. Läs mer under Toolits </value>
+  </data>
+  <data name="TosLinkText" xml:space="preserve">
+    <value>användarvillkor.</value>
+  </data>
+  <data name="String41" xml:space="preserve">
+    <value>Här är en rubrik för steg 1 då man tar en bild eller video</value>
+  </data>
+  <data name="TaskAcceptedBidCaption" xml:space="preserve">
+    <value>Hantverkare som vunnit budet</value>
+  </data>
+  <data name="OtherTaskMediaTitle" xml:space="preserve">
+    <value>Bilder &amp; videos</value>
+  </data>
+  <data name="NewBidInfoTitle" xml:space="preserve">
+    <value>Lämna ett personligt meddelande</value>
+  </data>
+  <data name="NewBidInfoCaption" xml:space="preserve">
+    <value>Tips: Har du frågor runt material eller ytterligare frågor runt jobbet kan du skriva det här.</value>
+  </data>
+  <data name="NewBidCostsTitle" xml:space="preserve">
+    <value>Ditt pris &amp; omkostnader</value>
+  </data>
+  <data name="NewBidMessagePrompt" xml:space="preserve">
+    <value>Skriv ditt meddelande nedan</value>
+  </data>
+    <data name="NewChatMessagePlaceholder" xml:space="preserve">
+    <value>Skriv ditt meddelande</value>
+  </data>
+  <data name="String418" xml:space="preserve">
+    <value>Medelandet kan täcka frågor, material funderingar eller övrigt</value>
+  </data>
+  <data name="DeleteAccountDescription" xml:space="preserve">
+    <value>Ditt konto kommer raderas och alla uppgifter om dig tas bort när dessa ej är nödvändiga längre. 
+Tex Hantverkaren har fått godkänt och utbetalt Rot eller Rut för arbete utfört hos dig.Du är välkommen att skapa nytt konto med bankID när du behöver någon mer hjälp i framtiden.</value>
+  </data>
+  <data name="String42" xml:space="preserve">
+    <value>Vill du ta en bild eller video:</value>
+  </data>
+  <data name="AddBidAction" xml:space="preserve">
+    <value>Lägg bud</value>
+  </data>
+  <data name="BidMessageTitle" xml:space="preserve">
+    <value>Ditt meddelande</value>
+  </data>
+  <data name="DeleteBidAction" xml:space="preserve">
+    <value>Ta bort bud</value>
+  </data>
+  <data name="ApproveJobAction" xml:space="preserve">
+    <value>Godkänn jobbet!</value>
+  </data>
+  <data name="UserPaymentConfirmationCaption" xml:space="preserve">
+    <value>Dina pengar förvaras nu säkert på ett klientmedelskonto och betalas ut till hantverkaren först när du godkänt att
+ jobbet är klart.</value>
+  </data>
+  <data name="UserPaymentConfirmationTitle" xml:space="preserve">
+    <value>Tack för din betalning.</value>
+  </data>
+  <data name="SwiftPaymentRequestTitle" xml:space="preserve">
+    <value>Dags att betala med Swish.</value>
+  </data>
+  <data name="SwiftPaymentRequestCaption" xml:space="preserve">
+    <value>Betalningen kommer ske via Swish i Svenska Kronor. Dina pengar förvaras säkert på ett klientmedelskonto och betalas ut till hantverkaren först när du godkänt att jobbet är klart.</value>
+  </data>
+  <data name="SwiftPaymentRequestTosText1" xml:space="preserve">
+    <value>Genom att du går vidare och betalar har du godkänt Toolits </value>
+  </data>
+  <data name="TosLink" xml:space="preserve">
+    <value>användarvillkor</value>
+  </data>
+  <data name="String43" xml:space="preserve">
+    <value>Jag vill
+ta en bild</value>
+  </data>
+  <data name="SwiftPaymentRequestTosText2" xml:space="preserve">
+    <value> som innefattar regler kring distansköp och ångerätt.</value>
+  </data>
+  <data name="PayAction" xml:space="preserve">
+    <value>Betala</value>
+  </data>
+  <data name="AcceptAndPayAction" xml:space="preserve">
+    <value>Acceptera &amp; Betala</value>
+  </data>
+  <data name="String433" xml:space="preserve">
+    <value>Bra jobbat!</value>
+  </data>
+  <data name="String434" xml:space="preserve">
+    <value>Välj hantverkare efter rating, tidigare jobb, rekommendationer, pris samt tidsram! 
+
+Snart är hjälp på väg!</value>
+  </data>
+  <data name="ReturnToMenuAction" xml:space="preserve">
+    <value>Gå till menyn!</value>
+  </data>
+  <data name="UserCompletedTaskReviewPlaceholder" xml:space="preserve">
+    <value>Exempel: Tack för ett välutfört jobb, Super nöjd!</value>
+  </data>
+  <data name="DeleteTaskCancelAction" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="DeleteTaskConfirmAction" xml:space="preserve">
+    <value>Ja, radera</value>
+  </data>
+  <data name="NewBidAddedConfirmationTitle" xml:space="preserve">
+    <value>Kul! Ditt bud är nu lagt!</value>
+  </data>
+  <data name="String44" xml:space="preserve">
+    <value>Jag vill spela
+in en video</value>
+  </data>
+  <data name="NewBidAddedConfirmationCaption" xml:space="preserve">
+    <value>När budet är godkänt deponeras pengar hos Toolit.
+Pengarna förs över när jobbet är godkänt av kund.</value>
+  </data>
+  <data name="String441" xml:space="preserve">
+    <value>Redigera ditt meddelande</value>
+  </data>
+  <data name="CraftsmanEditMessageTitle" xml:space="preserve">
+    <value>Tryck på kortet för att redigera</value>
+  </data>
+  <data name="String443" xml:space="preserve">
+    <value>Bra jobbat!</value>
+  </data>
+  <data name="CraftsmanTaskCompletedCaption" xml:space="preserve">
+    <value>Avtalad betalning efter Toolits andel för godkänt arbete betalas ut till ditt förinställda Bankgiro eller konto, tar ca 3-5 arbetsdagar.</value>
+  </data>
+  <data name="String445" xml:space="preserve">
+    <value>Skriv rubriken nedan</value>
+  </data>
+  <data name="String446" xml:space="preserve">
+    <value>Dina hantverkar-yrken</value>
+  </data>
+  <data name="String447" xml:space="preserve">
+    <value>Ditt fullständiga pris</value>
+  </data>
+  <data name="String448" xml:space="preserve">
+    <value>Material kostnad</value>
+  </data>
+  <data name="TasksAllJobsFilter" xml:space="preserve">
+    <value>Alla jobb</value>
+  </data>
+  <data name="AddTaskGoToStep2Action" xml:space="preserve">
+    <value>Fortsätt till steg 2/5</value>
+  </data>
+  <data name="String450" xml:space="preserve">
+    <value>Snickeri</value>
+  </data>
+  <data name="CraftsmanRegistrationTitle" xml:space="preserve">
+    <value>Krav för Toolit hantverkare</value>
+  </data>
+  <data name="CraftsmanRegistrationCaption" xml:space="preserve">
+    <value>Registrerat företag
+Certifikat eller Yrkesbevis
+Kontakt uppgifter</value>
+  </data>
+  <data name="CraftsmanRegistrationContinueAction" xml:space="preserve">
+    <value>Ansök som hantverkare</value>
+  </data>
+  <data name="String454" xml:space="preserve">
+    <value>VVS </value>
+  </data>
+  <data name="BackAction" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="SubmittedBidsFormatString" xml:space="preserve">
+    <value>Budgivning ({0})</value>
+  </data>
+  <data name="SubmittedBidsString" xml:space="preserve">
+    <value>Budgivning</value>
+  </data>
+  <data name="TaskInfoTitle" xml:space="preserve">
+    <value>Info om jobbet</value>
+  </data>
+  <data name="CompletedTasksTitle" xml:space="preserve">
+    <value>Slutfört jobb</value>
+  </data>
+  <data name="OngoingTasksTitle" xml:space="preserve">
+    <value>Pågående jobb</value>
+  </data>
+  <data name="String5" xml:space="preserve">
+    <value>Filma eller fotografera och lägg ut ditt
+arbete direkt! Ett lättare alternativ till
+ dig som söker en hantverkare idag.</value>
+  </data>
+  <data name="String50" xml:space="preserve">
+    <value>Sortera efter bästa betyg</value>
+  </data>
+  <data name="PlayVideoAction" xml:space="preserve">
+    <value>Spela video</value>
+  </data>
+  <data name="MyTaskDescriptionTitle" xml:space="preserve">
+    <value>Din beskrivning</value>
+  </data>
+  <data name="MyTaskMediaTitle" xml:space="preserve">
+    <value>Dina bilder &amp; videos</value>
+  </data>
+  <data name="BidPrice" xml:space="preserve">
+    <value>Arvode:</value>
+  </data>
+  <data name="DeleteJobAction" xml:space="preserve">
+    <value>Radera jobbet</value>
+  </data>
+  <data name="String56" xml:space="preserve">
+    <value>Ja, radera detta jobb</value>
+  </data>
+  <data name="DeleteTaskConfirmationTitle" xml:space="preserve">
+    <value>Är du säker på att du vill radera detta jobb?</value>
+  </data>
+    <data name="DeleteBidConfirmationTitle" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort ditt bud?</value>
+  </data>
+  <data name="TaskOpenChatAction" xml:space="preserve">
+    <value>Chatta med</value>
+  </data>
+  <data name="CompleteJobAction" xml:space="preserve">
+    <value>Jobbet är klart!</value>
+  </data>
+  <data name="String6" xml:space="preserve">
+    <value>Alla våra hantverkare är certifierade!
+Välj mellan flera hantverkare utifrån
+rekommendationer &amp; rating.</value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Redigera</value>
+  </data>
+  <data name="ActiveJobsTitleString" xml:space="preserve">
+    <value>Här kan du se aktiva jobb från våra användare.</value>
+  </data>
+  <data name="TaskSearchPlaceholder" xml:space="preserve">
+    <value>Sök efter jobb...</value>
+  </data>
+  <data name="MyTasksTitle" xml:space="preserve">
+    <value>Mina jobb</value>
+  </data>
+  <data name="ShowMoreAlternativesAction" xml:space="preserve">
+    <value>Visa fler alternativ</value>
+  </data>
+  <data name="OtherTasksTitle" xml:space="preserve">
+    <value>Utforska jobb</value>
+  </data>
+  <data name="AddTaskGoToStep3Action" xml:space="preserve">
+    <value>Fortsätt till steg 3/5</value>
+  </data>
+  <data name="OpenCategoriesAction" xml:space="preserve">
+    <value>Välj Kategori</value>
+  </data>
+  <data name="String68" xml:space="preserve">
+    <value>Nu är det dags att beskriva ditt problem!</value>
+  </data>
+  <data name="AddTaskTipsSmallHeaderString" xml:space="preserve">
+    <value>Några tips innan du börjar:</value>
+  </data>
+  <data name="String7" xml:space="preserve">
+    <value>Skapa ett nytt jobb</value>
+  </data>
+  <data name="AddTaskTipHeader1" xml:space="preserve">
+    <value>Tips 1: Spela in en video.</value>
+  </data>
+  <data name="String71" xml:space="preserve">
+    <value>Presentera jobbet på bästa vis genom att spela in en beskrivande video.</value>
+  </data>
+  <data name="AddTaskTipHeader2" xml:space="preserve">
+    <value>Tips 2: Visa upp ditt material.</value>
+  </data>
+  <data name="String73" xml:space="preserve">
+    <value>Om du redan har material så är det bra om du visar upp och beskriver det.</value>
+  </data>
+  <data name="AddTaskTitlePlaceholder" xml:space="preserve">
+    <value>Skriv din rubrik här...</value>
+  </data>
+  <data name="AddTaskDescriptionHeaderString" xml:space="preserve">
+    <value>Här beskriver du ditt jobb.</value>
+  </data>
+  <data name="AddTaskDescriptionPrompt" xml:space="preserve">
+    <value>Skriv din beskrivning under:</value>
+  </data>
+  <data name="AddTaskDescriptionTip" xml:space="preserve">
+    <value>Tips: Tänk på att berätta om ditt problem på ett så beskrivande sätt som möjligt!</value>
+  </data>
+  <data name="AddTaskGoToStep4Action" xml:space="preserve">
+    <value>Forstätt till steg 4/5</value>
+  </data>
+  <data name="AddTaskTitlePrompt" xml:space="preserve">
+    <value>Skriv en kort rubrik:</value>
+  </data>
+  <data name="WhatDoYouNeedHelpWithPrompt" xml:space="preserve">
+    <value>Vad behöver du hjälp med?</value>
+  </data>
+  <data name="AddTaskWorkTypesHeaderString" xml:space="preserve">
+    <value>Hjälp oss förstå vad du behöver hjälp med.</value>
+  </data>
+  <data name="AddTaskLocationHeaderString" xml:space="preserve">
+    <value>Adress &amp; Tid</value>
+  </data>
+  <data name="AddTaskLocationSubHeaderString" xml:space="preserve">
+    <value>Skriv in addressen för jobbet:</value>
+  </data>
+  <data name="AddTaskLocationAddressPlaceholder" xml:space="preserve">
+    <value>Skriv in gata och nummer här...</value>
+  </data>
+  <data name="AddTaskLocationPostalCodePlaceholder" xml:space="preserve">
+    <value>Postnr...</value>
+  </data>
+  <data name="AddTaskLocationCityPlaceholder" xml:space="preserve">
+    <value>Stad/Ort...</value>
+  </data>
+  <data name="String86" xml:space="preserve">
+    <value>Välj datum</value>
+  </data>
+  <data name="SaveAddressAction" xml:space="preserve">
+    <value>Spara Adress</value>
+  </data>
+  <data name="AddTaskTypeOfObjectPrompt" xml:space="preserve">
+    <value>Beskriv typ av objekt:</value>
+  </data>
+  <data name="AddTaskIsHouse" xml:space="preserve">
+    <value>Hus/Villa</value>
+  </data>
+  <data name="String9" xml:space="preserve">
+    <value>Inget just nu</value>
+  </data>
+  <data name="AddTaskIsCondominium" xml:space="preserve">
+    <value>Bostadsrätt</value>
+  </data>
+  <data name="AddTaskRotRutPrompt" xml:space="preserve">
+    <value>Vill du nyttja Rot/Rut?</value>
+  </data>
+  <data name="AddTaskRotRutYes" xml:space="preserve">
+    <value>Ja, det vill jag!</value>
+  </data>
+  <data name="AddTaskRotRutNo" xml:space="preserve">
+    <value>Nej, inte idag!</value>
+  </data>
+  <data name="AddTaskIsPublicPrompt" xml:space="preserve">
+    <value>Godkänn att jobbet visas offentligt</value>
+  </data>
+  <data name="CreateTaskAction" xml:space="preserve">
+    <value>Lägg upp jobbet!</value>
+  </data>
+  <data name="CreateTaskCompletionModelTitle" xml:space="preserve">
+    <value>Snyggt Jobbat!</value>
+  </data>
+  <data name="CreateTaskCompletionAction" xml:space="preserve">
+    <value>Gå till menyn!</value>
+  </data>
+  <data name="String98" xml:space="preserve">
+    <value>Acceptera bud</value>
+  </data>
+  <data name="CurrencyFormatString" xml:space="preserve">
+    <value>kr</value>
+  </data>
+  <data name="TextCannotBeEmpty" xml:space="preserve">
+    <value>Text kan inte vara tom.</value>
+  </data>
+  <data name="TotalPriceCannotBeEmpty" xml:space="preserve">
+    <value>Ditt fullständiga pris kan inte vara tom.</value>
+  </data>
+  <data name="YourAddressCannotBeEmpty" xml:space="preserve">
+    <value>Din address kan inte vara tom.</value>
+  </data>
+  <data name="YourMessageCannotBeEmpty" xml:space="preserve">
+    <value>Ditt meddelande kan inte vara tom.</value>
+  </data>
+  <data name="YourTextCannotBeEmpty" xml:space="preserve">
+    <value>Din fri text kan inte vara tom.</value>
+  </data>
+    <data name="EmailPlaceholder" xml:space="preserve">
+      <value>Email</value>
+  </data>
+    <data name="PasswordPlaceholder" xml:space="preserve">
+      <value>Lösenord</value>
+  </data>
+    <data name="LoginString" xml:space="preserve">
+      <value>Logga in</value>
+  </data>
+    <data name="PleaseFillAllFieldsErrorString" xml:space="preserve">
+      <value>Fyll i alla fälten</value>
+  </data>
+    <data name="LoadingString" xml:space="preserve">
+      <value>Laddar...</value>
+  </data>
+    <data name="InvalidCredentialsErrorString" xml:space="preserve">
+      <value>Ogiltig email eller lösenord. Försök igen</value>
+  </data>
+    <data name="NetworkErrorString" xml:space="preserve">
+      <value>Nätverksfel. Kontrollera din internet uppkoppling eller försök igen senare</value>
+  </data>
+    <data name="SessionEndedMessage" xml:space="preserve">
+    <value>Du har blivit utloggad på grund av inaktivitet.</value>
+  </data>
+  <data name="GreetingFormatText" xml:space="preserve">
+      <value>Godmorgon {0}!</value>
+  </data>
+    <data name="UserUpdateSuccessString" xml:space="preserve">
+    <value>Användarinformation uppdaterades</value>
+  </data>
+  <data name="ContactEmail" xml:space="preserve">
+      <value>info@toolit.se</value>
+  </data>
+  <data name="ContactPhone" xml:space="preserve">
+      <value>+46727050033</value>
+  </data>
+  <data name="ContactAddress" xml:space="preserve">
+      <value>Lundagatan 39, 117 27</value>
+  </data>
+  <data name="ContactAddressCity" xml:space="preserve">
+      <value>Stockholm.</value>
+  </data>
+  <data name="OpenBankIdAction" xml:space="preserve">
+      <value>Öppna Bank ID</value>
+  </data>
+  <data name="PercentFormatString" xml:space="preserve">
+      <value>{0:0}%</value>
+  </data>
+  <data name="BankIdNotInstalledErrorString" xml:space="preserve">
+      <value>BankID not installed.</value>
+  </data>
+  <data name="WelcomeIntroTitle1" xml:space="preserve">
+      <value>Toolit är Sveriges smidigaste hantverkartjänst</value>
+  </data>
+  <data name="WelcomeIntroDescription1" xml:space="preserve">
+      <value>Filma, fota och beskriv i text vad du behöver hjälp med, publicera jobbet.</value>
+  </data>
+  <data name="WelcomeIntroTitle2" xml:space="preserve">
+      <value>Vi finns för att vara lättare för dig</value>
+  </data>
+  <data name="WelcomeIntroTitle3" xml:space="preserve">
+      <value>Vår tjänst ska kännas trygg och säker</value>
+  </data>
+  <data name="WelcomeIntroDescription2" xml:space="preserve">
+      <value>Hitta rätt hantverkare utifrån dennes rekommendationer, certifiering, rating och tidigare jobb.</value>
+  </data>
+  <data name="WelcomeIntroDescription3" xml:space="preserve">
+      <value>Välj hantverkaren som passar dig bäst utifrån mest konkurrenskraftiga pris och tidsram.</value>
+  </data>
+  <data name="NoBidsPlaceholder" xml:space="preserve">
+      <value>Du har inte fått några bud än</value>
+  </data>
+  <data name="NoMediaPlaceholder" xml:space="preserve">
+      <value>Inga medier har lagts till för denna uppgift</value>
+  </data>
+  <data name="ElectricianLocalName" xml:space="preserve">
+      <value>Elektriker</value>
+  </data>
+  <data name="ElectricianLocalDescription" xml:space="preserve">
+      <value>Allt inom el</value>
+  </data>
+  <data name="ElectricianLocalFullDescription" xml:space="preserve">
+      <value> kan hjälpa dig med allt från installationer i villa, lägenheter, sommarhus och på kontor. Dra ledningar, montera elcentraler, strömbrytare, dimmers, ljus och ljud lösningar är vanliga uppgifter för en elektriker.</value>
+  </data>
+  <data name="ElectricianPowerOutletLocalName" xml:space="preserve">
+      <value>Eluttag</value>
+  </data>
+  <data name="ElectricianDimmerLocalName" xml:space="preserve">
+      <value>Dimmer</value>
+  </data>
+  <data name="ElectricianLampSwitchLocalName" xml:space="preserve">
+      <value>Lampknapp</value>
+  </data>
+  <data name="ElectricianSpotlightsLocalName" xml:space="preserve">
+      <value>Spotlights</value>
+  </data>
+  <data name="ElectricianLedStripLocalName" xml:space="preserve">
+      <value>Ledlist</value>
+  </data>
+  <data name="ElectricianLampLocalName" xml:space="preserve">
+      <value>Lampa</value>
+  </data>
+  <data name="ElectricianWiringLocalName" xml:space="preserve">
+      <value>Kabeldragning</value>
+  </data>
+  <data name="ElectricianElectricalPanelLocalName" xml:space="preserve">
+      <value>Elskåp</value>
+  </data>
+  <data name="ElectricianFittingsLocalName" xml:space="preserve">
+      <value>Armatur</value>
+  </data>
+  <data name="ElectricianGroundFaultCircuitBreakerLocalName" xml:space="preserve">
+      <value>Jordfelsbrytare</value>
+  </data>
+  <data name="CarpenterLocalName" xml:space="preserve">
+      <value>Snickare</value>
+  </data>
+  <data name="CarpenterLocalDescription" xml:space="preserve">
+      <value>Diverse inom trä</value>
+  </data>
+  <data name="CarpenterLocalFullDescription" xml:space="preserve">
+      <value> kan hjälpa dig med allt från stora byggprojekt till mindre sniderier. Tex Husbyggnation, nya väggar, stuckatur, montera kök och garderob, altan, trädäck, staket, och mycket mer. </value>
+  </data>
+  <data name="CarpenterWallLocalName" xml:space="preserve">
+      <value>Vägg</value>
+  </data>
+  <data name="CarpenterStuccoLocalName" xml:space="preserve">
+      <value>Stuckatur</value>
+  </data>
+  <data name="CarpenterDoorLocalName" xml:space="preserve">
+      <value>Dörr</value>
+  </data>
+  <data name="CarpenterDoorWithFrameLocalName" xml:space="preserve">
+      <value>Dörr med karm</value>
+  </data>
+  <data name="CarpenterFloorMoldingLocalName" xml:space="preserve">
+      <value>Golvlist</value>
+  </data>
+  <data name="CarpenterKitchenLocalName" xml:space="preserve">
+      <value>Kök</value>
+  </data>
+  <data name="CarpenterWardrobeLocalName" xml:space="preserve">
+      <value>Garderob</value>
+  </data>
+  <data name="CarpenterShelfLocalName" xml:space="preserve">
+      <value>Hylla</value>
+  </data>
+  <data name="PainterLocalName" xml:space="preserve">
+      <value>Målare</value>
+  </data>
+  <data name="PainterLocalDescription" xml:space="preserve">
+      <value>Målning och tapetsering</value>
+  </data>
+  <data name="PainterLocalFullDescription" xml:space="preserve">
+      <value> kan hjälpa dig att spackla, måla väggar, lister och tapetsera.</value>
+  </data>
+  <data name="PainterPaintLocalName" xml:space="preserve">
+      <value>Måla</value>
+  </data>
+  <data name="PainterWallpaperLocalName" xml:space="preserve">
+      <value>Tapetsera</value>
+  </data>
+  <data name="PlumberLocalName" xml:space="preserve">
+      <value>VVS (Rörmokare)</value>
+  </data>
+  <data name="PlumberLocalDescription" xml:space="preserve">
+      <value>Värme, Ventilation, Sanitet</value>
+  </data>
+  <data name="PlumberLocalFullDescription" xml:space="preserve">
+      <value> - montör installerar allt ifrån rör, värmepumpar elpannor, solvärme, varmvattenberedare, element och det som ingår i ett badrum så som toalettstol, handdukstork, badkar, dusch och handfat.</value>
+  </data>
+  <data name="PlumberRadiatorLocalName" xml:space="preserve">
+      <value>Element</value>
+  </data>
+  <data name="PlumberToiletLocalName" xml:space="preserve">
+      <value>Toalett</value>
+  </data>
+  <data name="PlumberPipingLocalName" xml:space="preserve">
+      <value>Rördragning</value>
+  </data>
+  <data name="PlumberFaucetLocalName" xml:space="preserve">
+      <value>Kranar</value>
+  </data>
+  <data name="PlumberShowerLocalName" xml:space="preserve">
+      <value>Dusch</value>
+  </data>
+  <data name="PlumberShowerCabinLocalName" xml:space="preserve">
+      <value>Duschkabin</value>
+  </data>
+  <data name="PlumberSinkLocalName" xml:space="preserve">
+      <value>Handfat</value>
+  </data>
+  <data name="PlumberBathtubLocalName" xml:space="preserve">
+      <value>Badkar</value>
+  </data>
+  <data name="PlumberSolarHeatingLocalName" xml:space="preserve">
+      <value>Solvärme</value>
+  </data>
+  <data name="PlumberHeatPumpsBoilersLocalName" xml:space="preserve">
+      <value>Värmepumpar och elpannor</value>
+  </data>
+  <data name="FloorLayerLocalName" xml:space="preserve">
+      <value>Golvläggare</value>
+  </data>
+  <data name="FloorLayerLocalDescription" xml:space="preserve">
+      <value>Lägga mattor och golv</value>
+  </data>
+  <data name="FloorLayerLocalFullDescription" xml:space="preserve">
+      <value> arbetar med att lägga mattor och golv av olika material så som textil, linoleum eller parkett.</value>
+  </data>
+  <data name="FloorLayerCarpetLocalName" xml:space="preserve">
+      <value>Heltäckningsmatta</value>
+  </data>
+  <data name="FloorLayerFloorLocalName" xml:space="preserve">
+      <value>Golv</value>
+  </data>
+  <data name="TilerLocalName" xml:space="preserve">
+      <value>Plattsättare</value>
+  </data>
+  <data name="TilerLocalDescription" xml:space="preserve">
+      <value>Kakel, klinker, mosaik och konstbetongplattor på väggar och golv</value>
+  </data>
+  <data name="TilerLocalFullDescription" xml:space="preserve">
+      <value> skapar och renoverar ditt badrum, kök och andra ytor. Monterar kakel, klinker, mosaik och konstbetongplattor på väggar och golv.</value>
+  </data>
+  <data name="TilerTilesLocalName" xml:space="preserve">
+      <value>Kakel</value>
+  </data>
+  <data name="TilerClinkersLocalName" xml:space="preserve">
+      <value>Klinkers</value>
+  </data>
+    <data name="AdBubbleText" xml:space="preserve">
+      <value>Annons</value>
+  </data>
+  <data name="TaskListItemBiddingStatus" xml:space="preserve">
+      <value>Budgivning</value>
+  </data>
+  <data name="TaskListItemCompletedStatus" xml:space="preserve">
+      <value>Avslutad</value>
+  </data>
+  <data name="GoToUrlAction" xml:space="preserve">
+      <value>Läs mer på ...</value>
+  </data>
+  <data name="NoMessagesPlaceholder" xml:space="preserve">
+      <value>Inga meddelanden här ännu</value>
+  </data>
+    <data name="TimeFormatString" xml:space="preserve">
+      <value>Kl. {0:HH:mm}</value>
+  </data>
+  <data name="NoPaymentsPlaceholder" xml:space="preserve">
+      <value>Inga tidigare betalningar</value>
+  </data>
+    <data name="NoTasksPlaceholder" xml:space="preserve">
+      <value>Inga jobb tillagda</value>
+  </data>
+  <data name="CraftsmanApplyCompanyAccountNumberPrompt" xml:space="preserve">
+      <value>Kontonummer</value>
+  </data>
+  <data name="CraftsmanApplyCompanyAccountNumberPlaceholder" xml:space="preserve">
+      <value>Konto nr, postgiro eller bankgiro</value>
+  </data>
+  <data name="SwishNotInstalledErrorString" xml:space="preserve">
+      <value>Swish inte installerat</value>
+  </data>
+  <data name="SwishPaymentFailedErrorString" xml:space="preserve">
+      <value>Betalning misslyckades</value>
+  </data>
+    <data name="NotificationNoPermissionErrorString" xml:space="preserve">
+      <value>Kontrollera att pushnotiser är aktiverat för appen i telefonens inställningar</value>
+  </data>
+    <data name="NotificationRegistrationErrorString" xml:space="preserve">
+      <value>Det gick tyvärr inte att registrera pushnotiser
+{0}</value>
+  </data>
+    <data name="InvalidPhoneNumberErrorMessage" xml:space="preserve">
+    <value>Din enhet stödjer inte telefonsamtalet eller så är det ett ogiltigt nummer</value>
+  </data>
+    <data name="NoEmailClientFoundErrorMessage" xml:space="preserve">
+      <value>Ingen email klient hittades på din enhet</value>
+  </data>
+    <data name="InvalidEmailAddressErrorMessage" xml:space="preserve">
+    <value>Ogiltig email</value>
+  </data>
+    <data name="NoWebBrowserFoundErrorMessage" xml:space="preserve">
+    <value>Webbbrowser saknas på din enhet</value>
+  </data>
+    <data name="InvalidWebAddressErrorMessage" xml:space="preserve">
+    <value>Ogiltig webbadress</value>
+  </data>
+  <data name="ToolitTosUrl" xml:space="preserve">
+      <value>http://toolit.se/anvandarvillkor/</value>
+  </data>
+  <data name="ToolitDataPolicyUrl" xml:space="preserve">
+      <value>http://toolit.se/dataskydds-policy/</value>
+  </data>
+  <data name="AccountDeletedConfirmationMessage" xml:space="preserve">
+      <value>Kontot raderas</value>
+  </data>
+  <data name="AddTaskMediaTypeTitle" xml:space="preserve">
+      <value>Välj medietyp</value>
+  </data>
+  <data name="CancelAction" xml:space="preserve">
+      <value>Avbryt</value>
+  </data>
+  <data name="AddTaskMediaPhotoType" xml:space="preserve">
+      <value>Foto</value>
+  </data>
+  <data name="AddTaskMediaVideoType" xml:space="preserve">
+      <value>Video</value>
+  </data>
+  <data name="FaqItem1Question" xml:space="preserve">
+      <value>Vad är Toolit?</value>
+  </data>
+  <data name="FaqItem1Answer" xml:space="preserve">
+      <value>Toolit är en marknadsplats för hantverkartjänster. För att du som kund därmed skall kunna få tillgång till kvalificerade hantverkare i ditt område, och kunna förädla eller förnya ditt hem eller arbetsplats.</value>
+  </data>
+  <data name="FaqItem2Question" xml:space="preserve">
+      <value>Varför ska jag använda Toolit?</value>
+  </data>
+  <data name="FaqItem2Answer" xml:space="preserve">
+      <value>Toolit är en förmedlingstjänst där du som kund kommer märka hur lätt tjänsten är att använda, samt finna trygghet i att våra hantverkare är kvalitetssäkrade. Förutom detta använder vi oss av dynamisk prissättning och du kan välja mellan flertalet hantverkare baserat på dess rating, tidigare arbeten samt recensioner för att hitta rätt hantverkare för ditt projekt.</value>
+  </data>
+  <data name="FaqItem3Question" xml:space="preserve">
+      <value>Vilka hantverkstjänster kan jag använda Toolit för?</value>
+  </data>
+  <data name="FaqItem3Answer" xml:space="preserve">
+      <value>Alla projekt som rör snickare, VVS, platssättare, golvläggare, elektriker och målare.</value>
+  </data>
+  <data name="FaqItem4Question" xml:space="preserve">
+      <value>På vem ligger ansvaret om något går fel vid renoveringen?</value>
+  </data>
+  <data name="FaqItem4Answer" xml:space="preserve">
+      <value>Toolit är endast en förmedlingstjänst och kan således ej hållas ansvarig vid tvist. Vid eventuellt tvist och kund ej är nöjd återbetalas avtalad kostnad för jobbet tills det att hantverkaren färdigställt arbetet, eller vid lagakraftvunnen dom enligt stycke 7 i våra allmänna villkor som du kan läsa om på hemsidan.</value>
+  </data>
+  <data name="FaqItem5Question" xml:space="preserve">
+      <value>I vilka områden fungerar Toolit?</value>
+  </data>
+  <data name="FaqItem5Answer" xml:space="preserve">
+      <value>I första skedet öppnar vi i Stockholms området, Men via vårat nyhetsbrev som du kan anmäla dig till via www.toolit.se uppdaterar vi löpande allt eftersom vi expanderar genom Sverige.</value>
+  </data>
+  <data name="FaqItem6Question" xml:space="preserve">
+      <value>Vad kostar det som kund att använda appen?</value>
+  </data>
+  <data name="FaqItem6Answer" xml:space="preserve">
+      <value>Ingenting, Den kostnad du och hantverkaren kommer överens om i appen är vad du betalar.</value>
+  </data>
+  <data name="FaqItem7Question" xml:space="preserve">
+      <value>Om appen!</value>
+  </data>
+  <data name="FaqItem7Answer" xml:space="preserve">
+      <value>Appen är skapad i syfte att vara så enkel och smidig som möjligt, om du stöter på utmaningar med appen, maila specifika problem till info@toolit.se så hjälper vi dig så snabbt vi bara kan!</value>
+  </data>
+  <data name="FaqItem8Question" xml:space="preserve">
+      <value>Kan jag kommunicera med flera hantverkare?</value>
+  </data>
+  <data name="FaqItem8Answer" xml:space="preserve">
+      <value>Det finns en chatfunktion direkt i appen. Där kan du kommunicera med samtliga hantverkare som budar på ditt jobb.</value>
+  </data>
+  <data name="FaqItem9Question" xml:space="preserve">
+      <value>Var hittar jag appen?</value>
+  </data>
+  <data name="FaqItem9Answer" xml:space="preserve">
+      <value>Finns på Appstore, Huawei appgallery samt google play.</value>
+  </data>
+  <data name="FaqItem10Question" xml:space="preserve">
+      <value>Om jag har en ritning jag vill hantverkaren ska se. hur gör jag då?</value>
+  </data>
+  <data name="FaqItem10Answer" xml:space="preserve">
+      <value>Till att börja med kan du ta en printscreen eller lägga upp ritningen när du lägger upp ditt projekt, så kan sedan alla hantverkare se det.</value>
+  </data>
+  <data name="FaqItem11Question" xml:space="preserve">
+      <value>Om appen strular, vad gör jag?</value>
+  </data>
+  <data name="FaqItem11Answer" xml:space="preserve">
+      <value>I vilket fall appen strular är det bra om vi får veta det och därmed kan lösa omgående. Maila specifikt problem till info@toolit.se så hjälper vi dig så snart vi kan!</value>
+  </data>
+  <data name="FaqItem12Question" xml:space="preserve">
+      <value>ROT-avdrag</value>
+  </data>
+  <data name="FaqItem12Answer" xml:space="preserve">
+      <value>En skattereduktionen på maximalt 50 procent av arbetskostnaden, och ett maxbelopp på 75 000 kronor per person och år.</value>
+  </data>
+  <data name="FaqItem13Question" xml:space="preserve">
+      <value>Hur vet jag om jag är behörig för ROT-avdrag?</value>
+  </data>
+  <data name="FaqItem13Answer" xml:space="preserve">
+      <value>För att ha rätt till rotavdrag ställs följande krav: Du måste ha fyllt 18 år och betala skatt i Sverige för 90% av din inkomst, arbetet ska således vara ett sådant som ger rätt till rotavdrag, det är delat ansvar mellan dig som kund och utföraren att säkerställa detta.</value>
+  </data>
+  <data name="FaqItem14Question" xml:space="preserve">
+      <value>Hur vet jag hur mycket ROT-avdrag jag har kvar att använda?</value>
+  </data>
+  <data name="FaqItem14Answer" xml:space="preserve">
+      <value>Är du osäker på hur mycket Rot du har kvar att nyttja i år kan du kolla detta efter du loggat in på Skatteverkets hemsida eller ringa dem och fråga.</value>
+  </data>
+  <data name="FaqItem15Question" xml:space="preserve">
+      <value>Kan jag få ut kvitto?</value>
+  </data>
+  <data name="FaqItem15Answer" xml:space="preserve">
+      <value>Ja! Per automatik skickar hantverkaren över kvitto och underlag för jobbet till dig per mail vid godkännande av jobb.</value>
+  </data>
+  <data name="FaqItem16Question" xml:space="preserve">
+      <value>Är mitt hem försäkrat via er tjänst?</value>
+  </data>
+  <data name="FaqItem16Answer" xml:space="preserve">
+      <value>Nej. Toolit är en marknadsplats där privatpersoner och hantverkare sammanförs dvs Toolit har ingen part i själva avtalet er emellan. 
+
+Vid olycka runt jobbet ta kontakt med ditt försäkringsbolag och hantverkaren som utförde jobbet så får ni hjälpas åt att lösa det.</value>
+  </data>
+  <data name="FaqItem17Question" xml:space="preserve">
+      <value>Måste jag betala skatt?</value>
+  </data>
+  <data name="FaqItem17Answer" xml:space="preserve">
+      <value>Toolit är en marknadsplats och som hantverkare behöver du själv ta reda på vilka skatter och avgifter, inklusive sociala avgifter som du omfattas av. Som kund ser du priserna inklusive moms. 
+
+Om du behöver mer information eller har frågor relaterade till skatt så hänvisar vi till din lokala skattemyndighet.</value>
+  </data>
+  <data name="TosSection1Title" xml:space="preserve">
+      <value>1. Allmänna Villkor</value>
+  </data>
+  <data name="TosSection1Content" xml:space="preserve">
+      <value>1.1 Toolit AB, organisationsnummer 559021-8250 Adress: Lundagatan 39, 117 27 Stockholm (”Toolit”) tillhandahåller en digital marknadsplats (”Appen”) för förmedling av hantverkartjänster samt är en annonsplattform för annonsörer (“Tjänsten”) och information som presenteras på Toolits hemsida (”Webbplatsen”) (www.toolit.se).
+
+1.2 Användarna i Tjänsten definieras som (”Användarna”) om det avser någon skyldighet som rör dem båda. (”Kunden”) och (”Hantverkaren”) om det är något som rör dessa Användare enskilt. 
+
+1.3 Privatpersoner och företag (”Kunden”) kan lägga upp annonser för hantverksjobb de vill ha utförda.    
+
+1.4 Med Hantverkare menas Snickare, Målare, Platssättare, Golvläggare, Vvs, samt Elektriker och alla dessa yrkeskategorier går under benämningen (“Hantverkaren”) och samtliga dessa kan buda på olika uppdrag beskrivna av Kunden och utföra dessa tjänster.
+
+1.5 En extern annonsör (”Annonsör”) som annonserar i Appen eller på Webbplatsen.
+
+1.6 Genom att skapa ett konto i Tjänsten accepterar Kunden och Hantverkaren vid var tid gällande Användarvillkoren (“Villkoren”) för användning av Tjänsten. Villkoren finns alltid tillgängliga på Toolits webbplats. Vi rekommenderar er att skriva ut en kopia av Allmänna villkoren.
+
+1.7 Toolit förbehåller sig rätten att ändra dessa Allmänna Villkor från tid till annan och kommer då att publicera de ändrade Allmänna Villkoren på Webbplatsen och i Appen. De ändrade villkoren blir gällande för nya Användare från och med det datum de publiceras på Webbplatsen eller i Appen och efter 30 dagar från publicering för befintliga Användare.
+
+1.8 Användaren förbinder sig att hålla sig uppdaterad om innehållet i de Allmänna Villkoren för all användning av Toolits tjänster.
+</value>
+  </data>
+  <data name="TosSection2Title" xml:space="preserve">
+      <value>2. Allmänt om tjänsten och registrering</value>
+  </data>
+  <data name="TosSection2Content" xml:space="preserve">
+      <value>2.1 Toolit erbjuder användare en möjlighet att nyttja Tjänsten genom att registrera sig. För att ingå avtal och registrera dig som Användare måste du vara minst 18 år gammal. Endast fysiska personer kan registrera sig som Kunder av Tjänsten, dock kan en juridisk person vara kund om det är en fysisk person kopplad till då man loggar in med bankID. Hantverkaren får ingå avtal med Tjänsten med bolagsnamn förutsatt att all nödvändig information, så som Hantverkarens namn, adress, organisationsnummer, innehavande av F/FA-Skattsedel som är knutet till dess bolag finns med. Möjlighet till att använda sig av ett frilansbolag där Hantverkaren kan fakturera ifrån är okej. Ej Hantverkare som vid färdigställt arbete behöver lämna längre garanti som till exempel elektricitet och våtrum då det krävs en juridisk person som tillhandahåller behörigheten.
+
+2.2 Tjänsten tillhandahålls inte personer som tidigare har brutit mot de Allmänna Villkoren, eller tidigare av Toolit tillhandahållna villkor eller tillämplig lag. Eller om användaren har blivit nekad eller blockerad av Toolit.
+
+2.3 Toolit förbehåller sig även rätten, att efter eget gottfinnande, stänga av användare som använder Tjänsten i strid med de Allmänna Villkoren, tillämplig lag eller på ett sätt som annars framstår som oacceptabelt för Toolit.
+
+2.4 Toolit äger rätt att begränsa tillgängligheten till Tjänsten i den omfattning som Toolit bedömer är nödvändig för att uppdatera och förbättra Tjänsten. Kompensation kan ej utkrävas för sådana störningar.
+</value>
+  </data>
+  <data name="TosSection3Title" xml:space="preserve">
+      <value>3. Immateriella rättigheter</value>
+  </data>
+  <data name="TosSection3Content" xml:space="preserve">
+      <value>3.1 Toolit innehar de immateriella rättigheterna till film, text, bild, design och det övriga material och information som görs tillgängligt för Användaren i Tjänsten. Detsamma gäller den bakomliggande programkoden för Tjänsten. Sådant material och information får inte användas på annat sätt än inom ramen för normal användning av Tjänsten.
+
+3.2 Toolit innehar de immateriella rättigheterna till de uppdragsbeskrivningar, inklusive film, text samt bilder, som lämnas i Tjänsten av Användaren. Dessa kan komma att publiceras i Toolits kanaler och användas i marknadsföringssyfte.
+
+3.3 Generellt är det godkänt att länka till Toolit, men däremot vill vi att besökare flyttas till vår domän och att länken inte är integrerad på andra webbsidor. Alla former av inbäddning och “hot-linking” är förbjudet. Detta kräver vårt godkännande. Detsamma gäller länkning i större skala eller i en kommersiell kontext.
+
+3.4 Du får inte indexera innehållet på Webbplatsen eller Appen.
+
+3.5 All otillåten användning av Toolit immateriella rättigheter kan medföra ersättningsskyldighet och/eller straffansvar.
+</value>
+  </data>
+  <data name="TosSection4Title" xml:space="preserve">
+      <value>4. Användargenererat innehåll</value>
+  </data>
+  <data name="TosSection4Content" xml:space="preserve">
+      <value>4.1 Med användargenererat innehåll avses allt sådant innehåll som en användare av Tjänsten skapar och lägger upp på Webbplatsen eller i Appen, som till exempel film, bild, ljudinspelningar och text (”Användargenererat Innehåll”).
+
+4.2 Du garanterar att du innehar nödvändiga rättigheter till det Användargenererade Innehållet, antingen genom att du själv har skapat detta (vare sig det är exempelvis film, bild eller en annonstext), eller att alla som har medverkat har gett dig tillstånd att använda det Användargenererade Innehållet på Webbplatsen och i Appen enligt de Allmänna Villkoren.
+
+4.3 Du garanterar att det Användargenererade Innehållet inte innehåller annans upphovsrättsligt skyddade material, logotyp eller annan immateriell rättighet som du inte har fått rättighetshavarens tillstånd att använda.
+
+4.4 Du garanterar att du sett till att de personer som kan identifieras i det Användargenererade Innehållet (exempelvis i en bild eller enbart genom sitt namn) är medvetna om hur materialet kommer att användas och att de uttryckligen har godkänt att förekomma i det Användargenererade Innehållet och att Toolit även kan komma att använda det Användargenererade Innehållet i marknadsföringssyfte.
+
+4.5 Genom att lägga upp Användargenererat Innehåll vid införandet av en annons, ger du Toolit en oinskränkt rätt att fritt förfoga över det Användargenererade Innehållet, genom att till exempel bearbeta, formatanpassa, lagra eller kopiera det och göra det tillgängligt för allmänheten oavsett mediekanal och att vidare upplåta dessa rättigheter till eventuella samarbetspartners. Toolit får även använda det Användargenererade Innehållet i marknadsföringssyfte. Toolits rättigheter kvarstår även efter att en annons har tagits bort.
+
+4.6 Du efterger härmed alla krav på ersättning från Toolit för Toolits användning av det Användargenererade Innehållet.
+
+4.7 Om Användaren publicerar copyright skyddat material, är Användare betalningsansvarig för det skadeståndsanspråk som riktats mot Toolit. Användaren åtar sig att betala hela beloppet för copyright intrånget som Toolit kommer att fakturera Användaren.
+</value>
+  </data>
+  <data name="TosSection5Title" xml:space="preserve">
+      <value>5. Användning av tjänsten</value>
+  </data>
+  <data name="TosSection5Content" xml:space="preserve">
+      <value>5.1 Användaren är ansvarig för att de namn- och kontaktuppgifter som finns registrerade i Tjänsten är korrekta och aktuella. Vidare ansvarar Användaren för att uppdragsbeskrivningen innehåller korrekt och relevant information om det jobb som Kunden önskar få utfört. Toolit har rätt att göra ändringar i uppdragsbeskrivningen i syfte att göra den mer relevant och tydlig eller i syfte att ta bort otillåtet eller olämpligt innehåll, utan att meddela Användaren. Toolit kan även komma att kontakta Användaren för att inhämta ytterligare information om det uppdrag som Kund önskar få utfört.
+
+5.2 Det är endast du som har registrerat dig som användare som får lägga upp arbeten eller annonsera utifrån det registrerade kontot. Det är inte tillåtet att låta en annan person använda ditt konto i Toolit. Du åtar dig att se till att andra personer inte kan få tillgång till ditt konto eller använder Tjänsten i ditt namn. Om du har anledning att misstänka att någon obehörig har tillgång till ditt konto i Toolit åtar du dig att omedelbart kontakta oss så att vi kan spärra ditt konto i avvaktan på utredning.
+
+5.3 När Hantverkaren svarar och blir godkänd att utföra ett uppdrag via Tjänsten så är du att anse som part i ett avtal mellan Hantverkare och Kund. Efter ett godkännande av priset som Hantverkaren har uppgett sker en Swish betalning till Toolits klientmedelskonto med detta belopp. Kunden och Hantverkaren har genom godkännande av Allmänna villkoren godkänt att pengarna ska deponeras på Toolits klientmedelskonto. Pengarna deponeras på Toolits klientmedelskonto tills arbetet är utfört. Godkännande av arbetet sker efter det är utfört och gärna tillsammans med Hantverkaren och genom att Kunden godkänner arbetet medger ni som Kund att Toolit får utbetala Hantverkarens belopp till Hantverkarens angivna konto samt Toolits tar sin del av överenskommet förmedlingsbelopp.
+
+5.4 Hantverkaren får det redovisade deponerade beloppet när arbetet är godkänt, Toolit får i samband med redovisningen av utbetalning på det deponerade beloppet avräkna och erhålla avtalad och förfallen betalning för tjänsten.
+
+5.5 Om tvist mellan Kund och Hantverkare avseende redovisningen uppstår, ska redovisningen ske först när tvisten löst enligt förlikning eller genom lagakraftvunnen dom. Redovisning kan även ske i enlighet med Kunden och Hantverkarens gemensamma skriftliga begäran, Toolit har då rätt att ta ut det avtalade beloppet enligt avtalet om Toolit inte har stridigt mot något i Allmänna villkoren eller Lag.
+
+5.6 Användaren ansvarar för allt innehåll som Kund laddar upp eller på annat sätt genererar inom ramen för Tjänsten och är skyldig att tillse att det inte strider mot lag eller gör intrång i tredje mans rättigheter, samt att det inte har ett innehåll som kan uppfattas som kränkande eller stötande för vare sig folkgrupper eller enskilda individer. Detta gäller såväl film, texter som bilder. Detta gäller även innehållet på andra webbplatser som Användaren länkar till i Tjänsten. Överträdelse mot dessa Villkor kan innebära att annons raderas och i allvarliga fall att Användaren blir permanent avstängd från Tjänsten.
+
+5.7 Du som Användare ansvarar själv för att till Skattemyndigheten på ett korrekt sätt deklarera enligt skatteverkets rådande regler, Du som Hantverkare för den ersättning du erhåller genom att utföra uppdrag mot betalning som har annonserats i Tjänsten. Kunden ansvarar själv vid bekräftelse i Tjänsten om att använda ROT och RUT-avdrag att denne uppfyller villkoren från Skatteverket. Användaren ansvarar själva för eventuella skattekonsekvenser som kan uppkomma i och med användande av Tjänsten, till exempel för betalning av eventuella skatter och avgifter inklusive sociala avgifter som kan komma att utgå. För vidare information om frågor relaterade till skatt så hänvisar Toolit till din lokala skattemyndighet. Toolit hålls inte ansvariga för fel uppgifter angivna av Kunder eller Hantverkare och kan inte ställas till svars eller krävas på skadestånd för fel uppgifter.
+
+5.8 Hantverkaren förbinder sig att under hela perioden som Hantverkaren är ansluten till Tjänsten inneha F/FA-skattsedel, följa svensk lag samt följa beslut och rekommendationer från Allmänna reklamationsnämnden (ARN), Konsumentombudsmannen (KO), Branschorganisationer och andra relevanta myndigheter i händelse av tvist med Kund.
+
+5.9 Om du som Hantverkare nyttjar externa fakturerings företag som till exempel Frilans Finans och vill kunna utföra uppdrag med ROT och RUT behöver detta företag ha funktionen att kunna ställa ut fakturor med ROT och RUT.
+</value>
+  </data>
+  <data name="TosSection6Title" xml:space="preserve">
+      <value>6. Regler för annonsering</value>
+  </data>
+  <data name="TosSection6Content" xml:space="preserve">
+      <value>6.1 Det är inte tillåtet att annonsera ovederhäftiga/orealistiska erbjudanden. Toolit förbehåller sig rätten att ta bort en annons eller ett jobb som anses falla inom denna kategori.
+
+6.2 Det är inte tillåtet att som Kund lägga till fler saker i ett jobb efter det att en annons har publicerats. Skapa då i stället en till annons.
+
+6.3 Du åtar dig att lämna de upplysningar om det material eller de saker som din annons innehåller och som Toolit vid var tid efterfrågar samt garanterar genom din publicering av annonsen att de lämnade upplysningarna är korrekta och fullständiga.
+
+6.4 Missbruk kan komma att polisanmälas.
+</value>
+  </data>
+  <data name="TosSection7Title" xml:space="preserve">
+      <value>7. Relationen mellan användare</value>
+  </data>
+  <data name="TosSection7Content" xml:space="preserve">
+      <value>7.1 Toolit är inte part i avtalet mellan Kund och Hantverkare Part utan tillhandahåller en förmedlingstjänst. Toolit har således inget ansvar eller någon ersättningsskyldighet gentemot Tjänstens användare för avtal de träffat med varandra genom nyttjandet av Tjänsten, inte heller kan Toolit ses som part vid reklamation eller dolt fel, där ansvarar Hantverkaren direkt mot kunden.
+
+7.2 Toolit är endast part mellan användarna i enlighet med överenskommen summa för deponering av pengar på klientmedelskontot tills att arbetet är utfört och godkänt. Vid tvist återbetalas summan till Kund tills det att tvisten är löst, Toolit förbehåller sig rätten att kunna ta betalt vid lagakraftvunnen dom av antingen Kund eller Hantverkare, eller löst tvist Användarna sinsemellan. Toolit kan inte hållas ansvariga för det som beslutats enligt Lag.
+
+7.3 Vid eventuell tvist mellan Användarna skall detta lösas först och främst Användarna emellan, och utan Toolits inblandning. Om detta ej går så är det Allmänna reklamationsnämnden (ARN) eller en tingsrätt som får avgöra utfallet i ärendet.
+</value>
+  </data>
+  <data name="TosSection8Title" xml:space="preserve">
+      <value>8. Omdömen</value>
+  </data>
+  <data name="TosSection8Content" xml:space="preserve">
+      <value>8.1 Toolit strävar efter att hålla hög kvalitet i Tjänsten och förmedla kontakt med seriösa Hantverkare till Kunder. Därför uppmuntrar Toolit Kunder att lämna ett omdöme om Hantverkaren efter utfört uppdrag. Med anledning av detta kan Kunden komma att bli kontaktad av Toolits Kundservice i syfte att utvärdera Hantverkarens arbete. Kunden kan även på eget initiativ lämna omdöme om en Hantverkare på Toolits webbplats.
+
+8.2 För att säkerställa omdömets äkthet måste Kunden uppge sitt fullständiga namn vid lämnande av omdöme. Omdömet publiceras sedan med Kundens namn.
+
+8.3 Toolit tar inte ansvar för innehållet i omdömen lämnade av Kunders eller svar lämnade av Hantverkare, men förbehåller sig rätten att ej publicera, respektive avlägsna omdömen/svar som är i strid med lag eller som kan uppfattas som kränkande eller stötande eller på annat sätt otillbörliga.
+
+8.4 Hantverkaren godkänner att Kunder kan lämna omdömen om uppdrag som Hantverkaren utfört. Toolit är inte ansvarigt för innehållet i Kundernas omdömen men åtar sig att ej publicera omdömen vars innehåll bryter mot svensk lag eller som Toolit på annat sätt anser vara olämpligt.
+
+8.5 Hantverkaren äger inte rätt att begära borttag eller korrigering i lämnade omdömen, men har möjlighet att svara på Konsumentens omdömen. Hantverkarens svar publiceras på Toolits webbplats i anslutning till Kund omdöme. Toolit förbehåller sig dock rätten att ej publicera svar som är olämpliga, står i strid med lag eller som kan uppfattas som kränkande.
+</value>
+  </data>
+  <data name="TosSection9Title" xml:space="preserve">
+      <value>9. Betalningar</value>
+  </data>
+  <data name="TosSection9Content" xml:space="preserve">
+      <value>9.1 Genom Tjänsten har Kunden och Hantverkare möjlighet att skicka och ta emot betalningar för annonsering eller av Kund för annonserade arbeten.
+
+9.2 Toolit tar betalt från Kunden för annonsering av arbete. Toolit tar betalt från Hantverkaren för förmedling av kontaktuppgifter. Toolit tillhandahåller ett klientmedelskonto och detta anses inte rent juridiskt vara en betalning, utan det är en deponering och utbetalas först villkoren är uppfyllda och då pengarna överförs till den rättmätiga mottagaren. Toolit tar betalt för annonsplatser från Annonsör som vill annonsera i tjänsten eller på Toolits hemsida.
+
+9.3 Det är inte tillåtet att som Hantverkare part be om betalning utanför plattformen eller att be om en högre ersättning utanför Tjänsten. Yrkar Hantverkaren på mer betalt för jobbet kan Kunden istället lägga upp ett till jobb i Tjänsten.
+
+9.4 När Kunden och Hantverkaren har bekräftat pris via Appen förbehåller Toolit sig rätten att att ta ut sitt arvode på det avtalade beloppet även fast det sker en priskorregering nedåt. Då kommer Toolit göra en enskild bedömning utifrån vad som har skett. Detta för att förhindra systematisk priskorrigering i efterhand och undvika andra betallösningar utanför applikationen. Om detta uppdagas kan Toolit välja att stänga av Kunden och/eller Hantverkaren.
+
+9.5 Utbetalningar till den hämtande användarens registrerade bankkonto aktiveras när jobbet i Appen godkänts av Kund part.
+
+9.6 Toolit tar en transaktionsavgift för varje utfört jobb, vilken kan variera i tid och för marknad. I Sverige är transaktionsavgiften 5–15% beroende på vilken typ av premiumtjänst Hantverkaren har enligt prislista.
+
+9.7 Transaktionsavgiften dras ifrån Hantverkarens ersättning som erhåller 85–95%, av det belopp som är accepterat av Kunden i kostnad vid utfört arbete.
+
+9.8 Kunden har upp till 2 veckor att begära ett kostnadsfritt förbättringsjobb om arbetet uppdagas att det är undermåligt och/eller ej fackmannamässigt utfört. Kontakten sker direkt mellan Kunden och Hantverkaren. Utförande av förbättringsjobb behöver inte vara inom denna 2 veckors fönster.
+
+9.9 Hantverkaren åtar sig att utföra ett förbättringsjobb kostnadsfritt om arbetet faktiskt är undermåligt och/eller ej fackmannamässigt utfört.
+
+9.10 Om hantverkare ej dyker upp kan kunden välja att boka om tiden eller boka av och då få full återbetalning av den deponerade summan.
+
+9.11 Kunden betalar ingenting vid publicerande av annons utan endast vid godkännande av hantverkare. Först vid godkännande av utfört jobb betalas de deponerade pengarna från Toolits klientmedelskonto ut till Hantverkare samt Toolits förmedlingskostnad.
+
+9.12 Hantverkaren har skyldighet att vid förbättringsjobb eller icke fackmannamässigt väl utfört jobb åtgärda dessa. Vid tvist återbetalar vi fullt deponerad summa för jobbet till Kund tills att tvist är löst antingen Användarna sinsemellan eller vid lagakraftvunnen dom. Toolit förbehåller sig rätten att skicka faktura på tidigare överenskommen summan till Kund och betala ut till dess rättmätiga ägare, vid utfall till Hantverkarens fördel tar Toolit ut sin förmedlingskostnad, Ej om Kund vinner.
+
+9.13 Kunden kan avbryta köpet 24 timmar innan anvisad tid och få tillbaka fullt deponerade pengar.             
+
+9.14 Hantverkaren är medveten om Kundens rättighet till full återbetalning via ångerrätten upp till 24 timmar före avsatt tid för utförande av jobbet, Hantverkare har då ingen rätt till ersättning om avbokning sker minst 24 timmar före.
+
+9.15 Båda parter av användarna skall agera solidariskt I ärendet.
+</value>
+  </data>
+  <data name="TosSection10Title" xml:space="preserve">
+      <value>10. Tredjepart samarbeten</value>
+  </data>
+  <data name="TosSection10Content" xml:space="preserve">
+      <value>10.1 (Swish) Genom att godkänna dessa Allmänna Villkor eller genom att fortsätta använda Appen och utföra för vilka du får betalt eller som Kund få jobb utförda och betala, blir du också bunden av Swish’s allmänna villkor, som kan ändras från tid till annan av Swish.
+
+10.2 Toolit är en förmedlingstjänst av hantverkartjänster och pris är enligt avtal mellan part Hantverkare samt Kund. Priser i Tjänsten är ink moms för kund och ex moms för Hantverkare, tillval nyttjande av ROT och RUT finns för Kund.
+
+10.3 Under stycke 7 § 1, 2 och 3 framgår att Toolit inte lämnar någon garanti vid användande av Tjänsten utan det föreligger Kund själv att ta kontakt med Hantverkare. Hantverkare åtar sig enligt stycke 9 § 8, 9 att kostnadsfritt åtgärda förbättringsjobb samt undermåligt utfört arbete kostnadsfritt om detta anmäls senast 2 veckor efter utfört arbete. Hantverkaren lämnar garantier runt reklamation enligt distansavtal samt vid undermåligt utfört jobb.
+
+10.4 Kunden har 14 dagars ångerrätt från publicerad annons, Från att kunden godkänner hantverkare i Appen avsäger sig kunden rätten till ångerrätt ienlighet med nedanstående stycke. "Vid distansköp samtycker kunden till att tjänsten ska utföras samt att frivilligt avsäga sig all ångerrätt av tjänster enligt denna offert enligt 10 och 11 § lag (2205:59)"
+
+10.5 Leveranstider och logistik är enligt överenskommelse mellan parterna Kund och Hantverkare.           
+
+10.6 (BankID) Genom att godkänna dessa Allmänna Villkor eller genom att fortsätta använda Appen och utföra för vilka du får betalt eller som Kund få jobb utförda och betala, blir du också bunden av allmänna villkor, som kan ändras från tid till annan av respektive bank ditt BankID är knutet till.
+</value>
+  </data>
+  <data name="TosSection11Title" xml:space="preserve">
+      <value>11. Användande av kampanjkod</value>
+  </data>
+  <data name="TosSection11Content" xml:space="preserve">
+      <value>11.1 För att nyttja rabatten relaterad till en kampanjkod ska koden senast anges i samband med publicering av en annons. En kampanjkod som berättigar en rabatt kan endast göras gällande för de annonskategorier där en annonsör betalar för att få hjälp.
+
+11.2 Om inget annat kommuniceras i samband med kampanjkoden är den förknippade rabatten endast giltig vid det första tillfället en annonsör bekräftar och betalar en hämtning eller leverans.
+</value>
+  </data>
+  <data name="TosSection12Title" xml:space="preserve">
+      <value>12. Skadeersättning</value>
+  </data>
+  <data name="TosSection12Content" xml:space="preserve">
+      <value>12.1 Du som Användare åtar dig att hålla Toolit skadeslöst för det fall att någon tredje part ställer krav på ersättning på grund av Användargenererat eller copyright skyddat innehåll, eller på grund av att du som användare i övrigt har agerat i strid med dessa Allmänna Villkor eller i strid med gällande lag eller tredje parts rättighet.
+</value>
+  </data>
+  <data name="TosSection13Title" xml:space="preserve">
+      <value>13. Toolit ansvar</value>
+  </data>
+  <data name="TosSection13Content" xml:space="preserve">
+      <value>13.1 Toolit tillhandahåller Tjänsten i befintligt skick. Toolit förbehåller sig rätten att förändra Tjänsten utan föregående meddelande till dig som användare.
+
+13.2 Toolit lämnar inga garantier gällande Tjänstens funktion eller tillgänglighet och garanterar inte kontinuerlig, oavbruten eller säker tillgång till Tjänsten. Som användare är du medveten om att driften av Webbplatsen och/eller Appen kan komma att störas av ett antal faktorer utanför Toolit kontroll.
+
+13.3 Toolit ansvarar inte för skada som beror på uteblivna eller fördröjda annonssvar eller på felaktig information i annonstexten, och ansvarar inte heller i övrigt gentemot dig för direkta eller indirekta skador eller förluster som direkt eller indirekt orsakats av din användning av Tjänsten eller av att du inte kunnat använda Tjänsten eller av dess innehåll.  
+
+13.4 Bestämmelser i dessa Allmänna Villkor ska inte begränsa Toolit ansvar vid uppsåt eller grov vårdslöshet eller enligt tvingande lag.
+
+13.5 Toolit förbehåller sig rätten att stänga av dig som användare från Tjänsten samt att upphöra att tillhandahålla del eller hela Tjänsten om det sker en regulatorisk förändring eller genom myndighetsbeslut som begränsar Toolits möjligheter att tillhandahålla Tjänsten.
+
+13.6 Toolit är ej att anse som part i eventuell tvist mellan Användarna. Paragraf 7.3 fastslår att det först och främst skall lösas sinsemellan Användarna och om det ej går så är det upp till ARN eller en tingsrätt att göra bedömning och ge utfall i ärendet.
+</value>
+  </data>
+  <data name="TosSection14Title" xml:space="preserve">
+      <value>14. Personuppgifter</value>
+  </data>
+  <data name="TosSection14Content" xml:space="preserve">
+      <value>14.1 Toolit behandlar dina personuppgifter i enlighet med GDPR vid var tid gällande Personuppgiftspolicy och kommer spara Användarens uppgifter endast så länge som det är nödvändigt, Vi raderar din information när den inte längre är relevant.
+</value>
+  </data>
+  <data name="TosSection15Title" xml:space="preserve">
+      <value>15. Ångerrätt &amp; avbokning</value>
+  </data>
+  <data name="TosSection15Content" xml:space="preserve">
+      <value>15.1 Du är medveten om att det inte föreligger någon ångerrätt om du påbörjar utnyttjandet av Tjänsten inom 24 timmar av överenskommen tid med Hantverkare, avbokningsskydd gäller upp till senast 24 timmar före överenskommen tid med Hantverkaren. Vid avbokning efter 24 timmar återbetalas överenskommet belopp minus Toolits förmedlingskostnad till Kund. Vid systematisk avbokning eller vid uppmaning att betalning skall ske utanför Tjänsten av någon av Användarna kan Toolit efter undersökning förbehålla sig rätten att vid misstanke av betalning utanför Appen stänga av Kund och / eller Hantverkare.
+</value>
+  </data>
+  <data name="TosSection16Title" xml:space="preserve">
+      <value>16. Överlåtelse av ditt avtal med Toolit</value>
+  </data>
+  <data name="TosSection16Content" xml:space="preserve">
+      <value>16.1 Genom att acceptera Användarvillkoren godkänner du att avtalet som du har ingått med Toolit, utan ditt samtycke, kan överlåtas till annat bolag.
+</value>
+  </data>
+  <data name="TosSection17Title" xml:space="preserve">
+      <value>17. Force majeure</value>
+  </data>
+  <data name="TosSection17Content" xml:space="preserve">
+      <value>17.1 Toolit ska vara befriad från skadestånd och andra påföljder om fullgörandet av ett visst åtagande förhindras eller väsentligen försvåras av omständighet som part inte rimligen kunnat råda över eller förutse. Som befriande omständighet kan bland annat anses lagändringar, blixtnedslag, eldsvåda, myndighetsbestämmelse eller annan offentlig reglering, krig, naturkatastrof, epidemi, pandemi eller fel i större tele- eller datanät.</value>
+  </data>
+  <data name="TosSection18Title" xml:space="preserve">
+      <value>18. ROT och RUT</value>
+  </data>
+  <data name="TosSection18Content" xml:space="preserve">
+      <value>18.1 Allmänt om Rot och Rut
+
+Du använder rot- och rutavdraget genom att utföraren gör ett avdrag på arbetskostnaden på din faktura. När du sedan har betalat begär utföraren utbetalning från Skatteverket. Om Skatteverket beviljar utbetalning till utföraren förifylls beloppet i din inkomstdeklaration. Tänk på att du måste ha betalat tillräckligt med skatt under inkomståret för att kunna använda rot- och rutavdraget. Det är särskilt viktigt om du också nyttjar skattereduktion för installation av grön teknik under året.
+
+Rotavdragets och rutavdragets storlek
+
+Rotavdraget och rutavdraget räknas ihop och får sammanlagt uppgå till max 75 000 kronor per person och år. Rotavdraget får dock högst vara 50 000 kronor per år. Du kan inte få 50 000 kronor för varje bostad du har. Det finns dock inget maxbelopp per fastighet. Så flera personer kan dela på arbetskostnaden och få rotavdrag eller rutavdrag i samma bostad. Du kan få rotavdrag med som mest 30 procent av arbetskostnaden och rutavdrag med som mest 50 procent av arbetskostnaden. 
+
+Se hur mycket rot- och rutavdrag du använt
+
+I Skatteverkets tjänst Rot och rut -mina avdrag, kan du se hur mycket rot- och rutavdrag du har använt. Tänk på att informera utföraren som du har anlitat om du redan har utnyttjat en del av avdraget. Då kan de göra rätt avdrag på din faktura. Hämtat från www.skatteverket.se
+
+18.2 Om Kund ej uppfyller kraven för att få ROT och RUT avdrag blir Kunden betalningskyldig denna summa till Hantverkaren. Detta genom Tjänsten eller extern faktura utställd av Hantverkaren.
+</value>
+  </data>
+  <data name="TosSection19Title" xml:space="preserve">
+      <value>19. Allmänt</value>
+  </data>
+  <data name="TosSection19Content" xml:space="preserve">
+      <value>19.1 Har du generella frågor kring din upplevelse med Toolit är du alltid välkommen att kontakta oss. Vi läser, undersöker, utvärderar och svarar på alla inkommande frågor. Krävs det så hör vi av oss till eventuellt andra involverade parter, såsom till exempel en annan Toolit-användare. Vi håller dig uppdaterad med utveckling och status i just ditt ärende via mail eller chatten i Appen. Du kan närsomhelst du vill höra av dig med kompletterande information eller övriga frågor rörande ditt ärende.
+
+Kontaktuppgifter
+
+Toolit AB  
+
+Tillämplig lag och tvistelösning
+
+Svensk lag skall gälla avseende dessa Allmänna Villkor och tvister ska lösas i svensk domstol.
+
+Senast uppdaterad version 2021-09-14</value>
+  </data>
+  <data name="NewBidCostsCaption" xml:space="preserve">
+      <value>Tips: Sätt ditt pris för arbetskostnad ex moms och övriga kostnader, framkörning osv</value>
+  </data>
+  <data name="CraftsmanApplyCompanyTip" xml:space="preserve">
+      <value>Eget företag eller Frilans via Egenanställningsbolag (Ej för VVS eller Elektriker, då krävs eget företag pga försäkring)</value>
+  </data>
+  <data name="CraftsmanCompanyNameString" xml:space="preserve">
+      <value>Bolagsnamn: </value>
+  </data>
+  <data name="ToolitContactUrl" xml:space="preserve">
+      <value>http://toolit.se/kontakt/</value>
+  </data>
+  <data name="WelcomeLoginTemplateTitle" xml:space="preserve">
+      <value>Välkommen tillbaka!</value>
+  </data>
+  <data name="WelcomeLoginTemplateCaption" xml:space="preserve">
+      <value>När du behöver en hantverkare, smidigt och till rätt pris.</value>
+  </data>
+  <data name="SaveAction" xml:space="preserve">
+      <value>Spara</value>
+  </data>
+  <data name="SplashScreenText" xml:space="preserve">
+      <value>När du behöver en hantverkare, 
+smidigt till rätt pris.</value>
+  </data>
+  <data name="TabBarTasksTitle" xml:space="preserve">
+      <value>Jobb</value>
+  </data>
+  <data name="TabBarAddTaskTitle" xml:space="preserve">
+      <value>Skapa Jobb</value>
+  </data>
+  <data name="TabBarChatsTitle" xml:space="preserve">
+      <value>Chatten</value>
+  </data>
+  <data name="TabBarAccountTitle" xml:space="preserve">
+      <value>Konto</value>
+  </data>
+  <data name="TaskListItemInProgressStatus" xml:space="preserve">
+      <value>Jobb pågår</value>
+  </data>
+  <data name="CraftsmanAlreadyExistsErrorMessage" xml:space="preserve">
+    <value>Tyvärr har du redan ansökt om att bli hantverkare. Kontakta support</value>
+  </data>
+  <data name="BrokerageFeeFormatString" xml:space="preserve">
+    <value>Förmedlingsavgift: {0:N2}kr</value>
+  </data>
+  <data name="BidBrokerageFeeNotice" xml:space="preserve">
+      <value>Förmedlingsavgiften betalas till Toolit efter slutfört jobb.</value>
+  </data>
+  <data name="ApplyAction" xml:space="preserve">
+      <value>Ansök</value>
+  </data>
+  <data name="ApplyAsToolitCraftsmanPrompt" xml:space="preserve">
+      <value>Bli Toolit Hantverkare</value>
+  </data>
+  <data name="ElectricianLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag behöver hjälp att installera ett nytt ellutag av modellen Renova 2-vägs uttag vit, Den skall sitta 4 meter från ett annat ellutag så det går att vidarekoppla. Behöver spåra in kablarna i en betongvägg 2 meter ungefär.</value>
+  </data>
+  <data name="CarpenterLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag vill ha hjälp att sätta upp en isolerad vägg, det är 2.40 i tak och väggen skall vara 3m bred. Det skall finnas öppning för en standard dörr 80cm bred, denna har jag köpt, har i övrigt inget material.</value>
+  </data>
+  <data name="PainterLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag behöver hjälp att måla min lägenhet som är på 60kvm, ytan utan kök och badrum är ca 40kvm, det behöver tas bort tapet, bredspacklas samt målas 2 gånger, jag har färg.</value>
+  </data>
+  <data name="PlumberLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag behöver hjälp att byta min toalettstol till en vägghäng. Jag har köpt en Starck ME Rimless 253009, Durafix med dold montering så det har jag hemma. Innan har det stått en vanlig gamma toalett där (se bild) och jag ska ta in en kakelkille för att täcka dessa sen så endast installation av denna behövs.</value>
+  </data>
+  <data name="FloorLayerLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag vill ha hjälp att lägga heltäckningsmatta över mitt trägolv. Ca 15kvm.</value>
+  </data>
+  <data name="TilerLocalJobDescriptionPlaceholder" xml:space="preserve">
+    <value>Exempel! Jag behöver sätta upp kakel i mitt badrum, det är ca 20kvm stort. Jag har allt kakel. Har total renoverat badrummet så ingen toalett / dusch eller komod finns på plats ännu.</value>
+  </data>
+</root>

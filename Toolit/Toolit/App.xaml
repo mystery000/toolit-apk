@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="Toolit.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:resourses="clr-namespace:Toolit.Resourses;assembly=Toolit"
+    xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit">
+    <Application.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resourses:Fonts />
+                <resourses:Colors />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+        
+        <CornerRadius x:Key="CornerRadius">8</CornerRadius>
+        <CornerRadius x:Key="CornerRadiusTopBig">0, 0, 32, 32</CornerRadius>
+
+        <!--#region Main Top Grid-->
+        <Style x:Key="SmallTopGrid" TargetType="Grid">
+            <Setter Property="RowDefinitions" Value="Auto, *" />
+        </Style>
+
+        <Style x:Key="TopBoxSmall" TargetType="Grid">
+            <Setter Property="HeightRequest" Value="96" />
+            <Setter Property="BackgroundColor" Value="{StaticResource DarkGreen}" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="Margin">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="0" />
+                        <On Platform="iOS" Value="0, -20, 0, 0" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--  Main Top Grid Bg Images  -->
+        
+        <Style x:Key="BaseLeftTopBoxSmallImage" TargetType="Image">
+            <Setter Property="HeightRequest" Value="80" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <Style x:Key="LeftTopBoxSmallImage" TargetType="Image"
+               BasedOn="{StaticResource BaseLeftTopBoxSmallImage}">
+            <Setter Property="Source" Value="down_left" />
+        </Style>
+        <Style x:Key="LeftTopBoxSmallDownImage" TargetType="Image"
+               BasedOn="{StaticResource BaseLeftTopBoxSmallImage}">
+            <Setter Property="Source" Value="the_green_left_down" />
+        </Style>
+        
+        <Style x:Key="BaseRightTopBoxSmallImage" TargetType="Image">
+            <Setter Property="WidthRequest" Value="200" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+        <Style x:Key="RightTopBoxSmallImage" TargetType="Image"
+               BasedOn="{StaticResource BaseRightTopBoxSmallImage}">
+            <Setter Property="Source" Value="up_right" />
+        </Style>
+        <Style x:Key="TopBoxSmallDottsImage" TargetType="Image"
+               BasedOn="{StaticResource BaseRightTopBoxSmallImage}">
+            <Setter Property="Source" Value="the_dotts" />
+        </Style>
+        
+        <Style x:Key="TopBoxBackBtnStack" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="Android" Value="Center" />
+                        <On Platform="iOS" Value="Start" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Margin">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="24, 0, 0, 0" />
+                        <On Platform="iOS" Value="24, 20, 0, 0" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--  Main Top Header  -->
+        <Style x:Key="TopBoxSmallHeader" TargetType="Label"
+               BasedOn="{StaticResource BoldSmallLabel}">
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalOptions">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="Android" Value="Center" />
+                        <On Platform="iOS" Value="Start" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="0" />
+                        <On Platform="iOS" Value="0, 20, 0, 0" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="TopBoxSmallLeftBack" TargetType="Label"
+               BasedOn="{StaticResource BoldSmallLabel}">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="TopBoxSmallLeftBackCenter" TargetType="Label"
+               BasedOn="{StaticResource BoldSmallLabel}">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="TopBoxSmallRight" TargetType="Label"
+               BasedOn="{StaticResource BoldSmallLabel}">
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="Margin" Value="0,0,20,40" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="TextDecorations" Value="Underline" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="ArrowLeft" TargetType="Image">
+            <Setter Property="WidthRequest" Value="16" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Source" Value="arrow_left" />
+        </Style>
+        <!--#endregion-->
+
+        <!--#endregion-->
+
+        <Style x:Key="TopBoxBig" TargetType="custom:PancakeView">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusTopBig}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+        </Style>
+        <Style x:Key="BigTopPatternDrop" TargetType="Image">
+            <Setter Property="HeightRequest" Value="228" />
+            <Setter Property="Margin" Value="-108,-32,0,0" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Source" Value="bg_drop" />
+        </Style>
+        <Style x:Key="BigTopPatternStripe" TargetType="Image">
+            <Setter Property="WidthRequest" Value="188" />
+            <Setter Property="Margin" Value="0,0,-20,0" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="Source" Value="bg_strips" />
+        </Style>
+        <Style x:Key="BigTopUserImage" TargetType="custom:PancakeView">
+            <Setter Property="WidthRequest" Value="92" />
+            <Setter Property="HeightRequest" Value="92" />
+            <Setter Property="Margin" Value="0,0,40,40" />
+            <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource White}, Thickness='1'}" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+        <Style x:Key="BigTopBackBtnStack" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Margin" Value="24,24,0,0" />
+        </Style>
+        <Style x:Key="BigTopRightStack" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="Margin" Value="0,24,16,0" />
+        </Style>
+        <Style x:Key="BigTopStarsStack" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="Margin" Value="0,20,40,0" />
+        </Style>
+        <Style x:Key="HeaderTextStack" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Margin" Value="36,32,0,48" />
+        </Style>
+        <Style x:Key="BigTopHeader" TargetType="Label"
+               BasedOn="{StaticResource BoldLargeLabel}">
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="BigTopSmallHeader" TargetType="Label"
+               BasedOn="{StaticResource RegularSmallLabel}">
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <!--#region  Grid-->
+
+        <!--#region Display Info Frames-->
+        <Style x:Key="DisplayInfoFrame" TargetType="custom:PancakeView">
+            <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+            <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+        </Style>
+        <Style x:Key="DisplayInfoFrameHeaderStack" TargetType="StackLayout">
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Margin" Value="16,16,16,0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Spacing" Value="8" />
+        </Style>
+        <Style x:Key="DisplayInfoFrameSoloHeader" TargetType="Label"
+               BasedOn="{StaticResource BoldMediumLabel}">
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Margin" Value="16,16,16,0" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <!--#endregion-->
+
+        <!--#region Frames-->
+        <!--  Frames  -->
+        <Style x:Key="TipsFrame" TargetType="custom:PancakeView">
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+        </Style>
+        <Style x:Key="DoubleBtnFrame" TargetType="custom:PancakeView">
+            <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+            <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            <Setter Property="HeightRequest" Value="52" />
+        </Style>
+
+        <!--#endregion-->
+
+        <!--#region Buttons-->
+        <Style x:Key="PrimaryBtn" TargetType="controls:PancakeButton">
+            <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="HeightRequest" Value="56" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}" />
+            <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{StaticResource DarkGreen}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PrimaryBtnSmall" TargetType="controls:PancakeButton"
+               BasedOn="{StaticResource PrimaryBtn}">
+            <Setter Property="HeightRequest" Value="52" />
+        </Style>
+        
+        <Style x:Key="CloseModalImage" TargetType="Image">
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="Margin" Value="16" />
+            <Setter Property="WidthRequest" Value="16" />
+            <Setter Property="Source" Value="close_icon" />
+        </Style>
+        
+        <Style x:Key="BaseDoubleBtn" TargetType="Button">
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+            <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+        </Style>
+        <Style x:Key="DoubleBtnGreen" TargetType="Button"
+               BasedOn="{StaticResource BaseDoubleBtn}">
+            <Setter Property="BackgroundColor" Value="{StaticResource DarkGreen}" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="DoubleBtnWhite" TargetType="Button"
+               BasedOn="{StaticResource BaseDoubleBtn}">
+            <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+            <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+        </Style>
+        
+        <!--#endregion-->
+
+        <!--  modal  -->
+        <Style x:Key="ModalFrame" TargetType="custom:PancakeView">
+            <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        
+        
+        <!-- implicit styles -->
+        <Style TargetType="toolit:CustomEntry">
+            <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+            <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+        </Style>
+        
+        <Style TargetType="Editor"
+               ApplyToDerivedTypes="True">
+            <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+            <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+        </Style>
+        <Style TargetType="custom:PancakeView">
+            <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+            <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+        </Style>
+
+    </Application.Resources>
+</Application>

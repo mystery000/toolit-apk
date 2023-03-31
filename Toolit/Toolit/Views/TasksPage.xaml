@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<controls:DarkStatusBarPage
+    x:Class="Toolit.Views.TasksPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ui="clr-namespace:Toolit.Helpers.Ui;assembly=Toolit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    x:Name="Root"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionCountToBoolConverter x:Key="CollectionCountToBoolConverter" />
+
+            <Style x:Key="TopFrame" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="0,0,20,20" />
+            </Style>
+            <Style x:Key="JobsFrame" TargetType="custom:PancakeView">
+                <Setter Property="HeightRequest" Value="180" />
+                <Setter Property="WidthRequest" Value="180" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+
+            <DataTemplate x:Key="OtherJobTaskTemplate">
+                <StackLayout Padding="16,0,0,0"
+                             VerticalOptions="Center"
+                             xct:TouchEffect.Command="{Binding Source={x:Reference Root}, 
+                                            Path=BindingContext.MoveToOtherTaskCommand}"
+                             xct:TouchEffect.CommandParameter="{Binding .}">
+
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger TargetType="StackLayout"
+                                     Binding="{Binding Task.IsBiddable}"
+                                     Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                            <Setter Property="IsEnabled" Value="True" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+
+                    <custom:PancakeView Style="{StaticResource JobsFrame}">
+
+                        <Grid RowDefinitions="84, Auto, Auto" RowSpacing="0">
+
+                            <!-- task image -->
+                            <forms:CachedImage
+                                Grid.Row="0"
+                                Aspect="AspectFill"
+                                DownsampleToViewSize="True"
+                                Source="{Binding Task.TitleImageUrl}"
+                                LoadingPlaceholder="loading_indicator_gif.gif"  />
+
+                            <!-- task bubble -->
+                            <custom:PancakeView
+                                Margin="8"
+                                BackgroundColor="{StaticResource White}"
+                                CornerRadius="8"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start">
+
+                                <Label Margin="8,4"
+                                       Style="{StaticResource RegularXtraSmallLabel}"
+                                       Text="{Binding Task.FormattedBubbleText}" />
+
+                            </custom:PancakeView>
+
+                            <!-- task title -->
+                            <Label
+                                Grid.Row="1"
+                                Style="{StaticResource RegularSmallLabel}"
+                                Margin="12,8,0,0"
+                                LineHeight="1.2"
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Task.Title}" />
+                            
+                            <!-- task description -->
+                            <Label
+                                Grid.Row="2"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Margin="12,8,0,0"
+                                MaxLines="2"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Task.Description}" />
+                        </Grid>
+                    </custom:PancakeView>
+
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="OtherJobAdTemplate">
+                <StackLayout Padding="16,0,0,0"
+                             VerticalOptions="Center"
+                             xct:TouchEffect.Command="{Binding Source={x:Reference Root}, 
+                                            Path=BindingContext.MoveToOtherTaskCommand}"
+                             xct:TouchEffect.CommandParameter="{Binding .}">
+                    <custom:PancakeView Style="{StaticResource JobsFrame}">
+                        <Grid RowDefinitions="84, Auto" RowSpacing="0">
+
+                            <!-- task image -->
+                            <forms:CachedImage
+                                Grid.Row="0"
+                                Aspect="AspectFill"
+                                DownsampleToViewSize="True"
+                                Source="{Binding Ad.ImageUrl}"
+                                LoadingPlaceholder="loading_indicator_gif.gif" />
+
+                            <!-- task bubble -->
+                            <custom:PancakeView
+                                Margin="8"
+                                BackgroundColor="{StaticResource White}"
+                                CornerRadius="8"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start">
+
+                                <Label Margin="8,4"
+                                       Style="{StaticResource RegularXtraSmallLabel}"
+                                       Text="{x:Static resources:AppResources.AdBubbleText}" />
+
+                            </custom:PancakeView>
+
+                            <!-- task title -->
+                            <Label
+                                Grid.Row="1"
+                                Style="{StaticResource RegularSmallLabel}"
+                                Margin="12,8,0,0"
+                                LineHeight="1.2"
+                                Text="{Binding Ad.Title}"
+                                MaxLines="3"
+                                LineBreakMode="TailTruncation" />
+
+                        </Grid>
+                    </custom:PancakeView>
+                </StackLayout>
+            </DataTemplate>
+            <ui:OtherJobTemplateSelector x:Key="OtherJobTemplateSelector"
+                                         TaskTemplate="{StaticResource OtherJobTaskTemplate}"
+                                         AdTemplate="{StaticResource OtherJobAdTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <local:CustomScrollView Margin="0, -48, 0, 0"
+                            VerticalScrollBarVisibility="Never">
+        <StackLayout Padding="0, 0, 0, 60">
+
+            <!--#region TopGrid-->
+            <custom:PancakeView Style="{StaticResource TopFrame}"
+                                Padding="0, 32, 0, 0">
+                <Grid IsClippedToBounds="True"
+                      HeightRequest="256">
+
+                    <!--  Pattern  -->
+                    <Image
+                        Margin="20,0,0,0"
+                        HorizontalOptions="Start"
+                        Source="the_blue_light"
+                        VerticalOptions="Center" />
+
+                    <!--  Pattern  -->
+                    <Image
+                        Margin="0,0,-32,-92"
+                        HorizontalOptions="End"
+                        Source="the_yellow_light"
+                        VerticalOptions="End"
+                        WidthRequest="160" />
+
+                    <!--  Logo  -->
+                    <Image
+                        Margin="24, 36, 0, 0"
+                        HeightRequest="32"
+                        HorizontalOptions="Start"
+                        Source="toolit_new_logo"
+                        VerticalOptions="Start" />
+
+                    <!--  Name and Searchbar Grid  -->
+                    <StackLayout Margin="24"
+                                 VerticalOptions="End">
+
+                        <Label
+                            Style="{StaticResource BoldMediumLabel}"
+                            Text="{Binding UserName, 
+                                StringFormat={x:Static resources:AppResources.GreetingFormatText}}"
+                            VerticalOptions="End" />
+                        <Label
+                            Margin="0,0,0,8"
+                            Style="{StaticResource RegularSmallLabel}"
+                            Text="{x:Static resources:AppResources.ActiveJobsTitleString}"
+                            VerticalOptions="Center" />
+
+                        <custom:PancakeView HeightRequest="52">
+
+                            <customRenderer:CustomEntry
+                                Margin="12, 0"
+                                Placeholder="{x:Static resources:AppResources.TaskSearchPlaceholder}"
+                                Text="{Binding SearchQuery, Mode=TwoWay}">
+                                <customRenderer:CustomEntry.Behaviors>
+                                    <xct:UserStoppedTypingBehavior Command="{Binding ExecuteSearchQueryCommand}"
+                                                                   StoppedTypingTimeThreshold="1000"
+                                                                   ShouldDismissKeyboardAutomatically="False" />
+                                </customRenderer:CustomEntry.Behaviors>
+                            </customRenderer:CustomEntry>
+
+                        </custom:PancakeView>
+                    </StackLayout>
+                </Grid>
+            </custom:PancakeView>
+            <!--#endregion-->
+
+            <!--  Page Content  -->
+            <StackLayout
+                Spacing="12"
+                VerticalOptions="FillAndExpand">
+
+                <!--  my tasks list  -->
+                <StackLayout Spacing="12">
+
+                    <!--  Job Header  -->
+                    <Label
+                        Margin="16,16,0,0"
+                        Style="{StaticResource BoldMediumLabel}"
+                        Text="{x:Static resources:AppResources.MyTasksTitle}" />
+
+                    <!-- no tasks placeholder -->
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           Text="{x:Static resources:AppResources.NoTasksPlaceholder}"
+                           TextColor="{StaticResource GrayTextColor}"
+                           Margin="8, 16"
+                           HorizontalOptions="Center"
+                           IsVisible="{Binding MyTaskList, 
+                                Converter={StaticResource CollectionCountToBoolConverter}, 
+                                ConverterParameter='i'}" />
+
+                    <!--  JobFrame  -->
+                    <CollectionView
+                        HorizontalScrollBarVisibility="Never"
+                        HeightRequest="200"
+                        ItemsSource="{Binding MyTaskList}"
+                        IsVisible="{Binding MyTaskList, 
+                                Converter={StaticResource CollectionCountToBoolConverter}}">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="16,0,0,0"
+                                      xct:TouchEffect.Command="{Binding Source={x:Reference Root}, 
+                                            Path=BindingContext.MoveToMyTaskCommand}"
+                                      xct:TouchEffect.CommandParameter="{Binding .}">
+
+                                    <custom:PancakeView Style="{StaticResource JobsFrame}">
+                                        <Grid RowDefinitions="84, Auto, Auto" RowSpacing="0">
+
+                                            <!-- task image -->
+                                            <forms:CachedImage
+                                                Grid.Row="0"
+                                                Aspect="AspectFill"
+                                                DownsampleToViewSize="True"
+                                                Source="{Binding TitleImageUrl}"
+                                                LoadingPlaceholder="loading_indicator_gif.gif" />
+
+                                            <!-- bidding status -->
+                                            <custom:PancakeView
+                                                Margin="8"
+                                                BackgroundColor="{StaticResource Yellow}"
+                                                CornerRadius="8"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    Style="{StaticResource RegularXtraSmallLabel}"
+                                                    Margin="8,4"
+                                                    Text="{Binding BiddingStatus}"
+                                                    TextColor="{StaticResource WhiteTextColor}" />
+
+                                                <custom:PancakeView.Triggers>
+                                                    <DataTrigger TargetType="custom:PancakeView"
+                                                                 Binding="{Binding HasAcceptedBid}"
+                                                                 Value="True">
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="{StaticResource LightBlue}" />
+                                                    </DataTrigger>
+                                                </custom:PancakeView.Triggers>
+                                            </custom:PancakeView>
+
+                                            <!-- title -->
+                                            <Label
+                                                Style="{StaticResource RegularSmallLabel}"
+                                                Grid.Row="1"
+                                                Margin="12,8,0,0"
+                                                LineHeight="1.2"
+                                                Text="{Binding Title}"
+                                                MaxLines="1"
+                                                LineBreakMode="TailTruncation" />
+                            
+                                            <!-- task description -->
+                                            <Label
+                                                Grid.Row="2"
+                                                Style="{StaticResource RegularXtraSmallLabel}"
+                                                Margin="12,8,0,0"
+                                                MaxLines="2"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Description}" />
+                                        </Grid>
+                                    </custom:PancakeView>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.Footer>
+                            <BoxView WidthRequest="72" />
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </StackLayout>
+
+                <!--  Header And Filter  -->
+                <StackLayout Margin="16,8" Orientation="Horizontal">
+
+                    <!-- other tasks title -->
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource BoldMediumLabel}"
+                        Text="{x:Static resources:AppResources.OtherTasksTitle}" />
+
+                    <!-- filter toggle -->
+                    <StackLayout HorizontalOptions="End"
+                                 Orientation="Horizontal"
+                                 xct:TouchEffect.Command="{Binding ToggleExpandCategoryCommand}"
+                                 xct:TouchEffect.NativeAnimation="True">
+                        <Label
+                            Margin="0,0,8,0"
+                            Style="{StaticResource RegularXtraSmallLabel}"
+                            Text="{x:Static resources:AppResources.OpenCategoriesAction}"
+                            VerticalOptions="Center" />
+                        <Image
+                            HeightRequest="8"
+                            Source="arrow_up"
+                            VerticalOptions="Center">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding IsCategoryFilterExpanded}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="arrow_down" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+                </StackLayout>
+
+                <!--#region Filter Scroll-->
+                <ScrollView Padding="16,0"
+                            HorizontalScrollBarVisibility="Never"
+                            IsVisible="{Binding IsCategoryFilterExpanded}"
+                            Orientation="Horizontal">
+                    <!-- TODO: ads an all option & account for different background images for items -->
+                    <StackLayout Orientation="Horizontal">
+                        <!-- select all filters -->
+                        <custom:PancakeView CornerRadius="{StaticResource CornerRadius}"
+                                            xct:TouchEffect.Command="{Binding BindingContext.SelectAllCraftFiltersCommand, 
+                                                                Source={x:Reference Root}}">
+                            <Grid
+                                BackgroundColor="{StaticResource DarkGreen}"
+                                HeightRequest="54"
+                                WidthRequest="120">
+                                <Image
+                                    Margin="0,0,0,0"
+                                    Aspect="AspectFill"
+                                    HeightRequest="54"
+                                    HorizontalOptions="End"
+                                    Source="screwdriver_fade" />
+                                <Label
+                                    Margin="8"
+                                    Style="{StaticResource SemiBoldXtraSmallLabel}"
+                                    HorizontalOptions="Start"
+                                    Text="{x:Static resources:AppResources.TasksAllJobsFilter}"
+                                    TextColor="{StaticResource WhiteTextColor}"
+                                    VerticalOptions="End" />
+                                <Grid.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding AreAllFiltersSelected}"
+                                        TargetType="Grid"
+                                        Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                    </DataTrigger>
+                                </Grid.Triggers>
+                            </Grid>
+                        </custom:PancakeView>
+
+                        <!-- filter craft list -->
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="16"
+                                     BindableLayout.ItemsSource="{Binding CraftList}">
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <custom:PancakeView CornerRadius="{StaticResource CornerRadius}"
+                                                        xct:TouchEffect.Command="{Binding BindingContext.CraftTappedCommand, 
+                                                                    Source={x:Reference Root}}"
+                                                        xct:TouchEffect.CommandParameter="{Binding .}">
+                                        <Grid
+                                            BackgroundColor="{StaticResource DarkGreen}"
+                                            HeightRequest="54"
+                                            WidthRequest="120">
+                                            <Image
+                                                Margin="0,0,0,0"
+                                                Aspect="AspectFill"
+                                                HeightRequest="56"
+                                                HorizontalOptions="End"
+                                                Source="{Binding FilterIcon}" />
+                                            <Label
+                                                Margin="8"
+                                                Style="{StaticResource SemiBoldXtraSmallLabel}"
+                                                HorizontalOptions="Start"
+                                                Text="{Binding LocalName}"
+                                                TextColor="{StaticResource WhiteTextColor}"
+                                                VerticalOptions="End" />
+                                            <Grid.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding IsSelected}"
+                                                    TargetType="Grid"
+                                                    Value="True">
+                                                    <Setter Property="BackgroundColor"
+                                                            Value="{StaticResource LightGreen}" />
+                                                </DataTrigger>
+                                            </Grid.Triggers>
+                                        </Grid>
+                                    </custom:PancakeView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <!--#endregion-->
+
+
+                <!-- no tasks placeholder -->
+                <Label Style="{StaticResource RegularSmallLabel}"
+                       Text="{x:Static resources:AppResources.NoTasksPlaceholder}"
+                       TextColor="{StaticResource GrayTextColor}"
+                       Margin="8, 16"
+                       HorizontalOptions="Center"
+                       IsVisible="{Binding OtherTaskList, 
+                                Converter={StaticResource CollectionCountToBoolConverter}, 
+                                ConverterParameter='i'}" />
+                
+                <!--  task list  -->
+                <CollectionView
+                    HeightRequest="200"
+                    ItemsSource="{Binding OtherTaskList}"
+                    ItemTemplate="{StaticResource OtherJobTemplateSelector}"
+                    HorizontalScrollBarVisibility="Never"
+                    ItemSizingStrategy="MeasureAllItems"
+                    IsVisible="{Binding OtherTaskList, 
+                                Converter={StaticResource CollectionCountToBoolConverter}}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="4" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.Footer>
+                        <BoxView WidthRequest="96" />
+                    </CollectionView.Footer>
+                </CollectionView>
+            </StackLayout>
+
+        </StackLayout>
+    </local:CustomScrollView>
+</controls:DarkStatusBarPage>

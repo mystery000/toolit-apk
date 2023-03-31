@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.EmailSignInPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:behaviors="clr-namespace:Toolit.Behaviors;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="WelcomeHeader" TargetType="Label"
+                   BasedOn="{StaticResource BoldXtraLargeLabel}">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="0,0,0,24" />
+                <Setter Property="LineHeight" Value="1.1" />
+            </Style>
+
+            <!--  Entry And Errors  -->
+            <Style x:Key="EditFrame" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,16,0,0" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="16,0,0,12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Padding="24" BackgroundColor="{StaticResource DarkGreen}">
+            <!--  BackBtn  -->
+            <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                         Margin="8, 0, 0, 0"
+                         VerticalOptions="Start"
+                         effects:SafeAreaEffect.SafeArea="True"
+                         effects:TouchEffect.Command="{Binding BackCommand}">
+
+                <!--  arrow  -->
+                <Image Style="{StaticResource ArrowLeft}" />
+                <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                       Text="{x:Static resources:AppResources.BackAction}" />
+                
+            </StackLayout>
+
+            <StackLayout Spacing="24" VerticalOptions="Center">
+                <Label Style="{StaticResource WelcomeHeader}" 
+                       Text="{x:Static resources:AppResources.LoginString}" />
+
+                <!--  Email  -->
+                <custom:PancakeView Style="{StaticResource EditFrame}">
+                    <StackLayout Spacing="8">
+                        <Label Style="{StaticResource EditEntryHeader}" 
+                               Text="{x:Static resources:AppResources.EmailPlaceholder}" />
+                        <customRenderer:CustomEntry
+                            Keyboard="Email"
+                            Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                            ReturnType="Next"
+                            Style="{StaticResource EditEntry}"
+                            Text="{Binding Email.Value, Mode=TwoWay}">
+                            <customRenderer:CustomEntry.Behaviors>
+                                <behaviors:NextEntryBehavior NextEntry="{x:Reference PasswordEntry}" />           
+                            </customRenderer:CustomEntry.Behaviors>
+                        </customRenderer:CustomEntry>
+                    </StackLayout>
+                </custom:PancakeView>
+
+                <!--  password  -->
+                <custom:PancakeView Style="{StaticResource EditFrame}">
+                    <StackLayout Spacing="8">
+                        <Label Style="{StaticResource EditEntryHeader}" 
+                               Text="{x:Static resources:AppResources.PasswordPlaceholder}" />
+                        <customRenderer:CustomEntry
+                            x:Name="PasswordEntry"
+                            IsPassword="True"
+                            Keyboard="Plain"
+                            Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                            Style="{StaticResource EditEntry}"
+                            Text="{Binding Password.Value, Mode=TwoWay}" />
+                    </StackLayout>
+                </custom:PancakeView>
+                
+                <!-- sign in button -->
+                <controls:PancakeButton Style="{StaticResource PrimaryBtn}"
+                                        BackgroundColor="{StaticResource LightGreen}"
+                                        Text="{x:Static resources:AppResources.LoginString}"
+                                        Margin="32, 24, 32, 0"
+                                        Command="{Binding LoginCommand}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

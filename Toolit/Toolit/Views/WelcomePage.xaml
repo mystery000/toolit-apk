@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.WelcomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layouts="clr-namespace:Toolit.Models.Layouts"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    x:Name="Root"
+    BackgroundColor="{StaticResource DarkGreen}"
+    Shell.PresentationMode="NotAnimated"
+    Shell.TabBarIsVisible="False">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!--  Stack  -->
+            <Style x:Key="WelcomeStack" TargetType="StackLayout">
+                <Setter Property="Padding" Value="40,60" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            </Style>
+
+            <!--  Button  -->
+            <Style x:Key="WelcomeBtn" TargetType="controls:PancakeButton"
+                   BasedOn="{StaticResource PrimaryBtn}">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+                <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                <Setter Property="Padding" Value="52,0" />
+                <Setter Property="Text" Value="{x:Static resources:AppResources.ReadNext}" />
+            </Style>
+
+            <!--  Text  -->
+            <Style x:Key="WelcomeHeader" TargetType="Label"
+                   BasedOn="{StaticResource BoldXtraLargeLabel}">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="0,0,0,24" />
+                <Setter Property="LineHeight" Value="1.1" />
+            </Style>
+            
+            <Style x:Key="WelcomeText" TargetType="Label"
+                   BasedOn="{StaticResource RegularSmallLabel}">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                <Setter Property="LineHeight" Value="1.1" />
+                <Setter Property="HeightRequest" Value="80" />
+            </Style>
+        </ResourceDictionary>
+
+        <DataTemplate x:Key="WelcomeTemplate">
+            <Grid>
+                <Image
+                    Aspect="AspectFill"
+                    Source="{Binding BackgroundImage}" />
+                
+                <StackLayout Style="{StaticResource WelcomeStack}">
+                    
+                    <!-- page title -->
+                    <Label Style="{StaticResource WelcomeHeader}" 
+                           Text="{Binding Title}" />
+                    
+                    <!-- page text -->
+                    <Label Style="{StaticResource WelcomeText}" 
+                           Text="{Binding Text}" />
+                    
+                    <controls:PancakeButton
+                        Margin="0,32,0,32"
+                        Command="{Binding BindingContext.NextCommand, Source={x:Reference Root}}"
+                        Style="{StaticResource WelcomeBtn}"
+                        BackgroundColor="{StaticResource LightGreen}" />
+
+                </StackLayout>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="OpenBankIdTemplate">
+            <Grid>
+                <Image
+                    x:Name="Background"
+                    Aspect="AspectFill"
+                    Source="bg_two" />
+                
+                <StackLayout x:Name="TextAndButton" 
+                             Style="{StaticResource WelcomeStack}">
+                    
+                    <Label Style="{StaticResource WelcomeHeader}" 
+                           Text="{x:Static resources:AppResources.WelcomeBankIdTitle}" />
+                    
+                    <Label Style="{StaticResource WelcomeText}" 
+                           Text="{x:Static resources:AppResources.WelcomeBankIdDescription}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveToEmailSignInCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                
+                    <controls:PancakeButton
+                        Margin="0,32,0,32"
+                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.OpenBankIdCommand}"
+                        Style="{StaticResource WelcomeBtn}"
+                        BackgroundColor="{StaticResource LightGreen}"
+                        Text="{x:Static resources:AppResources.OpenBankIdAction}" />
+                </StackLayout>
+                
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="LoginTemplate">
+            <Grid>
+                <Image
+                    x:Name="Background"
+                    Aspect="AspectFill"
+                    Source="bg_two" />
+                
+                <StackLayout x:Name="TextAndButton" 
+                             Style="{StaticResource WelcomeStack}">
+                    
+                    <Label Style="{StaticResource WelcomeHeader}" 
+                           Text="{x:Static resources:AppResources.WelcomeLoginTemplateTitle}" />
+                    
+                    <Label Style="{StaticResource WelcomeText}" 
+                           Text="{x:Static resources:AppResources.WelcomeLoginTemplateCaption}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveToEmailSignInCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                
+                    <controls:PancakeButton
+                        Margin="0,32,0,32"
+                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.OpenBankIdCommand}"
+                        Style="{StaticResource WelcomeBtn}"
+                        BackgroundColor="{StaticResource LightGreen}"
+                        Text="{x:Static resources:AppResources.OpenBankIdAction}" />
+                </StackLayout>
+                
+            </Grid>
+        </DataTemplate>
+
+        <!--  WelcomeCarouselItemSelector  -->
+        <layouts:WelcomeCarouselItemSelector
+            x:Key="WelcomeCarouselItemSelector"
+            OpenBankIdTemplate="{StaticResource OpenBankIdTemplate}"
+            WelcomeTemplate="{StaticResource WelcomeTemplate}"
+            LoginTemplate="{StaticResource LoginTemplate}"/>
+        
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <CarouselView
+                x:Name="carousel"
+                IndicatorView="IndicatorView"
+                Loop="False"
+                IsSwipeEnabled="False"
+                ItemTemplate="{StaticResource WelcomeCarouselItemSelector}"
+                ItemsSource="{Binding CarouselItems}"
+                CurrentItem="{Binding SelectedPage, Mode=TwoWay}"/>
+            
+            <IndicatorView x:Name="IndicatorView"
+                Margin="0,0,0,32"
+                HorizontalOptions="Center"
+                IndicatorColor="{StaticResource GrayTextColor}"
+                SelectedIndicatorColor="{StaticResource LightGreen}"
+                VerticalOptions="End"
+                HideSingle="True">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

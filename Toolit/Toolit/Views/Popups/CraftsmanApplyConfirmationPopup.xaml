@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage
+    x:Class="Toolit.Views.CraftsmanApplyConfirmationPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:pages="http://rotorgames.com"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    Shell.TabBarIsVisible="False">
+
+    <!--  content  -->
+    <pancakeView:PancakeView VerticalOptions="Center"
+                             Margin="16, 12">
+        <Grid>
+            
+            <Image Source="modal_pastel_background"
+                   Aspect="AspectFill"
+                   Margin="-8, 0"/>
+            
+            <!--  content  -->
+            <StackLayout Padding="36,16,36,64" Spacing="36">
+                
+                <Image
+                    Margin="0,40,0,-40"
+                    HeightRequest="188"
+                    Source="call_to_action_thumb"
+                    VerticalOptions="CenterAndExpand" />
+                
+                <Label Style="{StaticResource BoldMediumLabel}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.CraftsmanApplyConfirmationTitle}" />
+                <Label Style="{StaticResource RegularSmallLabel}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.CraftsmanApplyConfirmationCaption}" />
+                
+                <controls:PancakeButton
+                    Command="{Binding MoveToMainCommand}"
+                    Style="{StaticResource PrimaryBtn}"
+                    Text="{x:Static resources:AppResources.CraftsmanApplyConfirmationCloseAction}"
+                    VerticalOptions="EndAndExpand" />
+                
+            </StackLayout>
+
+        </Grid>
+    </pancakeView:PancakeView>
+
+</pages:PopupPage>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.ToSPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Content>
+        <Grid>
+            <toolit:CustomScrollView VerticalScrollBarVisibility="Never"
+                                     Margin="0, 80, 0, 72"
+                                     effects:SafeAreaEffect.SafeArea="True">
+                <StackLayout Spacing="0">
+                    <!-- title -->
+                    <Label Style="{StaticResource BoldLargeLabel}"
+                           Text="{x:Static resources:AppResources.YourTosTitle}"
+                           Margin="24, 48, 24, 0" />
+
+                    <!-- subtitle -->
+                    <Label Style="{StaticResource RegularMediumLabel}"
+                           Text="{x:Static resources:AppResources.YourTosSubtitle}"
+                           Margin="24, 16, 24, 24" />
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding TosItems}">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="24"
+                                             Padding="24, 0">
+                                    <!-- tos section title -->
+                                    <Label Style="{StaticResource BoldSmallLabel}"
+                                           Text="{Binding SectionTitle}" />
+
+                                    <!-- tos section content -->
+                                    <Label Style="{StaticResource RegularSmallLabel}"
+                                           Text="{Binding SectionContent}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                </StackLayout>
+            </toolit:CustomScrollView>
+            
+            <!-- header view -->
+            <Grid Style="{StaticResource TopBoxSmall}"
+                  Margin="0">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+                <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.TosPageTitle}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

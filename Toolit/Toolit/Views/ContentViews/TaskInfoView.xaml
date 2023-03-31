@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:ui="clr-namespace:Toolit.Helpers.Ui;assembly=Toolit"
+             x:Class="Toolit.Views.ContentViews.TaskInfoView"
+             x:Name="View">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <!-- photo template -->
+            <DataTemplate x:Key="TaskMediaPhotoTemplate">
+                <Grid Padding="12, 0, 0, 0"
+                      HorizontalOptions="Start"
+                      VerticalOptions="Start"
+                      HeightRequest="164"
+                      WidthRequest="164"
+                      effects:TouchEffect.Command="{Binding OpenFullImageCommand, 
+                                        Source={x:Reference View}}"
+                      effects:TouchEffect.CommandParameter="{Binding .}">
+                    <!-- media -->
+                    <forms:CachedImage Source="{Binding Url}"
+                                       HeightRequest="144"
+                                       WidthRequest="144"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       Aspect="AspectFill">
+                        <forms:CachedImage.Transformations>
+                            <transformations:CornersTransformation TopLeftCornerSize="16"
+                                                                   TopRightCornerSize="16"
+                                                                   BottomLeftCornerSize="16"
+                                                                   BottomRightCornerSize="16"
+                                                                   CornersTransformType="AllRounded" />
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                </Grid>
+            </DataTemplate>
+            
+            <!-- video template -->
+            <DataTemplate x:Key="TaskMediaVideoTemplate">
+                <Grid Padding="12, 0, 0, 0"
+                      HorizontalOptions="Start"
+                      VerticalOptions="Start"
+                      HeightRequest="164"
+                      WidthRequest="164"
+                      effects:TouchEffect.Command="{Binding OpenFullVideoCommand, 
+                                        Source={x:Reference View}}"
+                      effects:TouchEffect.CommandParameter="{Binding .}">
+                    <!-- media -->
+                    <pancakeView:PancakeView CornerRadius="16"
+                                        Padding="0"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start"
+                                        HeightRequest="144"
+                                        WidthRequest="144">
+                        <effects:MediaElement Source="{Binding Url}"
+                                          HeightRequest="144"
+                                          WidthRequest="144"
+                                          HorizontalOptions="Start"
+                                          VerticalOptions="Start"
+                                          Aspect="AspectFill"
+                                          ShowsPlaybackControls="False"
+                                          AutoPlay="False" />
+                    </pancakeView:PancakeView>
+                </Grid>
+            </DataTemplate>
+        
+            <ui:TaskMediaTemplateSelector x:Key="TaskMediaTemplateSelector"
+                                          PhotoTemplate="{StaticResource TaskMediaPhotoTemplate}"
+                                          VideoTemplate="{StaticResource TaskMediaVideoTemplate}" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+
+        <StackLayout Spacing="16"
+                     Padding="16"
+                     Margin="0, 0, 0, 32">
+
+            <!--  description frame  -->
+            <pancakeView:PancakeView Padding="16, 0, 16, 16">
+
+                <Grid RowDefinitions="52, *"
+                      ColumnDefinitions="*, Auto">
+
+                    <!-- description title -->
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource BoldMediumLabel}"
+                           HorizontalOptions="Start"
+                           Text="{x:Static resources:AppResources.MyTaskDescriptionTitle}"
+                           VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsInEditMode, Source={x:Reference View}}"
+                                         Value="False">
+                                <Setter Property="Text" Value="{x:Static resources:AppResources.OtherTaskDescriptionTitle}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <!-- edit button -->
+                    <StackLayout Orientation="Horizontal"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
+                                 IsVisible="{Binding IsInEditMode, 
+                                    Source={x:Reference View}}"
+                                 Spacing="0"
+                                 effects:TouchEffect.Command="{Binding EditTaskCommand}">
+                        <Label
+                            Margin="0,0,8,0"
+                            Style="{StaticResource RegularXtraSmallLabel}"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{x:Static resources:AppResources.EditAction}"
+                            VerticalOptions="Center" />
+                        <Image
+                            HeightRequest="16"
+                            Source="edit_square"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <!--  description  -->
+                    <Label
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource RegularSmallLabel}"
+                        Text="{Binding DisplayedTask.Description}" />
+
+                </Grid>
+            </pancakeView:PancakeView>
+
+            <!--  Video And Picture  -->
+            <pancakeView:PancakeView Padding="0, 0, 0, 16">
+
+                <StackLayout Spacing="16">
+
+                    <!-- title -->
+                    <Label Style="{StaticResource DisplayInfoFrameSoloHeader}"
+                           Text="{x:Static resources:AppResources.MyTaskMediaTitle}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsInEditMode, Source={x:Reference View}}"
+                                         Value="False">
+                                <Setter Property="Text" Value="{x:Static resources:AppResources.OtherTaskMediaTitle}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <!-- media list -->
+                    <ScrollView Orientation="Horizontal"
+                                HorizontalScrollBarVisibility="Never">
+                        <StackLayout BindableLayout.ItemsSource="{Binding DisplayedTaskMediaFiles}"
+                                     BindableLayout.ItemTemplateSelector="{StaticResource TaskMediaTemplateSelector}"
+                                     HeightRequest="164"
+                                     Orientation="Horizontal"
+                                     Spacing="0">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </pancakeView:PancakeView>
+
+            <BoxView HeightRequest="64" />
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

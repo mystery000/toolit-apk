@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pancakeView:PancakeView xmlns="http://xamarin.com/schemas/2014/forms" 
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                         xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+                         xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                         mc:Ignorable="d"
+                         x:Class="Toolit.Controls.PancakeButton"
+                         x:Name="View"
+                         effects:TouchEffect.Command="{Binding Source={x:Reference View}, Path=Command}"
+                         effects:TouchEffect.CommandParameter="{Binding Source={x:Reference View}, Path=CommandParameter}"
+                         effects:TouchEffect.NativeAnimation="True">
+    
+    <pancakeView:PancakeView.Resources>
+        <ResourceDictionary>
+            <effects:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </pancakeView:PancakeView.Resources>
+    
+    <pancakeView:PancakeView.Triggers>
+        <Trigger TargetType="pancakeView:PancakeView"
+                 Property="IsEnabled"
+                 Value="False">
+            <Setter Property="Opacity" Value="0.5" />
+        </Trigger>
+    </pancakeView:PancakeView.Triggers>
+                    
+    <Grid x:Name="ControlContainer"
+          ColumnSpacing="0"
+          HorizontalOptions="Center">
+
+          <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+
+          <Image Source="{Binding ImageSource}"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center"
+                 Grid.Column="0"
+                 Margin="4, 0"
+                 IsVisible="{Binding ImageSource, Converter={StaticResource IsNotNullOrEmptyConverter}}">
+              <Image.Triggers>
+                  <DataTrigger TargetType="Image"
+                               Binding="{Binding ImagePosition}"
+                               Value="Left">
+                        <Setter Property="Grid.Column" Value="0" />
+                  </DataTrigger>
+
+                  <DataTrigger TargetType="Image"
+                               Binding="{Binding ImagePosition}"
+                               Value="Right">
+                      <Setter Property="Grid.Column" Value="2" />
+                  </DataTrigger>
+              </Image.Triggers>
+          </Image>
+
+          <Label VerticalOptions="Center"
+                 HorizontalTextAlignment="{Binding TextAlignment}"
+                 Text="{Binding Text}"
+                 TextColor="{Binding TextColor}"
+                 FontSize="{Binding FontSize}"
+                 Grid.Column="1"
+                 FontFamily="{Binding FontFamily}">
+              <Label.Triggers>
+                  <DataTrigger TargetType="Label"
+                               Binding="{Binding ImagePosition}"
+                               Value="None">
+                      <Setter Property="HorizontalTextAlignment" Value="Center" />
+                  </DataTrigger>
+
+                  <MultiTrigger TargetType="Label">
+                      <MultiTrigger.Conditions>
+                          <BindingCondition Binding="{Binding TextAlignment}"
+                                            Value="Center" />
+                          <BindingCondition
+                              Binding="{Binding ImageSource, 
+                                Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                              Value="True" />
+                      </MultiTrigger.Conditions>
+
+                      <Setter Property="Margin" Value="8, 0, 0, 0" />
+
+                  </MultiTrigger>
+              </Label.Triggers>
+          </Label>
+
+      </Grid>
+
+</pancakeView:PancakeView>

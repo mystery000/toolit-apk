@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Toolit.Views.ContentViews.ProfileSettingsView"
+             x:Name="View">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:CollectionCountToBoolConverter x:Key="CollectionCountToBoolConverter" />
+            
+            <Style x:Key="SeeMoreText" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="SeeMoreTextWrapper" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="ArrowRight" TargetType="Image">
+                <Setter Property="Source" Value="arrow_right" />
+                <Setter Property="HeightRequest" Value="8" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="BoldPageText" TargetType="Label"
+                   BasedOn="{StaticResource BoldMediumLabel}">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+            <Style x:Key="PageGrid" TargetType="Grid">
+                <Setter Property="Margin" Value="16,0" />
+            </Style>
+            <Style x:Key="JobsFrame" TargetType="pancakeView:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="Shadow" Value="{pancakeView:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="HeightRequest" Value="152" />
+                <Setter Property="WidthRequest" Value="180" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <StackLayout>
+            
+            <!--  History Header  -->
+            <Grid Margin="16,20,16,16">
+                <Label Style="{StaticResource BoldPageText}"
+                       Text="{x:Static resources:AppResources.PaymentHistoryTitle}" />
+                
+                <!-- see more payment info button -->
+                <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                    
+                    <Label Style="{StaticResource SeeMoreText}"
+                           VerticalOptions="Center"
+                           Text="{x:Static resources:AppResources.SeeFullHistoryAction}" />
+                    
+                    <Image Style="{StaticResource ArrowRight}"
+                           VerticalOptions="Center" />
+                    
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MoveToPaymentsCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+            
+            <!-- no payments placeholder -->
+            <Label Style="{StaticResource RegularSmallLabel}"
+                   Text="{x:Static resources:AppResources.NoPaymentsPlaceholder}"
+                   TextColor="{StaticResource GrayTextColor}"
+                   Margin="8, 16"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding PaymentsList, 
+                    Converter={StaticResource CollectionCountToBoolConverter}, 
+                    ConverterParameter='i'}"/>
+            
+            <!-- payments list -->
+            <CollectionView
+                HeightRequest="168"
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding PaymentsList}"
+                IsVisible="{Binding PaymentsList, 
+                    Converter={StaticResource CollectionCountToBoolConverter}}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="16, 0, 0, 0">
+                            <pancakeView:PancakeView Style="{StaticResource JobsFrame}"
+                                                     effects:TouchEffect.Command="{Binding BindingContext.MoveToPaymentTaskCommand, 
+                                                        Source={x:Reference View}}"
+                                                     effects:TouchEffect.CommandParameter="{Binding .}">
+                                <Grid RowDefinitions="84, Auto" RowSpacing="0">
+                                    <!-- image -->
+                                    <forms:CachedImage
+                                        Grid.Row="0"
+                                        Aspect="AspectFill"
+                                        Source="{Binding Task.TitleImageUrl}" />
+                                    <!-- date bubble -->
+                                    <pancakeView:PancakeView
+                                        Margin="8"
+                                        BackgroundColor="{StaticResource LightGreen}"
+                                        CornerRadius="8"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start">
+                                        <Label Style="{StaticResource RegularXtraSmallLabel}"
+                                               Margin="8,4"
+                                               Text="{Binding Modified, StringFormat='{0:dd/MM/yy}'}"
+                                               TextColor="{StaticResource WhiteTextColor}" />
+                                    </pancakeView:PancakeView>
+                                    <!-- title -->
+                                    <Label Style="{StaticResource RegularSmallLabel}"
+                                        Grid.Row="1"
+                                        Margin="12,8,0,0"
+                                        LineHeight="1.2"
+                                        Text="{Binding Task.Title}"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation" />
+                                </Grid>
+                            </pancakeView:PancakeView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.Footer>
+                    <BoxView WidthRequest="24" />
+                </CollectionView.Footer>
+            </CollectionView>
+            
+            <!-- craftsman apply link -->
+            <pancakeView:PancakeView Margin="16,16,16,0"
+                                     Padding="0, 12">
+                
+                <Grid Style="{StaticResource PageGrid}">
+                    <Label Style="{StaticResource BoldPageText}"
+                           Text="{x:Static resources:AppResources.ApplyAsToolitCraftsmanPrompt}" />
+                    
+                    <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                        <Label Style="{StaticResource SeeMoreText}"
+                               Text="{x:Static resources:AppResources.ApplyAction}" />
+                            
+                        <Image Style="{StaticResource ArrowRight}" />
+                    </StackLayout>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenCraftsmanRegistrationPopupCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </pancakeView:PancakeView>
+
+            <!--  Info  -->
+            <pancakeView:PancakeView Margin="16,16,16,0" 
+                                     Style="{StaticResource DisplayInfoFrame}">
+                <StackLayout Margin="0,16" Spacing="16">
+                    
+                    <!-- title -->
+                    <Grid Margin="16,0,0,-8">
+                        <Label Style="{StaticResource BoldPageText}"
+                               Text="{x:Static resources:AppResources.InfoSettingsTitle}" />
+                    </Grid>
+                    
+                    <BoxView BackgroundColor="{StaticResource PageColorLight}" 
+                             HeightRequest="2" />
+                    
+                    <!-- about us link -->
+                    <Grid Style="{StaticResource PageGrid}">
+                        <Label Style="{StaticResource BoldPageText}"
+                               Text="{x:Static resources:AppResources.AboutUsTitle}" />
+                        <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                            <Label Style="{StaticResource SeeMoreText}"
+                                   Text="{x:Static resources:AppResources.SeeMoreAction}" />
+                            
+                            <Image Style="{StaticResource ArrowRight}" />
+                        </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoveToAboutUsCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!-- contact us link -->
+                    <Grid Style="{StaticResource PageGrid}">
+                        <Label Style="{StaticResource BoldPageText}"
+                               Text="{x:Static resources:AppResources.ContactUsAction}" />
+                        <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                            <Label Style="{StaticResource SeeMoreText}"
+                                   Text="{x:Static resources:AppResources.SeeMoreAction}" />
+                            <Image Style="{StaticResource ArrowRight}" />
+                        </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ContactUsCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!-- faq link -->
+                    <Grid Style="{StaticResource PageGrid}">
+                        <Label Style="{StaticResource BoldPageText}" Text="{x:Static resources:AppResources.FaqAction}" />
+                        <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                            <Label Style="{StaticResource SeeMoreText}"
+                                   Text="{x:Static resources:AppResources.SeeMoreAction}" />
+                            <Image Style="{StaticResource ArrowRight}" />
+                        </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoveToFAQCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!-- open ToS action -->
+                    <Grid Style="{StaticResource PageGrid}">
+                        <Label Style="{StaticResource BoldPageText}"
+                               Text="{x:Static resources:AppResources.OpenTosAction}" />
+                        <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                            <Label Style="{StaticResource SeeMoreText}"
+                                   Text="{x:Static resources:AppResources.SeeMoreAction}" />
+                            <Image Style="{StaticResource ArrowRight}" />
+                        </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoveToToSCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!-- open data policy link -->
+                    <Grid Style="{StaticResource PageGrid}">
+                        <Label Style="{StaticResource BoldPageText}"
+                               Text="{x:Static resources:AppResources.OpenDataPolicyAction}" />
+                        <StackLayout Style="{StaticResource SeeMoreTextWrapper}">
+                            <Label Style="{StaticResource SeeMoreText}"
+                                   Text="{x:Static resources:AppResources.SeeMoreAction}" />
+                            <Image Style="{StaticResource ArrowRight}" />
+                        </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoveToDataPolicyCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                </StackLayout>
+
+            </pancakeView:PancakeView>
+
+            <!--  Buttons  -->
+            <Grid Margin="16,24,16,48" ColumnSpacing="24" ColumnDefinitions="*,*">
+                <controls:PancakeButton
+                    Grid.Column="0"
+                    Style="{StaticResource PrimaryBtn}"
+                    BackgroundColor="{StaticResource LightBlue}"
+                    Command="{Binding LogOutCommand}"
+                    Text="{x:Static resources:AppResources.LogOutAction}" />
+                <controls:PancakeButton
+                    Grid.Column="1"
+                    Style="{StaticResource PrimaryBtn}"
+                    BackgroundColor="{StaticResource Red}"
+                    Command="{Binding DeleteAccountCommand}"
+                    Text="{x:Static resources:AppResources.DeleteAccountAction}" />
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

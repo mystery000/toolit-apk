@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.ChatsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource LightTabBarBackgroundColor}"
+    Shell.TabBarIsVisible="True"
+    x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+
+            <Style x:Key="ChatFrame" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="16" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <!--  Topbox  -->
+            <Grid BackgroundColor="{StaticResource DarkGreen}"
+                  HeightRequest="112">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="HeightRequest" Value="160" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+                <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.ChatPageTitle}"
+                       xct:SafeAreaEffect.SafeArea="True" />
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Chats}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalScrollBarVisibility="Never"
+                            BackgroundColor="{StaticResource PageColorLight}">
+                
+                <CollectionView.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS">0, 0, 0, 72</On>
+                        <On Platform="Android">0</On>
+                    </OnPlatform>
+                </CollectionView.Margin>
+                
+                <CollectionView.Triggers>
+                    <DataTrigger TargetType="CollectionView"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, 0, 0, 100" />
+                    </DataTrigger>
+                </CollectionView.Triggers>
+
+                <CollectionView.Header>
+                    <BoxView HeightRequest="24" />
+                </CollectionView.Header>
+
+                <CollectionView.EmptyView>
+                    <Grid>
+                        <Label HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.NoMessagesPlaceholder}"
+                               TextColor="{StaticResource GrayTextColor}"
+                               Margin="16, 0, 16, 96" />
+                    </Grid>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <!--  Content  -->
+                        <StackLayout Padding="16,4">
+                            <custom:PancakeView Style="{StaticResource ChatFrame}"
+                                                HeightRequest="64"
+                                                HorizontalOptions="FillAndExpand"
+                                                xct:TouchEffect.Command="{Binding BindingContext.MoveToChatCommand, Source={x:Reference Root}}"
+                                                xct:TouchEffect.CommandParameter="{Binding .}">
+                                <Grid ColumnDefinitions="Auto,*,1,Auto"
+                                      RowDefinitions="*,*"
+                                      ColumnSpacing="12"
+                                      RowSpacing="8">
+
+                                    <!-- craftsman avatar -->
+                                    <controls:CachedAvatarView Grid.Row="0"
+                                                    Grid.RowSpan="2"
+                                                    Grid.Column="0"
+                                                    HeightRequest="64"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
+                                                    ImageUrl="{Binding ChatRecipient.ImageUrl}"
+                                                    UserInitials="{Binding ChatRecipient, Converter={StaticResource UserToInitialsConverter}}"/>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Style="{StaticResource SemiBoldSmallLabel}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding ChatRecipient.FullName}"
+                                        VerticalOptions="End" />
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Style="{StaticResource RegularXtraSmallLabel}"
+                                        HorizontalOptions="End"
+                                        TextColor="{StaticResource LightGreen}"
+                                        VerticalOptions="End"
+                                        Text="{Binding LastMessage.Sent, StringFormat={x:Static resources:AppResources.TimeFormatString}}" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Style="{StaticResource RegularXtraSmallLabel}"
+                                        HorizontalOptions="End"
+                                        TextColor="{StaticResource LightGreen}"
+                                        VerticalOptions="Start"
+                                        Text="{Binding LastMessage.Sent, StringFormat='{0:dd/MM}'}" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Style="{StaticResource RegularXtraSmallLabel}"
+                                        MaxLines="1"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding LastMessage.Text}"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </custom:PancakeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

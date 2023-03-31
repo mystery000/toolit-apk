@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:pages="http://rotorgames.com"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             x:Class="Toolit.Views.Popups.FullVideoPopup"
+             x:Name="Popup"
+             CloseWhenBackgroundIsClicked="True">
+    
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    
+    <pages:PopupPage.Content>
+        <StackLayout Spacing="16"
+                     VerticalOptions="Center"
+                     xct:SafeAreaEffect.SafeArea="True">
+            
+            <pancakeView:PancakeView HorizontalOptions="End"
+                                     Padding="8"
+                                     CornerRadius="16"
+                                     Margin="0, 0, 12, 12"
+                                     xct:TouchEffect.Command="{Binding CloseCommand}">
+                <Image Source="close_icon" />
+            </pancakeView:PancakeView>
+            
+            <xct:MediaElement Source="{Binding VideoSource}"
+                              HeightRequest="{Binding Height, Source={x:Reference Popup}, 
+                                    Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/2'}"/>
+            
+        </StackLayout>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

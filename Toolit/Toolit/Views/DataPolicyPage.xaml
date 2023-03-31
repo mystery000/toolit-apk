@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.DataPolicyPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Content>
+        <toolit:CustomScrollView>
+            <Grid>
+                <StackLayout>
+                    
+                    <Grid Style="{StaticResource TopBoxSmall}">
+                        
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid"
+                                         Binding="{Binding HasSafeArea}"
+                                         Value="True">
+                                <Setter Property="Margin" Value="0, -52, 0, 0" />
+                                <Setter Property="HeightRequest" Value="128" />
+                            </DataTrigger>
+                        </Grid.Triggers>
+                        
+                        <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+                        <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+                        <Label Style="{StaticResource TopBoxSmallHeader}" 
+                               Text="{x:Static resources:AppResources.String293}"
+                               effects:SafeAreaEffect.SafeArea="True" />
+                        
+                        <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                                     effects:SafeAreaEffect.SafeArea="True">
+                            <!--  arrow  -->
+                            <Image Style="{StaticResource ArrowLeft}" />
+                            <Label Style="{StaticResource TopBoxSmallLeftBack}" Text="{x:Static resources:AppResources.BackAction}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+                    
+                    <StackLayout Padding="36,16,36,56" Spacing="0">
+                        <Label
+                            Style="{StaticResource BoldLargeLabel}"
+                            Text="{x:Static resources:AppResources.String294}"
+                            Margin="0, 0, 0, 24"/>
+                        
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String295}" />
+
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String296}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String297}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String298}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String299}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String300}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String301}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String302}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String303}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String304}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String305}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String306}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String320}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String307}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String308}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String309}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String310}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String311}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String312}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String313}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String314}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String315}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String316}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String317}" />
+                        <Label
+                            Margin="0, 16, 0, 0"
+                            Style="{StaticResource BoldSmallLabel}"
+                            Text="{x:Static resources:AppResources.String318}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.String319}" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </toolit:CustomScrollView>
+    </ContentPage.Content>
+</ContentPage>

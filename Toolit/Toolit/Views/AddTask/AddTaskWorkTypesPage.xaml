@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.AddTaskWorkTypesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False"
+    x:Name="Root">
+    <!--  Shell.PresentationMode="Modal"  -->
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <Style TargetType="custom:PancakeView">
+                <Setter Property="Padding" Value="8,0" />
+                <Setter Property="HeightRequest" Value="32" />
+                <Setter Property="Margin" Value="8" />
+            </Style>
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource RegularSmallLabel}">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style TargetType="FlexLayout">
+                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="Wrap" Value="Wrap" />
+                <Setter Property="Padding" Value="25,0" />
+            </Style>
+            
+          
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <local:CustomScrollView>
+
+        <!--  Topbox  -->
+        <Grid Style="{StaticResource SmallTopGrid}"
+              RowDefinitions="Auto, *">
+            <Grid Style="{StaticResource TopBoxSmall}">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.NewJobPageTitle}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout
+                Grid.Row="1"
+                Padding="40,40,40,60"
+                Spacing="24">
+                <Label
+                    Style="{StaticResource BoldLargeLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.AddTaskWorkTypesHeaderString}" />
+
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.AddTaskSelectTagsPrompt}" />
+
+                <!--  region el  -->
+                <FlexLayout BindableLayout.ItemsSource="{Binding CraftMdl.Tags}"
+                            VerticalOptions="StartAndExpand"
+                            Margin="-40, 0">
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <!--  tag template  -->
+                            <custom:PancakeView>
+                                <Label Text="{Binding LocalName}">
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsSelected}"
+                                            TargetType="Label"
+                                            Value="True">
+                                            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <custom:PancakeView.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="custom:PancakeView"
+                                        Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                    </DataTrigger>
+                                </custom:PancakeView.Triggers>
+
+                                <custom:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding BindingContext.ToggleTagSelectionCommand, Source={x:Reference Root}}"
+                                        CommandParameter="{Binding .}" />
+                                </custom:PancakeView.GestureRecognizers>
+                            </custom:PancakeView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+
+                <controls:PancakeButton
+                    Margin="24,32,24,8"
+                    Command="{Binding MoveToDescriptionCommand}"
+                    Style="{StaticResource PrimaryBtnSmall}"
+                    Text="{x:Static resources:AppResources.AddTaskGoToStep4Action}" />
+            </StackLayout>
+            <!--  endregion  -->
+
+            <!-- progress indicator -->
+            <IndicatorView Margin="0,32"
+                           Grid.Row="1"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource GrayTextColor}"
+                           SelectedIndicatorColor="{StaticResource LightGreen}"
+                           VerticalOptions="End"
+                           Count="5"
+                           Position="2">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+        </Grid>
+    </local:CustomScrollView>
+</ContentPage>

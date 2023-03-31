@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Toolit.Resourses.Colors">
+    
+    <Color x:Key="PageColorLight">#F8F9FB</Color>
+    <Color x:Key="DarkGreen">#153B2E</Color>
+    <Color x:Key="DarkGreenFade">#30153B2E</Color>
+    <Color x:Key="ModalBackground">#90153B2E</Color>
+    <Color x:Key="LightGreen">#00964D</Color>
+    <Color x:Key="LightSelectedGreen">#DFF4E4</Color>
+    <Color x:Key="LightBlue">#0AA4FF</Color>
+    <Color x:Key="Orange">#FF6C3B</Color>
+    <Color x:Key="Red">#FD2D55</Color>
+    <Color x:Key="Beige">#FAF0E9</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Yellow">#FFBA00</Color>
+    <Color x:Key="White">#F9FAFC</Color>
+    <Color x:Key="BlackTextColor">#000</Color>
+    <Color x:Key="BidTextColor">#8F9BB3</Color>
+    <Color x:Key="GrayTextColor">#80000000</Color>
+    <Color x:Key="TabBarUnselectedTextColor">#80FFFFFF</Color>
+    <Color x:Key="TabBarBackgroundColor">#002418</Color>
+    <Color x:Key="LightTabBarBackgroundColor">#2B4238</Color>
+    <Color x:Key="WhiteTextColor">#FFF</Color>
+    <Color x:Key="SeparatorColor">#EDF1F7</Color>
+    
+</ResourceDictionary>

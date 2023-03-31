@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             x:Class="Toolit.Views.MyTaskPage"
+             x:Name="Root">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            
+            <!-- control templates -->
+            <ControlTemplate x:Key="BidsListView">
+                <StackLayout BindableLayout.ItemsSource="{Binding TaskBidList}"
+                             BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                             VerticalOptions="Start">
+                        
+                    <BindableLayout.EmptyView>
+                        <!-- placeholder -->
+                        <Label HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.NoBidsPlaceholder}"
+                               TextColor="{StaticResource GrayTextColor}" />
+                    </BindableLayout.EmptyView>
+                        
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <contentViews:BidInfoView DisplayedBid="{Binding .}"
+                                                      Command="{Binding BindingContext.MoveToBidDetailCommand, Source={x:Reference Root}}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ControlTemplate>
+            
+            <ControlTemplate x:Key="AcceptedBidView">
+                <StackLayout Spacing="0"
+                             Margin="0, 0, 0, 120"
+                             BindingContext="{Binding BindingContext, Source={x:Reference Root}}">
+                        
+                    <!-- accepted bid caption -->
+                    <Label HorizontalOptions="Center"
+                           Margin="0, 12"
+                           Text="{x:Static resources:AppResources.TaskAcceptedBidCaption}"
+                           FontSize="13" />
+                        
+                    <!-- accepted bid -->
+                    <contentViews:BidInfoView DisplayedBid="{Binding AcceptedBid}" />
+                        
+                    <!-- accepted bid cost info -->
+                    <contentViews:BidCostView DisplayedBid="{Binding AcceptedBid}"
+                                              IsRotRut="{Binding DisplayedTask.UseRotRut}"
+                                              IsInEditMode="False"
+                                              MoveToToSCommand="{Binding MoveToToSCommand}" 
+                                              Margin="24, 12"/>
+                        
+                </StackLayout>
+            </ControlTemplate>
+            
+            <ControlTemplate x:Key="TaskInfoView">
+                <contentViews:TaskInfoView BindingContext="{Binding BindingContext, Source={x:Reference Root}}"
+                                           IsInEditMode="{Binding HasAcceptedBid, Converter={StaticResource InvertedBoolConverter}}"
+                                           OpenFullImageCommand="{Binding OpenFullImageCommand}"
+                                           OpenFullVideoCommand="{Binding OpenFullVideoCommand}"/>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="*, *">
+            <toolit:CustomScrollView VerticalScrollBarVisibility="Never"
+                                     Grid.ColumnSpan="2">
+                <StackLayout Spacing="0">
+                    <!-- task info header -->
+                    <contentViews:TaskPageHeaderView />
+                    
+                    <!--  segmented Btn  -->
+                    <pancakeView:PancakeView Margin="16,24" 
+                                             Style="{StaticResource DoubleBtnFrame}">
+                        
+                        <Grid ColumnDefinitions="*,*" 
+                              ColumnSpacing="0">
+
+                            <!--  submitted bids  -->
+                            <Button
+                                Command="{Binding ShowBidsCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{Binding NumberOfTaskBidsFormattedString}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsShowingInfo}"
+                                        TargetType="Button"
+                                        Value="False">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            
+                            <!--  Info  -->
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding ShowInfoCommand}"
+                                Style="{StaticResource DoubleBtnWhite}"
+                                Text="{x:Static resources:AppResources.TaskInfoTitle}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsShowingInfo}"
+                                        TargetType="Button"
+                                        Value="True">
+                                        <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                        
+                    </pancakeView:PancakeView>
+                    
+                    <!-- content -->
+                    <ContentView>
+                        <ContentView.Triggers>
+                    
+                            <!-- bids list -->
+                            <!-- visible if no bid accepted -->
+                            <MultiTrigger TargetType="ContentView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding HasAcceptedBid}"
+                                                      Value="False" />
+                                    <BindingCondition Binding="{Binding IsShowingInfo}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+                        
+                                <Setter Property="ControlTemplate" Value="{StaticResource BidsListView}" />
+                            </MultiTrigger>
+                            
+                            <!-- accepted bid -->
+                            <!-- visible if a bid was accepted -->
+                            <MultiTrigger TargetType="ContentView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding HasAcceptedBid}"
+                                                      Value="True" />
+                                    <BindingCondition Binding="{Binding IsShowingInfo}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+                        
+                                <Setter Property="ControlTemplate" Value="{StaticResource AcceptedBidView}" />
+                            </MultiTrigger>
+                    
+                            <!-- task info -->
+                            <DataTrigger TargetType="ContentView"
+                                         Binding="{Binding IsShowingInfo}"
+                                         Value="True">
+                                
+                                <Setter Property="ControlTemplate" Value="{StaticResource TaskInfoView}" />
+                            </DataTrigger>
+                            
+                        </ContentView.Triggers>
+                    </ContentView>
+                </StackLayout>
+            </toolit:CustomScrollView>
+            
+            <!--  open chat btn  -->
+            <!--  Visible if accepted  -->
+            <controls:PancakeButton
+                Grid.Column="0"
+                VerticalOptions="End"
+                Style="{StaticResource PrimaryBtnSmall}"
+                BackgroundColor="{StaticResource LightBlue}"
+                Text="{x:Static resources:AppResources.TaskOpenChatAction}"
+                ImageSource="comment"
+                ImagePosition="Left"
+                Command="{Binding OpenChatCommand}"
+                IsVisible="False"
+                xct:SafeAreaEffect.SafeArea="True">
+                
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="24, 0, 12, 36" />
+                        <On Platform="iOS" Value="24, 0, 12, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+                
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasAcceptedBid}"
+                                              Value="True" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+                        
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </controls:PancakeButton.Triggers>
+                
+            </controls:PancakeButton>
+            
+            <!--  approve task btn  -->
+            <!--  Visible if accepted  -->
+            <controls:PancakeButton
+                Grid.Column="1"
+                VerticalOptions="End"
+                Style="{StaticResource PrimaryBtnSmall}"
+                BackgroundColor="{StaticResource LightGreen}"
+                Text="{x:Static resources:AppResources.ApproveJobAction}"
+                Command="{Binding FinishTaskCommand}"
+                IsVisible="False"
+                IsEnabled="{Binding CanFinish}"
+                xct:SafeAreaEffect.SafeArea="True">
+                
+                <controls:PancakeButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="12, 0, 24, 36" />
+                        <On Platform="iOS" Value="12, 0, 24, 88" />
+                    </OnPlatform>
+                </controls:PancakeButton.Margin>
+                
+                <controls:PancakeButton.Triggers>
+                    <MultiTrigger TargetType="controls:PancakeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding HasAcceptedBid}"
+                                              Value="True" />
+                            <BindingCondition Binding="{Binding IsShowingInfo}"
+                                              Value="False" />
+                        </MultiTrigger.Conditions>
+                        
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </controls:PancakeButton.Triggers>
+                
+            </controls:PancakeButton>
+            
+        </Grid>   
+    </ContentPage.Content>
+</ContentPage>

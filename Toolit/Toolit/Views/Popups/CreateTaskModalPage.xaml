@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             xmlns:pages="http://rotorgames.com"
+             x:Class="Toolit.Views.ContentViews.CreateTaskModalPage">
+    <pages:PopupPage.Content>
+        <pancakeView:PancakeView Style="{StaticResource ModalFrame}"
+                                 Margin="16, 0">
+            <!--  Background  -->
+            <Grid>
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0"/>
+
+                <!--  content  -->
+                <StackLayout Padding="36,16,36,36"
+                             Spacing="0">
+
+                    <!-- header image -->
+                    <Image Source="call_to_action" />
+
+                    <!--  header  -->
+                    <Label Style="{StaticResource BoldMediumLabel}"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="EndAndExpand"
+                           Text="{Binding SelectedTaskCraft.LocalName, 
+                                StringFormat={x:Static resources:AppResources.AddTaskModalHeaderFormatString}}"
+                           Margin="0, 0, 0, 24"/>
+                    
+                    <!-- full description -->
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Margin="0, 0, 0, 24">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span 
+                                    FontFamily="{StaticResource BoldFont}"
+                                    FontSize="{StaticResource SmallFontSize}"
+                                    Text="{Binding SelectedTaskCraft.LocalName}" />
+                                <Span Text="{Binding SelectedTaskCraft.LocalFullDescription}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!-- move to tips -->
+                    <controls:PancakeButton
+                        Command="{Binding MoveToTipsCommand}"
+                        Style="{StaticResource PrimaryBtn}"
+                        Text="{x:Static resources:AppResources.MoveToTipsAction}"
+                        VerticalOptions="EndAndExpand" />
+
+                </StackLayout>
+                
+                <!-- close button -->
+                <Image Style="{StaticResource CloseModalImage}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </pancakeView:PancakeView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

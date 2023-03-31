@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Toolit.Controls.CachedAvatarView"
+             x:Name="View"
+             ControlTemplate="{DynamicResource AvatarView}">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <views:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+            <converters:IntegerToNaturalConverter x:Key="IntegerToNaturalConverter" />
+            
+            <ControlTemplate x:Key="AvatarView">
+                <pancakeView:PancakeView WidthRequest="{Binding Source={x:Reference View}, 
+                    Path=HeightRequest, 
+                    Converter={StaticResource IntegerToNaturalConverter}}"
+                                         CornerRadius="8"
+                                         Shadow="{pancakeView:ShadowMarkup Opacity=0}"
+                                         BackgroundColor="{StaticResource LightGreen}">
+                    <Label Style="{StaticResource SemiBoldLargeLabel}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Text="{Binding UserInitials, Source={x:Reference View}}"
+                           TextColor="{StaticResource WhiteTextColor}" />
+                </pancakeView:PancakeView>
+            </ControlTemplate>
+            <ControlTemplate x:Key="ImageView">
+                <forms:CachedImage Source="{Binding ImageUrl, Source={x:Reference View}}"
+                                  WidthRequest="{Binding Source={x:Reference View}, Path=Height}"
+                                  Aspect="AspectFill">
+                    <forms:CachedImage.Transformations>
+                        <transformations:RoundedTransformation Radius="32" /> 
+                    </forms:CachedImage.Transformations>
+                </forms:CachedImage>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentView"
+                     Binding="{Binding ImageUrl, 
+                        Source={x:Reference View}, 
+                        Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                     Value="True">
+            <Setter Property="ControlTemplate" Value="{DynamicResource ImageView}" />
+        </DataTrigger>
+    </ContentPage.Triggers>
+    
+</ContentView>

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.AboutUsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="OfferIconStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="12" />
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowText" TargetType="Label"
+                   BasedOn="{StaticResource BoldSmallLabel}">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowInfo" TargetType="Span">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            </Style>
+            <Style x:Key="OfferRowStackWrapper" TargetType="StackLayout">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Spacing" Value="12" />
+                <Setter Property="Margin" Value="16" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <!--  Background  -->
+        <Grid BackgroundColor="{StaticResource PageColorLight}">
+            <!--  spiral  -->
+            <Image
+                Margin="0,-104,-140,0"
+                HeightRequest="420"
+                HorizontalOptions="End"
+                Opacity="0.5"
+                Source="the_spiral"
+                VerticalOptions="Start" />
+            <!--  green  -->
+            <Image
+                Margin="0,-160,-108,0"
+                HeightRequest="255"
+                HorizontalOptions="End"
+                Opacity="0.3"
+                Source="the_green_two"
+                VerticalOptions="Start" />
+            <!--  blue  -->
+            <Image
+                Margin="-180,-40,0,0"
+                HorizontalOptions="Center"
+                Opacity="0.3"
+                Source="blue_dotts"
+                VerticalOptions="Start"
+                WidthRequest="138" />
+            <!--  yellow  -->
+            <Image
+                Margin="-116,56,0,-0"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_yellow"
+                VerticalOptions="Start"
+                WidthRequest="160" />
+            <!--  orange  -->
+            <Image
+                Margin="-192,200,0,0"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_orange"
+                VerticalOptions="Center"
+                WidthRequest="200" />
+            <!--  blub  -->
+            <Image
+                Margin="-120,200,0,0"
+                HorizontalOptions="Center"
+                Opacity="0.3"
+                Source="the_blub"
+                VerticalOptions="Center"
+                WidthRequest="200" />
+            <!--  carrot  -->
+            <Image
+                Margin="0,-32,-32,0"
+                HorizontalOptions="End"
+                Opacity="0.1"
+                Source="the_carrot"
+                VerticalOptions="Center"
+                WidthRequest="180" />
+            <!--  Small red strips  -->
+            <Image
+                Margin="-32,200,0,0"
+                HorizontalOptions="Start"
+                Opacity="0.1"
+                Source="the_small_red_strips"
+                VerticalOptions="Center"
+                WidthRequest="240" />
+            <!--  Blue Spiral  -->
+            <Image
+                Margin="0,200,-32,0"
+                HorizontalOptions="End"
+                Opacity="0.1"
+                Source="the_blue_spiral"
+                VerticalOptions="Center"
+                WidthRequest="168" />
+            <!--  Strips  -->
+            <Image
+                Margin="0,0,-12,20"
+                HorizontalOptions="End"
+                Opacity="0.2"
+                Source="the_red_strips"
+                VerticalOptions="End"
+                WidthRequest="108" />
+            <!--  Green Down  -->
+            <Image
+                Margin="-100,0,0,-140"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_geen_rounded"
+                VerticalOptions="End"
+                WidthRequest="256" />
+            
+            
+            <local:CustomScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <!--  TopImage  -->
+                    <custom:PancakeView Style="{StaticResource TopBoxBig}"
+                                        HorizontalOptions="Fill"
+                                        Padding="0">
+
+                        <!-- safe area compensator -->
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger TargetType="custom:PancakeView"
+                                         Binding="{Binding HasSafeArea}"
+                                         Value="True">
+                                <Setter Property="HeightRequest" Value="256" />
+                                <Setter Property="Margin" Value="0, -52, 0, 0" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                        
+                        <Grid>
+                            <!--  Bg Image  -->
+                            <Image
+                                Margin="-36, 0, -36, -20"
+                                Aspect="AspectFill"
+                                Source="people_image" />
+                            <!--  BackBtn  -->
+                            <StackLayout Style="{StaticResource BigTopBackBtnStack}"
+                                         effects:SafeAreaEffect.SafeArea="True">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <!--  arrow  -->
+                                <Image Style="{StaticResource ArrowLeft}" />
+                                <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                                       Text="{x:Static resources:AppResources.BackAction}" />
+                            </StackLayout>
+                        </Grid>
+                    </custom:PancakeView>
+
+                    <!--  PageContent  -->
+                    <StackLayout Margin="44,16,44,60" Spacing="20">
+                        
+                        <Label Style="{StaticResource BoldLargeLabel}"
+                               Text="{x:Static resources:AppResources.AboutUsContentTitle}" />
+                        
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.AboutUsContent1}" />
+                        
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.AboutUsContent2}" />
+                        
+                        <Label Style="{StaticResource RegularSmallLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontFamily="{StaticResource BoldFont}" 
+                                          Text="{x:Static resources:AppResources.AboutUsContent3}" />
+                                    <Span Text="&#10;" />
+                                    <Span Text="{x:Static resources:AppResources.AboutUsContent4}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        
+                        <custom:PancakeView Style="{StaticResource DisplayInfoFrame}">
+                            <Grid RowDefinitions="36,2,*">
+                                <Label Style="{StaticResource DisplayInfoFrameSoloHeader}" 
+                                       Text="{x:Static resources:AppResources.ContactInfoTitle}" />
+                                
+                                <BoxView Grid.Row="1" 
+                                         BackgroundColor="{StaticResource PageColorLight}" />
+                                
+                                <StackLayout Style="{StaticResource OfferRowStackWrapper}">
+                                    
+                                    <!--Mail-->
+                                    <StackLayout Orientation="Horizontal" Spacing="12">
+                                        <Image Source="mail" 
+                                               Style="{StaticResource OfferIconStyle}" />
+                                        <Label Style="{StaticResource OfferRowText}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static resources:AppResources.ContactEmailTitle}" />
+                                                    <Span Style="{StaticResource OfferRowInfo}" 
+                                                          Text="{x:Static resources:AppResources.ContactEmail}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    
+                                    <!--Phone-->
+                                    <StackLayout Orientation="Horizontal" Spacing="12">
+                                        <Image
+                                            Source="phone"
+                                            VerticalOptions="Center" />
+                                        <Label Style="{StaticResource OfferRowText}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static resources:AppResources.ContactPhoneTitle}" />
+                                                    <Span Style="{StaticResource OfferRowInfo}" 
+                                                          Text="{x:Static resources:AppResources.ContactPhone}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    
+                                    <!--address-->
+                                    <StackLayout Orientation="Horizontal" Spacing="12">
+                                        <Image Source="map_marker_green" Style="{StaticResource OfferIconStyle}" />
+                                        <Label Style="{StaticResource OfferRowText}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static resources:AppResources.ContactAddressTitle}" />
+                                                    <Span Style="{StaticResource OfferRowInfo}" 
+                                                          Text="{x:Static resources:AppResources.ContactAddress}" />
+                                                    <Span Style="{StaticResource OfferRowInfo}" 
+                                                          Text="{x:Static resources:AppResources.ContactAddressCity}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </custom:PancakeView>
+                    </StackLayout>
+                </StackLayout>
+            </local:CustomScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             x:Class="Toolit.Views.EditTaskPage"
+             x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <toolit:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <!--  Entry And Errors  -->
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="toolit:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="12,0,0,12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <!-- header view -->
+            <Grid Style="{StaticResource TopBoxSmall}"
+                  Margin="0">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.EditAction}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                
+            </Grid>
+
+            <toolit:CustomScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout Spacing="24"
+                             Padding="32, 24, 32, 64">
+                    
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskTitlePrompt}" />
+
+                    <!--  Title  -->
+                    <pancakeView:PancakeView BackgroundColor="{StaticResource PageColorLight}">
+                        <StackLayout Spacing="0">
+                            <toolit:CustomEntry
+                                Margin="16"
+                                Placeholder="{x:Static resources:AppResources.AddTaskTitlePlaceholder}"
+                                Style="{StaticResource EditEntry}"
+                                Text="{Binding Title.Value}" />
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding Title.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding Title.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <pancakeView:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Title.IsInvalidAndChanged}"
+                                TargetType="pancakeView:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </pancakeView:PancakeView.Triggers>
+                    </pancakeView:PancakeView>
+                    
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskDescriptionPrompt}" />
+
+                    <!--  Description  -->
+                    <pancakeView:PancakeView BackgroundColor="{StaticResource PageColorLight}">
+                        <StackLayout Spacing="0">
+                            <toolit:CustomEditor BackgroundColor="Transparent"
+                                          Margin="16"
+                                          FontSize="{StaticResource SmallFontSize}"
+                                          HeightRequest="160"
+                                          Placeholder="{x:Static resources:AppResources.AddTaskDescriptionPlaceholder}"
+                                          PlaceholderColor="{StaticResource GrayTextColor}"
+                                          Text="{Binding Description.Value}"
+                                          TextColor="{StaticResource BlackTextColor}" />
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding Description.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding Description.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <pancakeView:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Description.IsInvalidAndChanged}"
+                                TargetType="pancakeView:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </pancakeView:PancakeView.Triggers>
+                    </pancakeView:PancakeView>
+
+                    <!-- save button -->
+                    <controls:PancakeButton
+                        VerticalOptions="EndAndExpand"
+                        Margin="24,32,24,0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryBtnSmall}"
+                        Text="{x:Static resources:AppResources.SaveAction}" />
+                    
+                    
+                    <!--  Delete Task Btn  -->
+                    <controls:PancakeButton HorizontalOptions="Fill"
+                                            VerticalOptions="End"
+                                            Margin="24,-8,24,8"
+                                            Style="{StaticResource PrimaryBtnSmall}"
+                                            BackgroundColor="{StaticResource Red}"
+                                            Command="{Binding DeleteTaskCommand}"
+                                            Text="{x:Static resources:AppResources.DeleteJobAction}" />
+                </StackLayout>
+            </toolit:CustomScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

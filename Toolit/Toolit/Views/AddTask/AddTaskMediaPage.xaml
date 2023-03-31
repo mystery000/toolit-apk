@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.AddTaskMediaPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    xmlns:ui="clr-namespace:Toolit.Helpers.Ui;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False"
+    x:Name="Root">
+    
+    <ContentPage.Resources>
+        <converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+        <converters:BoolToCaptureModeConverter x:Key="BoolToCaptureModeConverter" />
+        <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        
+        <!-- photo template -->
+        <DataTemplate x:Key="TaskMediaPhotoTemplate">
+            <Grid Padding="0, 4, 4, 0"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start"
+                  HeightRequest="92"
+                  WidthRequest="92">
+                <forms:CachedImage Source="{Binding Source}"
+                                   HeightRequest="72"
+                                   WidthRequest="72"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Aspect="AspectFill"
+                                   Margin="8"
+                                   xct:TouchEffect.Command="{Binding BindingContext.OpenFullImageCommand, 
+                                                    Source={x:Reference Root}}"
+                                   xct:TouchEffect.CommandParameter="{Binding .}">
+                    <forms:CachedImage.Transformations>
+                        <transformations:CornersTransformation TopLeftCornerSize="16"
+                                                               TopRightCornerSize="16"
+                                                               BottomLeftCornerSize="16"
+                                                               BottomRightCornerSize="16"
+                                                               CornersTransformType="AllRounded" />
+                    </forms:CachedImage.Transformations>
+                </forms:CachedImage>
+
+                <!-- delete button -->
+                <custom:PancakeView Style="{StaticResource TipsFrame}"
+                                    BackgroundColor="{StaticResource PageColorLight}"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Padding="0"
+                                    CornerRadius="16">
+                    
+                    <custom:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DeleteMediaCommand, 
+                                                    Source={x:Reference Root}}"
+                                              CommandParameter="{Binding .}" />
+                    </custom:PancakeView.GestureRecognizers>
+                    
+                    <Image Source="close_icon"
+                           WidthRequest="12"
+                           HeightRequest="12"
+                           Margin="8" />
+                </custom:PancakeView>
+            </Grid>
+        </DataTemplate>
+        
+        <!-- video template -->
+        <DataTemplate x:Key="TaskMediaVideoTemplate">
+            <Grid Padding="0, 4, 4, 0"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start"
+                  HeightRequest="92"
+                  WidthRequest="92">
+                <custom:PancakeView CornerRadius="16"
+                                    Padding="0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start"
+                                    Margin="8"
+                                    HeightRequest="72"
+                                    WidthRequest="72"
+                                    xct:TouchEffect.Command="{Binding BindingContext.OpenFullVideoCommand, 
+                                                    Source={x:Reference Root}}"
+                                    xct:TouchEffect.CommandParameter="{Binding .}">
+                    <xct:MediaElement Source="{Binding Source}"
+                                      HeightRequest="72"
+                                      WidthRequest="72"
+                                      HorizontalOptions="Start"
+                                      VerticalOptions="Start"
+                                      Aspect="AspectFill" />
+                </custom:PancakeView>
+
+                <!-- delete button -->
+                <custom:PancakeView Style="{StaticResource TipsFrame}"
+                                    BackgroundColor="{StaticResource PageColorLight}"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Padding="0"
+                                    CornerRadius="16">
+                    
+                    <custom:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DeleteMediaCommand, 
+                                                    Source={x:Reference Root}}"
+                                              CommandParameter="{Binding .}" />
+                    </custom:PancakeView.GestureRecognizers>
+                    
+                    <Image Source="close_icon"
+                           WidthRequest="12"
+                           HeightRequest="12"
+                           Margin="8" />
+                </custom:PancakeView>
+            </Grid>
+        </DataTemplate>
+        
+        <ui:TaskMediaTemplateSelector x:Key="TaskMediaTemplateSelector"
+                                      PhotoTemplate="{StaticResource TaskMediaPhotoTemplate}"
+                                      VideoTemplate="{StaticResource TaskMediaVideoTemplate}" />
+        
+    </ContentPage.Resources>
+    
+    <toolit:CustomScrollView>
+
+        <!--  Topbox  -->
+        <StackLayout Spacing="0">
+            <Grid Style="{StaticResource TopBoxSmall}">
+            
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+                
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}" 
+                       Text="{x:Static resources:AppResources.NewJobPageTitle}"
+                       xct:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             xct:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  camera viewfinder  -->
+            <Grid RowDefinitions="*, Auto">
+                <xct:CameraView x:Name="CameraView"
+                                Grid.RowSpan="2"
+                                CaptureMode="{Binding IsCameraViewCapturingVideo, Converter={StaticResource BoolToCaptureModeConverter}}"
+                                OnAvailable="CameraView_OnOnAvailable"
+                                MediaCaptured="CameraView_OnMediaCaptured"
+                                HeightRequest="{Binding Height, Source={x:Reference Root}, 
+                                    Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/2'}" />
+                
+                <Image Source="gallery_icon"
+                       Grid.Row="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Margin="12, 0, 0, 12"
+                       xct:TouchEffect.Command="{Binding OpenGalleryCommand}" />
+                
+                <Image Source="photo_button"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0, 0, 0, 12"
+                       IsEnabled="{Binding AreCameraControlsEnabled}"
+                       xct:TouchEffect.Command="{Binding TakePhotoCommand}" />
+                
+                <Ellipse Fill="Red"
+                         Grid.Row="1"
+                         StrokeThickness="0"
+                         WidthRequest="16"
+                         HeightRequest="16"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Margin="0, 0, 0, 12"
+                         IsVisible="False"
+                         InputTransparent="True">
+                    <Ellipse.Triggers>
+                        <MultiTrigger TargetType="Ellipse">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding IsCameraViewCapturingVideo}"
+                                                  Value="True" />
+                                <BindingCondition Binding="{Binding IsCameraRolling}"
+                                                  Value="False" />
+                            </MultiTrigger.Conditions>
+                            
+                            <Setter Property="IsVisible" Value="True" />
+                        </MultiTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                
+                <Rectangle Fill="Red"
+                         Grid.Row="1"
+                         StrokeThickness="0"
+                         WidthRequest="16"
+                         HeightRequest="16"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Margin="0, 0, 0, 12"
+                         IsVisible="False"
+                         InputTransparent="True">
+                    <Rectangle.Triggers>
+                        <MultiTrigger TargetType="Rectangle">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding IsCameraViewCapturingVideo}"
+                                                  Value="True" />
+                                <BindingCondition Binding="{Binding IsCameraRolling}"
+                                                  Value="True" />
+                            </MultiTrigger.Conditions>
+                            
+                            <Setter Property="IsVisible" Value="True" />
+                        </MultiTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
+            </Grid>
+            
+            <!-- mode selector -->
+            <StackLayout Orientation="Horizontal"
+                         Spacing="16"
+                         Margin="24, 16">
+
+                <!--  Photo Btn  -->
+                <custom:PancakeView HorizontalOptions="FillAndExpand"
+                                    HeightRequest="32"
+                                    IsEnabled="{Binding IsCameraRolling, Converter={StaticResource InvertedBoolConverter}}">
+                    
+                    <Label
+                        HorizontalOptions="Center"
+                        Style="{StaticResource RegularXtraSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskMediaPhotoType}"
+                        VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsCameraViewCapturingVideo}"
+                                TargetType="Label"
+                                Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <custom:PancakeView.Triggers>
+                        <Trigger TargetType="custom:PancakeView"
+                                 Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                        
+                        <DataTrigger
+                            Binding="{Binding IsCameraViewCapturingVideo}"
+                            TargetType="custom:PancakeView"
+                            Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                    <custom:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleCaptureModePhotoCommand}" />
+                    </custom:PancakeView.GestureRecognizers>
+                </custom:PancakeView>
+
+                <!--  Video Btn  -->
+                <custom:PancakeView HorizontalOptions="FillAndExpand"
+                                    HeightRequest="32"
+                                    IsEnabled="{Binding IsCameraRolling, Converter={StaticResource InvertedBoolConverter}}">
+                    <Label
+                        HorizontalOptions="Center"
+                        Style="{StaticResource RegularXtraSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskMediaVideoType}"
+                        VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsCameraViewCapturingVideo}"
+                                TargetType="Label"
+                                Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <custom:PancakeView.Triggers>
+                        <Trigger TargetType="custom:PancakeView"
+                                 Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+
+                        <DataTrigger
+                            Binding="{Binding IsCameraViewCapturingVideo}"
+                            TargetType="custom:PancakeView"
+                            Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                    <custom:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleCaptureModeVideoCommand}" />
+                    </custom:PancakeView.GestureRecognizers>
+                </custom:PancakeView>
+            </StackLayout>
+            
+            <!-- selected images list -->
+            <FlexLayout BindableLayout.ItemsSource="{Binding SelectedMedia}"
+                        BindableLayout.ItemTemplateSelector="{StaticResource TaskMediaTemplateSelector}"
+                        Margin="24, 16, 24, 0"
+                        Wrap="Wrap"
+                        JustifyContent="Start">
+            </FlexLayout>
+            
+            <!-- move to next step -->
+            <controls:PancakeButton
+                Style="{StaticResource PrimaryBtn}"
+                Margin="64,32,64,0"
+                Command="{Binding MoveToWorkTypesCommand}"
+                BackgroundColor="{StaticResource DarkGreen}"
+                Text="{x:Static resources:AppResources.AddTaskGoToStep3Action}"
+                VerticalOptions="EndAndExpand"
+                IsEnabled="{Binding CanContinue}" />
+
+            <!-- progress indicator -->
+            <IndicatorView Margin="0,32"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource GrayTextColor}"
+                           SelectedIndicatorColor="{StaticResource LightGreen}"
+                           VerticalOptions="End"
+                           Count="5"
+                           Position="1">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+        </StackLayout>
+    </toolit:CustomScrollView>
+</ContentPage>

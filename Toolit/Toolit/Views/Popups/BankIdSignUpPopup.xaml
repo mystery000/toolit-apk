@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="http://rotorgames.com"
+                 xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+                 xmlns:behaviors="clr-namespace:Toolit.Behaviors;assembly=Toolit"
+                 xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                 x:Class="Toolit.Views.Popups.BankIdSignUpPopup"
+                 CloseWhenBackgroundIsClicked="False">
+
+    <pages:PopupPage.Resources>
+        <toolit:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+        <Style x:Key="ValidationPancake" TargetType="pancakeView:PancakeView">
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Shadow" Value="{pancakeView:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+        </Style>
+        <Style x:Key="ErrorStack" TargetType="StackLayout">
+            <Setter Property="HeightRequest" Value="84" />
+            <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        </Style>
+        <Style x:Key="EditEntryHeader" TargetType="Label"
+               BasedOn="{StaticResource RegularXtraSmallLabel}">
+            <Setter Property="Margin" Value="16,12,0,0" />
+        </Style>
+        <Style x:Key="ErrorLabel" TargetType="Label"
+               BasedOn="{StaticResource RegularXtraSmallLabel}">
+            <Setter Property="Margin" Value="16,8" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+        </Style>
+        <Style x:Key="EditEntry" TargetType="toolit:CustomEntry">
+            <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+            <Setter Property="Margin" Value="16,8" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            <Setter Property="ReturnType" Value="Next" />
+        </Style>
+    </pages:PopupPage.Resources>
+
+
+    <pages:PopupPage.Content>
+
+        <pancakeView:PancakeView Style="{StaticResource ModalFrame}"
+                                 VerticalOptions="Center"
+                                 Margin="16, 32">
+
+            <!--  Background  -->
+            <Grid>
+                
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0, -8, -16" />
+
+                <toolit:CustomScrollView VerticalScrollBarVisibility="Never">
+                    <!--  content  -->
+                    <StackLayout Padding="24,64" Spacing="36">
+                        <Label Style="{StaticResource BoldMediumLabel}"
+                               HorizontalTextAlignment="Center"
+                               Text="{x:Static resources:AppResources.BankIdSignUpModalHeader}" />
+
+                        <StackLayout Spacing="16">
+
+                            <!--  Email  -->
+                            <pancakeView:PancakeView
+                                Style="{StaticResource ValidationPancake}">
+                                <StackLayout Spacing="0">
+                                    <StackLayout Style="{StaticResource ErrorStack}">
+
+                                        <Label Style="{StaticResource EditEntryHeader}"
+                                               Text="{x:Static resources:AppResources.EmailAddressPrompt}" />
+
+                                        <toolit:CustomEntry
+                                            Keyboard="Email"
+                                            Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                                            Style="{StaticResource EditEntry}"
+                                            Text="{Binding Email.Value}">
+                                            <toolit:CustomEntry.Behaviors>
+                                                <behaviors:NextEntryBehavior NextEntry="{x:Reference PhoneEntry}" />
+                                            </toolit:CustomEntry.Behaviors>
+                                        </toolit:CustomEntry>
+                                    </StackLayout>
+
+                                    <!--  Error  -->
+                                    <StackLayout BackgroundColor="{StaticResource Red}"
+                                                 IsVisible="{Binding Email.IsInvalidAndChanged}">
+                                        <Label Style="{StaticResource ErrorLabel}"
+                                               Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <pancakeView:PancakeView.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Email.IsInvalidAndChanged}"
+                                        TargetType="pancakeView:PancakeView"
+                                        Value="True">
+                                        <Setter Property="Border"
+                                                Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                    </DataTrigger>
+                                </pancakeView:PancakeView.Triggers>
+                            </pancakeView:PancakeView>
+
+                            <!--  Phone  -->
+                            <pancakeView:PancakeView
+                                Style="{StaticResource ValidationPancake}">
+                                <StackLayout Spacing="0">
+                                    <StackLayout Style="{StaticResource ErrorStack}">
+                                        <Label Style="{StaticResource EditEntryHeader}"
+                                               Text="{x:Static resources:AppResources.PhoneNumberPrompt}" />
+                                        <StackLayout Orientation="Horizontal"
+                                                     Spacing="0">
+                                            <Label Style="{StaticResource RegularSmallLabel}"
+                                                   Text="+46"
+                                                   Margin="16, 8, 8, 8"
+                                                   VerticalOptions="Center" />
+
+                                            <toolit:CustomEntry x:Name="PhoneEntry"
+                                                                Keyboard="Telephone"
+                                                                Placeholder="{x:Static resources:AppResources.PhoneNumberFormatPlaceholder}"
+                                                                Style="{StaticResource EditEntry}"
+                                                                Text="{Binding Phone.Value}"
+                                                                Margin="0, 8, 16, 8"
+                                                                HorizontalOptions="FillAndExpand">
+                                                <toolit:CustomEntry.Behaviors>
+                                                    <behaviors:NextEntryBehavior NextEntry="{x:Reference AddressEntry}" />
+                                                </toolit:CustomEntry.Behaviors>
+                                            </toolit:CustomEntry>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <!--  Error  -->
+                                    <StackLayout BackgroundColor="{StaticResource Red}"
+                                                 IsVisible="{Binding Phone.IsInvalidAndChanged}">
+                                        <Label Style="{StaticResource ErrorLabel}"
+                                               Text="{Binding Phone.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <pancakeView:PancakeView.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Phone.IsInvalidAndChanged}"
+                                        TargetType="pancakeView:PancakeView"
+                                        Value="True">
+                                        <Setter Property="Border"
+                                                Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                    </DataTrigger>
+                                </pancakeView:PancakeView.Triggers>
+                            </pancakeView:PancakeView>
+
+                            <!--  Address  -->
+                            <pancakeView:PancakeView
+                                Style="{StaticResource ValidationPancake}">
+                                <StackLayout Spacing="0">
+                                    <StackLayout Style="{StaticResource ErrorStack}">
+                                        <Label Style="{StaticResource EditEntryHeader}"
+                                               Text="{x:Static resources:AppResources.HomeAddressPrompt}" />
+                                        <toolit:CustomEntry x:Name="AddressEntry"
+                                                            Placeholder="{x:Static resources:AppResources.HomeAddressPrompt}"
+                                                            Style="{StaticResource EditEntry}"
+                                                            Text="{Binding Address.Value}">
+                                            <toolit:CustomEntry.Behaviors>
+                                                <behaviors:NextEntryBehavior NextEntry="{x:Reference PostalCodeEntry}" />
+                                            </toolit:CustomEntry.Behaviors>
+                                        </toolit:CustomEntry>
+                                    </StackLayout>
+
+                                    <!--  Error  -->
+                                    <StackLayout BackgroundColor="{StaticResource Red}"
+                                                 IsVisible="{Binding Address.IsInvalidAndChanged}">
+                                        <Label Style="{StaticResource ErrorLabel}"
+                                               Text="{Binding Address.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <pancakeView:PancakeView.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Address.IsInvalidAndChanged}"
+                                        TargetType="pancakeView:PancakeView"
+                                        Value="True">
+                                        <Setter Property="Border"
+                                                Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                    </DataTrigger>
+                                </pancakeView:PancakeView.Triggers>
+                            </pancakeView:PancakeView>
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                                <!--  Postcode  -->
+                                <pancakeView:PancakeView Grid.Column="0" Style="{StaticResource ValidationPancake}">
+                                    <StackLayout Spacing="0">
+                                        <StackLayout Style="{StaticResource ErrorStack}">
+                                            <Label Style="{StaticResource EditEntryHeader}"
+                                                   Text="{x:Static resources:AppResources.PostalCodePrompt}" />
+                                            <toolit:CustomEntry x:Name="PostalCodeEntry"
+                                                                Keyboard="Numeric"
+                                                                Placeholder="{x:Static resources:AppResources.PostalCodeFormatPlaceholder}"
+                                                                Style="{StaticResource EditEntry}"
+                                                                Text="{Binding PostCode.Value}">
+                                                <toolit:CustomEntry.Behaviors>
+                                                    <behaviors:NextEntryBehavior NextEntry="{x:Reference CityEntry}" />
+                                                </toolit:CustomEntry.Behaviors>
+                                            </toolit:CustomEntry>
+                                        </StackLayout>
+
+                                        <!--  Error  -->
+                                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                                     IsVisible="{Binding PostCode.IsInvalidAndChanged}">
+                                            <Label Style="{StaticResource ErrorLabel}"
+                                                   Text="{Binding PostCode.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <pancakeView:PancakeView.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding PostCode.IsInvalidAndChanged}"
+                                            TargetType="pancakeView:PancakeView"
+                                            Value="True">
+                                            <Setter Property="Border"
+                                                    Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                        </DataTrigger>
+                                    </pancakeView:PancakeView.Triggers>
+                                </pancakeView:PancakeView>
+
+                                <!--  City  -->
+                                <pancakeView:PancakeView Grid.Column="1" Style="{StaticResource ValidationPancake}">
+                                    <StackLayout Spacing="0">
+                                        <StackLayout Style="{StaticResource ErrorStack}">
+                                            <Label Style="{StaticResource EditEntryHeader}"
+                                                   Text="{x:Static resources:AppResources.CityPlaceholder}" />
+                                            <toolit:CustomEntry x:Name="CityEntry"
+                                                                Placeholder="{x:Static resources:AppResources.CityPlaceholder}"
+                                                                Style="{StaticResource EditEntry}"
+                                                                Text="{Binding City.Value}"
+                                                                ReturnType="Done" />
+                                        </StackLayout>
+
+                                        <!--  Error  -->
+                                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                                     IsVisible="{Binding City.IsInvalidAndChanged}">
+                                            <Label Style="{StaticResource ErrorLabel}"
+                                                   Text="{Binding City.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <pancakeView:PancakeView.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding City.IsInvalidAndChanged}"
+                                            TargetType="pancakeView:PancakeView"
+                                            Value="True">
+                                            <Setter Property="Border"
+                                                    Value="{pancakeView:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                        </DataTrigger>
+                                    </pancakeView:PancakeView.Triggers>
+                                </pancakeView:PancakeView>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox
+                                    IsChecked="{Binding TermsAndCondition.Value}"
+                                    VerticalOptions="Center"
+                                    Color="Black" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontFamily="{StaticResource RegularFont}"
+                                                FontSize="{StaticResource SmallFontSize}"
+                                                Text="{x:Static resources:AppResources.TosPrompt1}"
+                                                TextColor="{StaticResource BlackTextColor}" />
+                                            <Span
+                                                FontFamily="{StaticResource RegularFont}"
+                                                FontSize="{StaticResource SmallFontSize}"
+                                                Text="{x:Static resources:AppResources.TosPrompt2}"
+                                                TextColor="{StaticResource BlackTextColor}"
+                                                TextDecorations="Underline">
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding MoveToToSCommand}" />
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding TermsAndCondition.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{StaticResource Red}" />
+                            <StackLayout />
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox
+                                    IsChecked="{Binding DataProtectionPolicy.Value}"
+                                    VerticalOptions="Center"
+                                    Color="Black" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontFamily="{StaticResource RegularFont}"
+                                                FontSize="{StaticResource SmallFontSize}"
+                                                Text="{x:Static resources:AppResources.TosPrompt1}"
+                                                TextColor="{StaticResource BlackTextColor}" />
+                                            <Span
+                                                FontFamily="{StaticResource RegularFont}"
+                                                FontSize="{StaticResource SmallFontSize}"
+                                                Text="{x:Static resources:AppResources.DataPolicyPromot}"
+                                                TextColor="{StaticResource BlackTextColor}"
+                                                TextDecorations="Underline">
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding MoveToDataPolicyCommand}" />
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding DataProtectionPolicy.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{StaticResource Red}" />
+                        </StackLayout>
+
+                        <!-- bank id login button -->
+                        <controls:PancakeButton
+                            Command="{Binding SignUpCommand}"
+                            IsEnabled="{Binding Form.IsValid}"
+                            Style="{StaticResource PrimaryBtn}"
+                            Text="{x:Static resources:AppResources.SignUpAction}"
+                            VerticalOptions="EndAndExpand" />
+
+                    </StackLayout>
+                </toolit:CustomScrollView>
+            </Grid>
+        </pancakeView:PancakeView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

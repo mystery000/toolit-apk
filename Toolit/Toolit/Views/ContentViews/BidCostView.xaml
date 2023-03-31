@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             x:Class="Toolit.Views.ContentViews.BidCostView">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="OfferIconStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowText" TargetType="Label"
+                   BasedOn="{StaticResource BoldSmallLabel}">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowPrice" TargetType="Label"
+                   BasedOn="{StaticResource RegularSmallLabel}">
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="OfferRowPriceGreen" TargetType="Label"
+                   BasedOn="{StaticResource OfferRowPrice}">
+                <Setter Property="TextColor" Value="{StaticResource LightGreen}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Grid x:Name="MasterContainer">
+            <pancakeView:PancakeView>
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                      ColumnDefinitions="Auto, *, Auto"
+                      RowSpacing="12"
+                      ColumnSpacing="12"
+                      Margin="16">
+
+                    <!-- title -->
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource BoldMediumLabel}"
+                           HorizontalOptions="Start"
+                           Text="{x:Static resources:AppResources.BidYourOfferTitle}"
+                           Margin="0, 0, 0, 16"
+                           VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsBidMadeByUser}"
+                                         Value="False">
+                                <Setter Property="Text" Value="{x:Static resources:AppResources.BidCraftsmansOfferTitle}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                        
+                    <!-- edit button -->
+                    <StackLayout Grid.Row="0"
+                                 Grid.Column="1"
+                                 Grid.ColumnSpan="2"
+                                 HorizontalOptions="End"
+                                 Orientation="Horizontal"
+                                 Spacing="0"
+                                 IsVisible="{Binding IsInEditMode}"
+                                 Margin="0, 0, 0, 16">
+                        <Label
+                            Margin="0,0,8,0"
+                            Style="{StaticResource RegularXtraSmallLabel}"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{x:Static resources:AppResources.EditAction}"
+                            VerticalOptions="Center" />
+                        <Image
+                            HeightRequest="16"
+                            Source="edit_square"
+                            VerticalOptions="Center" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    
+                    <!-- separator -->
+                    <BoxView Grid.Row="0"
+                             Grid.ColumnSpan="3"
+                             VerticalOptions="End"
+                             HeightRequest="1"
+                             Margin="-16, 0"
+                             BackgroundColor="{StaticResource SeparatorColor}" />
+                    
+                    <!-- labor cost -->
+                    <Image Grid.Row="1"
+                           Grid.Column="0"
+                           Source="money_bill" 
+                           Style="{StaticResource OfferIconStyle}" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource OfferRowText}" 
+                           Text="{x:Static resources:AppResources.BidLaborCostTitle}" />
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           HorizontalOptions="EndAndExpand" 
+                           Style="{StaticResource OfferRowPrice}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DisplayedBid.LabourCostWithVat}" />
+                                <Span Text="{x:Static resources:AppResources.CurrencyFormatString}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <!-- material cost -->
+                    <Image Grid.Row="2"
+                           Grid.Column="0"
+                           Source="briefcase" 
+                           Style="{StaticResource OfferIconStyle}" />
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                           Style="{StaticResource OfferRowText}" 
+                           Text="{x:Static resources:AppResources.BidMaterialCostTitle}" />
+                    <Label Grid.Row="2"
+                           Grid.Column="2"
+                           HorizontalOptions="EndAndExpand" 
+                           Style="{StaticResource OfferRowPrice}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DisplayedBid.MaterialCostWithVat}" />
+                                <Span Text="{x:Static resources:AppResources.CurrencyFormatString}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <!-- root deduction -->
+                    <Image Grid.Row="3"
+                           Grid.Column="0"
+                           Source="paint_roller_grren" 
+                           Style="{StaticResource OfferIconStyle}"
+                           IsVisible="{Binding IsRotRut}" />
+                    <Label Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{StaticResource OfferRowText}" 
+                           Text="{x:Static resources:AppResources.BidRootDeductionTitle}" 
+                           IsVisible="{Binding IsRotRut}" />
+                    <Label Grid.Row="3"
+                           Grid.Column="2"
+                           HorizontalOptions="EndAndExpand" 
+                           Style="{StaticResource OfferRowPrice}"
+                           IsVisible="{Binding IsRotRut}" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DisplayedBid.RootDeduction, StringFormat='-{0}'}" />
+                                <Span Text="{x:Static resources:AppResources.CurrencyFormatString}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <!-- total bid -->
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           Style="{StaticResource OfferRowText}" 
+                           Text="{x:Static resources:AppResources.BidFinalPriceTitle}"
+                           Margin="0, 16, 0, 0" />
+                    <Label Grid.Row="4"
+                           Grid.Column="2"
+                           HorizontalOptions="EndAndExpand" 
+                           Style="{StaticResource OfferRowPriceGreen}"
+                           Margin="0, 16, 0, 0"
+                           Text="{Binding DisplayedBid.FormattedFinalBid}">
+                    </Label>
+                    
+                    <!-- brokerage fee -->
+                    <Label Grid.Row="5"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource RegularTinyLabel}"
+                           Margin="0, 12, 0, 0"
+                           HorizontalOptions="End"
+                           Text="{Binding DisplayedBid.FormattedBrokerageFee}"
+                           IsVisible="{Binding IsBidMadeByUser}" />
+                    
+                    <!-- separator -->
+                    <BoxView Grid.Row="6"
+                             Grid.ColumnSpan="3"
+                             HeightRequest="1"
+                             VerticalOptions="Start"
+                             Margin="-16, 0"
+                             BackgroundColor="{StaticResource SeparatorColor}" />
+                    
+                    <!-- brokerage fee notice -->
+                    <Label Grid.Row="6"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource RegularTinyLabel}"
+                           Margin="0, 12, 0, -12"
+                           Text="{x:Static resources:AppResources.BidBrokerageFeeNotice}"
+                           IsVisible="{Binding IsBidMadeByUser}" />
+                    
+                    <!-- payment notice -->
+                    <Label Grid.Row="7"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource RegularTinyLabel}"
+                           Margin="0, 12, 0, 0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResources.BidPaymentNoticePart1}" />
+                                <Span Text="{Binding DisplayedTask.Title}" />
+                                <Span Text="{x:Static resources:AppResources.BidPaymentNoticePart2}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <!-- tos notice -->
+                    <Label Grid.Row="8"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource RegularTinyLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResources.BidPaymentNoticePart3}" />
+                                <Span Text="{x:Static resources:AppResources.TosLinkText}" 
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding MoveToToSCommand}" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                </Grid>
+            </pancakeView:PancakeView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

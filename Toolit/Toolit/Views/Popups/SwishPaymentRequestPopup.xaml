@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+                 xmlns:pages="http://rotorgames.com"
+                 xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+                 xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                 x:Class="Toolit.Views.Popups.SwishPaymentRequestPopup">
+    <pages:PopupPage.Content>
+        <pancakeView:PancakeView
+            Margin="16, 0"
+            BackgroundColor="{StaticResource PageColorLight}"
+            CornerRadius="8"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center">
+            <!--  Background  -->
+            <Grid>
+
+                <Image Source="modal_pastel_background"
+                       Aspect="AspectFill"
+                       Margin="-8, 0" />
+
+                <StackLayout Padding="36,36,36,48"
+                             Spacing="16">
+
+                    <Image HeightRequest="120" Source="swish_logo" />
+
+                    <!--  Header  -->
+                    <Label
+                        Margin="0,40,0,0"
+                        Style="{StaticResource BoldMediumLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.SwiftPaymentRequestTitle}" />
+
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           HorizontalTextAlignment="Center"
+                           Text="{x:Static resources:AppResources.SwiftPaymentRequestCaption}" />
+
+                    <Label
+                        Style="{StaticResource RegularTinyLabel}"
+                        HorizontalOptions="End"
+                        HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResources.SwiftPaymentRequestTosText1}" />
+                                <Span Text="{x:Static resources:AppResources.TosLink}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding MoveToToSCommand}" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text="{x:Static resources:AppResources.SwiftPaymentRequestTosText2}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!--  Btn  -->
+                    <controls:PancakeButton
+                        Command="{Binding PayCommand}"
+                        Style="{StaticResource PrimaryBtn}"
+                        Text="{x:Static resources:AppResources.PayAction}"
+                        VerticalOptions="EndAndExpand" />
+
+                </StackLayout>
+                <Image Style="{StaticResource CloseModalImage}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </pancakeView:PancakeView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

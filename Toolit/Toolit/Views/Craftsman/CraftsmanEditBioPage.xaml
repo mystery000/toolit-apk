@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.CraftsmanEditBioPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <local:BoolInvertConverter x:Key="BoolInvertConverter" />
+        <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        
+        <ResourceDictionary>
+
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,12,0,0" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="Editor">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="12,0,12,8" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--<Grid>-->
+    <customRenderer:CustomScrollView VerticalScrollBarVisibility="Never">
+
+        <!--  Topbox  -->
+        <Grid Style="{StaticResource SmallTopGrid}"
+              RowDefinitions="Auto, Auto">
+            <Grid Style="{StaticResource TopBoxSmall}">
+            
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+                
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}" 
+                       Text="{x:Static resources:AppResources.CraftsmanEditBioPageTitle}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout
+                Grid.Row="1"
+                Padding="40,40,40,60"
+                Spacing="24">
+
+                <!--  Big Header  -->
+                <Label
+                    Style="{StaticResource BoldLargeLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.CraftsmanEditBioTitle}" />
+
+                <!--  Small Header  -->
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.CraftsmanEditBioSubtitle}" />
+
+                <!--  Small Text  -->
+                <Label
+                    Style="{StaticResource RegularXtraSmallLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.CraftsmanEditBioDescription}" />
+
+                <!--  Bio Header  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                    BackgroundColor="{StaticResource PageColorLight}">
+                    <StackLayout Spacing="0">
+                        <StackLayout>
+                            <Label Style="{StaticResource EditEntryHeader}" 
+                                   Text="{x:Static resources:AppResources.CraftsmanBioHeaderPrompt}" />
+                            <customRenderer:CustomEntry
+                                Placeholder="{x:Static resources:AppResources.CraftsmanBioHeaderPlaceholder}"
+                                Style="{StaticResource EditEntry}"
+                                Text="{Binding AboutHeader.Value}"
+                                Margin="16, 0, 8, 16" />
+                        </StackLayout>
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}" 
+                                     IsVisible="{Binding AboutHeader.IsValid, 
+                                        Converter={StaticResource BoolInvertConverter}}">
+                            <Label Style="{StaticResource ErrorLabel}" 
+                                   Text="{Binding AboutHeader.Errors, 
+                                        Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+                    </StackLayout>
+                    
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding AboutHeader.IsValid}"
+                            TargetType="custom:PancakeView"
+                            Value="False">
+                            <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                </custom:PancakeView>
+
+                <!--  Bio  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                    BackgroundColor="{StaticResource PageColorLight}">
+                    
+                    <StackLayout Spacing="0">
+                        <StackLayout>
+                            <Label Style="{StaticResource EditEntryHeader}" 
+                                   Text="{x:Static resources:AppResources.CraftsmanBioPlaceholder}" />
+                            <customRenderer:CustomEditor 
+                                HeightRequest="160"
+                                Placeholder="{x:Static resources:AppResources.CraftsmanBioHeaderPlaceholder}"
+                                Style="{StaticResource EditEntry}"
+                                Text="{Binding AboutText.Value}"/>
+                        </StackLayout>
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}" 
+                                     IsVisible="{Binding AboutText.IsValid, 
+                                        Converter={StaticResource BoolInvertConverter}}">
+                            <Label Style="{StaticResource ErrorLabel}" 
+                                   Text="{Binding AboutText.Errors, 
+                                        Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding AboutText.IsValid}"
+                            TargetType="custom:PancakeView"
+                            Value="False">
+                            <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                </custom:PancakeView>
+
+                <!--  Apply Btn  -->
+                <controls:PancakeButton
+                    Margin="40,0"
+                    Style="{StaticResource PrimaryBtn}"
+                    BackgroundColor="{StaticResource LightBlue}"
+                    Text="{x:Static resources:AppResources.SaveProfileDataAction}"
+                    VerticalOptions="EndAndExpand"
+                    Command="{Binding SaveChangesCommand}"/>
+            </StackLayout>
+
+        </Grid>
+    </customRenderer:CustomScrollView>
+</ContentPage>

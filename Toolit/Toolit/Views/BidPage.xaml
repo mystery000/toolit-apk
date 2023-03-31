@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.BidPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+    x:Name="Root"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+            
+            <!-- control templates -->
+            <ControlTemplate x:Key="BidInfoView">
+                
+                <StackLayout Spacing="24"
+                             Margin="16, 16, 16, 108"
+                             BindingContext="{Binding BindingContext, Source={x:Reference Root}}">
+
+                    <!--  BidInfo  -->
+                    <custom:PancakeView Style="{StaticResource DisplayInfoFrame}">
+                        <StackLayout>
+                            <Label
+                                Style="{StaticResource DisplayInfoFrameSoloHeader}"
+                                Text="{x:Static resources:AppResources.BidDetailBidMessageTitle}" />
+
+                            <Label
+                                Margin="16,12,16,16"
+                                Style="{StaticResource RegularSmallLabel}"
+                                Text="{Binding DisplayedBid.BidMessage}" />
+                        </StackLayout>
+                    </custom:PancakeView>
+                    
+                    <!--  Offer/bid  -->
+                    <contentViews:BidCostView DisplayedBid="{Binding DisplayedBid}"
+                                              IsRotRut="{Binding DisplayedBid.Task.UseRotRut}"
+                                              MoveToToSCommand="{Binding MoveToToSCommand}" />
+                    
+                </StackLayout>
+            </ControlTemplate>
+            
+            <ControlTemplate x:Key="CraftsmanInfoView">
+                
+                <contentViews:CraftsmanInfoView Padding="16"
+                                                IsInEditMode="False"
+                                                BindingContext="{Binding BindingContext, Source={x:Reference Root}}" />
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="*, *"
+          ColumnSpacing="0">
+        <customRenderer:CustomScrollView
+            VerticalScrollBarVisibility="Never"
+            Padding="0,0,0,40"
+            Grid.ColumnSpan="2">
+
+            <StackLayout Spacing="0">
+
+                <!--#region Top Grid Big-->
+                <custom:PancakeView Style="{StaticResource TopBoxBig}"
+                                    HeightRequest="220"
+                                    HorizontalOptions="Fill">
+
+                    <custom:PancakeView.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS">0, -20, 0, 0</On>
+                            <On Platform="Android">0</On>
+                        </OnPlatform>
+                    </custom:PancakeView.Margin>
+
+                    <!-- safe area compensator -->
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger TargetType="custom:PancakeView"
+                                     Binding="{Binding HasSafeArea}"
+                                     Value="True">
+                            <Setter Property="HeightRequest" Value="256" />
+                            <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+
+                    <Grid BackgroundColor="{StaticResource DarkGreen}">
+
+                        <!--  Pattern  -->
+                        <Image Style="{StaticResource BigTopPatternDrop}" />
+                        <Image Style="{StaticResource BigTopPatternStripe}" />
+
+                        <!--  BackBtn  -->
+                        <StackLayout Style="{StaticResource BigTopBackBtnStack}"
+                                     xct:SafeAreaEffect.SafeArea="True">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </StackLayout.GestureRecognizers>
+
+                            <!--  arrow  -->
+                            <Image Style="{StaticResource ArrowLeft}" />
+                            <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                                   Text="{x:Static resources:AppResources.BackAction}" />
+                        </StackLayout>
+                        
+                        <!--  rating bar  -->
+                        <controls:RatingBar
+                            xct:SafeAreaEffect.SafeArea="True"
+                            Margin="0,16,36,0"
+                            HeightRequest="16"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            Rating="{Binding DisplayedBid.Craftsman.AverageRating}" />
+
+                        <!--  Header  -->
+                        <StackLayout Style="{StaticResource HeaderTextStack}">
+                            <Label LineHeight="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource BigTopHeader}" 
+                                              Text="{Binding DisplayedBid.Craftsman.User.PreferredName}" />
+                                        <Span Text="&#x0a;" />
+                                        <Span Style="{StaticResource BigTopHeader}" 
+                                              Text="{Binding DisplayedBid.Craftsman.User.LastName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Style="{StaticResource BigTopSmallHeader}" 
+                                   Text="{Binding DisplayedBid.Craftsman.Craft}" />
+                        </StackLayout>
+                        
+                        <custom:PancakeView Style="{StaticResource BigTopUserImage}">
+                            <controls:CachedAvatarView ImageUrl="{Binding DisplayedBid.Craftsman.User.ImageUrl}"
+                                            UserInitials="{Binding DisplayedBid.Craftsman.User, 
+                                                Converter={StaticResource UserToInitialsConverter}}"
+                                            HeightRequest="80" />
+                        </custom:PancakeView>
+                    </Grid>
+                </custom:PancakeView>
+                <!--#endregion-->
+
+                <!--  segmented Btn  -->
+                <custom:PancakeView Margin="16,24" Style="{StaticResource DoubleBtnFrame}">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="0">
+                        <Button
+                            Command="{Binding ShowBidInfoCommand}"
+                            Style="{StaticResource DoubleBtnWhite}"
+                            Text="{x:Static resources:AppResources.BidDetailBidInfo}">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsShowingInfo}"
+                                    TargetType="Button"
+                                    Value="False">
+                                    <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button
+                            Grid.Column="1"
+                            Command="{Binding ShowAboutCommand}"
+                            Style="{StaticResource DoubleBtnWhite}"
+                            Text="{x:Static resources:AppResources.BidDetailCraftsmanInfo}">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsShowingInfo}"
+                                    TargetType="Button"
+                                    Value="True">
+                                    <Setter Property="Style" Value="{StaticResource DoubleBtnGreen}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+                </custom:PancakeView>
+
+                <ContentView>
+                    <ContentView.Triggers>
+                        <!--  BidInfo View  -->
+                        <DataTrigger TargetType="ContentView"
+                                     Binding="{Binding IsShowingInfo}"
+                                     Value="False">
+                            <Setter Property="ControlTemplate" Value="{StaticResource BidInfoView}" />
+                        </DataTrigger>
+                        <!--  About  -->
+                        <DataTrigger TargetType="ContentView"
+                                     Binding="{Binding IsShowingInfo}"
+                                     Value="True">
+                            <Setter Property="ControlTemplate" Value="{StaticResource CraftsmanInfoView}" />
+                        </DataTrigger>
+                    </ContentView.Triggers>
+                </ContentView>
+            </StackLayout>
+        </customRenderer:CustomScrollView>
+
+        <!--  Buttons  -->
+        <!--  Chat  -->
+        <controls:PancakeButton
+            Grid.Column="0"
+            Style="{StaticResource PrimaryBtnSmall}"
+            BackgroundColor="{StaticResource LightBlue}"
+            VerticalOptions="End"
+            Text="{x:Static resources:AppResources.TaskOpenChatAction}"
+            ImageSource="comment"
+            ImagePosition="Left"
+            xct:SafeAreaEffect.SafeArea="True"
+            Command="{Binding MoveToChatCommand}">
+            
+            <controls:PancakeButton.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="24, 0, 12, 36" />
+                    <On Platform="iOS" Value="24, 0, 12, 88" />
+                </OnPlatform>
+            </controls:PancakeButton.Margin>
+            
+        </controls:PancakeButton>
+
+        <!--  Accept Btn  -->
+        <controls:PancakeButton
+            Grid.Column="1"
+            Style="{StaticResource PrimaryBtnSmall}"
+            BackgroundColor="{StaticResource LightGreen}"
+            Command="{Binding AcceptBidCommand}"
+            Text="{x:Static resources:AppResources.AcceptAndPayAction}"
+            VerticalOptions="End"
+            xct:SafeAreaEffect.SafeArea="True">
+                
+            <controls:PancakeButton.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="12, 0, 24, 36" />
+                    <On Platform="iOS" Value="12, 0, 24, 88" />
+                </OnPlatform>
+            </controls:PancakeButton.Margin>
+        </controls:PancakeButton>
+        
+    </Grid>
+</ContentPage>

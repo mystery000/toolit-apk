@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+             xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+             x:Class="Toolit.Views.ContentViews.BidInfoView">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Grid x:Name="MasterContainer"
+              Padding="24, 12"
+              views:TouchEffect.Command="{Binding Command}"
+              views:TouchEffect.CommandParameter="{Binding DisplayedBid}">
+            <pancakeView:PancakeView>
+                <Grid RowDefinitions="*, *"
+                      ColumnDefinitions="Auto, Auto, Auto, *, 84"
+                      RowSpacing="8"
+                      ColumnSpacing="0"
+                      Margin="12, 0"
+                      HeightRequest="100">
+
+                    <!-- craftsman avatar -->
+                    <controls:CachedAvatarView Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Grid.Column="0"
+                                      HorizontalOptions="Center"
+                                      VerticalOptions="Center"
+                                      ImageUrl="{Binding DisplayedBid.Craftsman.ImageUrl}"
+                                      UserInitials="{Binding DisplayedBid.Craftsman.User, Converter={StaticResource UserToInitialsConverter}}"
+                                      HeightRequest="72" />
+
+                    <!-- craftsman full name -->
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Text="{Binding DisplayedBid.Craftsman.User.FullName}"
+                           Style="{StaticResource BoldSmallLabel}"
+                           Margin="12, 0, 0, 0"
+                           VerticalTextAlignment="End" />
+
+                    <!-- craftsman full name -->
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding DisplayedBid.Craftsman.AboutHeader}"
+                           Style="{StaticResource RegularXtraSmallLabel}"
+                           Margin="12, 0, 0, 0"
+                           VerticalTextAlignment="Start" />
+
+                    <!-- craftsman rating image -->
+                    <Image Grid.Row="1"
+                           Grid.Column="2"
+                           Source="star"
+                           VerticalOptions="Start"
+                           Margin="8, 0, 0, 0" />
+
+                    <!-- craftsman rating -->
+                    <Label Grid.Row="1"
+                           Grid.Column="3"
+                           Text="{Binding DisplayedBid.Craftsman.AverageRating, StringFormat='{0:0.0}'}"
+                           Style="{StaticResource RegularXtraSmallLabel}"
+                           Margin="4, 0, 0, 0"
+                           VerticalTextAlignment="Start" />
+
+                    <!-- bid price title -->
+                    <Label Grid.Row="0"
+                           Grid.Column="4"
+                           Text="{x:Static resources:AppResources.BidPrice}"
+                           Style="{StaticResource RegularXtraSmallLabel}"
+                           Margin="12, 0, 0, 0"
+                           HorizontalOptions="End"
+                           VerticalTextAlignment="End" />
+
+                    <!-- bid price -->
+                    <Label Grid.Row="1"
+                           Grid.Column="3"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource BoldSmallLabel}"
+                           Text="{Binding DisplayedBid.FormattedFinalBid}"
+                           TextColor="{StaticResource LightGreen}"
+                           Margin="12, 0, 0, 0"
+                           HorizontalOptions="End"
+                           VerticalTextAlignment="Start" />
+
+
+                </Grid>
+            </pancakeView:PancakeView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.CraftsmanApplyCompanyPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        <ResourceDictionary>
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorStack" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="84" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="0, 0, 0, 12"></Setter>
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,16,0,0" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="16, 8" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+            <Style x:Key="SmallFrames" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="12,0" />
+                <Setter Property="HeightRequest" Value="32" />
+                <Setter Property="WidthRequest" Value="128" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+        <customRenderer:CustomScrollView>
+
+            <!--  Topbox  -->
+            <Grid Style="{StaticResource SmallTopGrid}"
+                  RowDefinitions="Auto, Auto">
+                <Grid Style="{StaticResource TopBoxSmall}">
+                
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid"
+                                     Binding="{Binding HasSafeArea}"
+                                     Value="True">
+                            <Setter Property="Margin" Value="0, -52, 0, 0" />
+                            <Setter Property="HeightRequest" Value="128" />
+                        </DataTrigger>
+                    </Grid.Triggers>
+                    
+                    <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                    <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                    
+                    <Label Style="{StaticResource TopBoxSmallHeader}" 
+                           Text="{x:Static resources:AppResources.CraftsmanApplyCompanyPageTitle}"
+                           effects:SafeAreaEffect.SafeArea="False, True, False, False" />
+
+                    <!--  BackBtn  -->
+                    <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                                 effects:SafeAreaEffect.SafeArea="False, True, False, False">
+
+                        <!--  arrow  -->
+                        <Image Style="{StaticResource ArrowLeft}" />
+                        <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                               Text="{x:Static resources:AppResources.BackAction}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        
+                    </StackLayout>
+                </Grid>
+
+                <!--  content  -->
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="40,40,40,60"
+                    Spacing="24">
+
+                    <!--  title  -->
+                    <Label
+                        Style="{StaticResource BoldLargeLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.CraftsmanApplyCompanyTitle}" />
+
+                    <!--  caption  -->
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.CraftsmanApplyCompanyCaption}" />
+                    
+                    <!--  tip  -->
+                    <Label
+                        Style="{StaticResource RegularSmallLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.CraftsmanApplyCompanyTip}" />
+
+                    <!--  Company Name  -->
+                    <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout Spacing="0">
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                
+                                <Label Style="{StaticResource EditEntryHeader}" 
+                                       Text="{x:Static resources:AppResources.CraftsmanApplyCompanyCompanyNamePrompt}" />
+                                <customRenderer:CustomEntry HorizontalOptions="FillAndExpand"
+                                                            Style="{StaticResource EditEntry}" 
+                                                            Text="{Binding CompanyName.Value}"
+                                                            Placeholder="{x:Static resources:AppResources.CraftsmanApplyCompanyCompanyNamePrompt}" />
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}" 
+                                         IsVisible="{Binding CompanyName.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}" 
+                                       Text="{Binding CompanyName.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding CompanyName.IsInvalidAndChanged}"
+                                TargetType="custom:PancakeView"
+                                Value="True">
+                                <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                    </custom:PancakeView>
+
+                    <!--  Org Number  -->
+                    <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout Spacing="0">
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                <Label Style="{StaticResource EditEntryHeader}" 
+                                       Text="{x:Static resources:AppResources.CraftsmanApplyCompanyOrganizationNumberPrompt}" />
+                                <customRenderer:CustomEntry HorizontalOptions="FillAndExpand"
+                                                            Keyboard="Numeric"
+                                                            Style="{StaticResource EditEntry}"
+                                                            Text="{Binding OrgNumber.Value}"
+                                                            Placeholder="{x:Static resources:AppResources.CraftsmanApplyCompanyOrganizationNumberPrompt}" />
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}" 
+                                         IsVisible="{Binding OrgNumber.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}" 
+                                       Text="{Binding OrgNumber.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding OrgNumber.IsInvalidAndChanged}"
+                                TargetType="custom:PancakeView"
+                                Value="True">
+                                <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                    </custom:PancakeView>
+
+                    <!--  Company Address  -->
+                    <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout Spacing="0">
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                <Label Style="{StaticResource EditEntryHeader}" 
+                                       Text="{x:Static resources:AppResources.CraftsmanApplyCompanyCompanyAddressPrompt}" />
+                                <customRenderer:CustomEntry HorizontalOptions="FillAndExpand"
+                                                            Style="{StaticResource EditEntry}" 
+                                                            Text="{Binding CompanyAddress.Value}"
+                                                            Placeholder="{x:Static resources:AppResources.CraftsmanApplyCompanyCompanyAddressPrompt}" />
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}" 
+                                         IsVisible="{Binding CompanyAddress.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}" 
+                                       Text="{Binding CompanyAddress.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding CompanyAddress.IsInvalidAndChanged}"
+                                TargetType="custom:PancakeView"
+                                Value="True">
+                                <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                    </custom:PancakeView>
+                    
+                    <!--  Account number  -->
+                    <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                        <StackLayout Spacing="0">
+                            <StackLayout Style="{StaticResource ErrorStack}">
+                                <Label Style="{StaticResource EditEntryHeader}" 
+                                       Text="{x:Static resources:AppResources.CraftsmanApplyCompanyAccountNumberPrompt}" />
+                                <customRenderer:CustomEntry HorizontalOptions="FillAndExpand"
+                                                            Style="{StaticResource EditEntry}" 
+                                                            Text="{Binding AccountNumber.Value}"
+                                                            Placeholder="{x:Static resources:AppResources.CraftsmanApplyCompanyAccountNumberPlaceholder}"/>
+                            </StackLayout>
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}" 
+                                         IsVisible="{Binding AccountNumber.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}" 
+                                       Text="{Binding CompanyAddress.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding AccountNumber.IsInvalidAndChanged}"
+                                TargetType="custom:PancakeView"
+                                Value="True">
+                                <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                    </custom:PancakeView>
+
+                    <!--  F-Tax  -->
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.CraftsmanApplyCompanyFTaxToggle}" />
+
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        Spacing="16">
+
+                        <!--  Yes Btn  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.YesAction}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding HasFTax}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding HasFTax}"
+                                    TargetType="custom:PancakeView"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleFTaxYesBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+
+                        <!--  No Btn  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.NoAction}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding HasFTax}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding HasFTax}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleFTaxNoBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+                    </StackLayout>
+
+                    <!--  Next Btn  -->
+                    <controls:PancakeButton
+                        Margin="24,24,24,0"
+                        Command="{Binding MoveToApplyInfoCommand}"
+                        IsEnabled="{Binding Form.IsValid}"
+                        Style="{StaticResource PrimaryBtnSmall}"
+                        Text="{x:Static resources:AppResources.CraftsmanRegistrationMoveToStep3Action}"
+                        VerticalOptions="EndAndExpand" />
+                </StackLayout>
+                
+                <!-- progress indicator -->
+                <IndicatorView Grid.Row="1"
+                               HorizontalOptions="Center"
+                               IndicatorColor="{StaticResource GrayTextColor}"
+                               SelectedIndicatorColor="{StaticResource LightGreen}"
+                               VerticalOptions="End"
+                               Count="3"
+                               Position="1"
+                               effects:SafeAreaEffect.SafeArea="True"
+                               Margin="0, 0, 0, 32">
+                    <IndicatorView.IndicatorTemplate>
+                        <DataTemplate>
+                            <BoxView HeightRequest="3" WidthRequest="48" />
+                        </DataTemplate>
+                    </IndicatorView.IndicatorTemplate>
+                </IndicatorView>
+                
+            </Grid>
+        </customRenderer:CustomScrollView>
+</ContentPage>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.AddTaskTipsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False">
+    <!--  Shell.PresentationMode="Modal"  -->
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TipsFrame" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="15" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <customRenderer:CustomScrollView>
+
+        <!--  Topbox  -->
+        <StackLayout>
+            <Grid Style="{StaticResource TopBoxSmall}">
+            
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+                
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}" 
+                       Text="{x:Static resources:AppResources.NewJobPageTitle}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}" Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout
+                Padding="32,40,32,32"
+                Spacing="24"
+                VerticalOptions="StartAndExpand">
+                <Label Style="{StaticResource BoldLargeLabel}"
+                       HorizontalTextAlignment="Center"
+                       Text="{Binding User.PreferredName, StringFormat={x:Static resources:AppResources.AddTaskTipsHeaderFormatString}}" />
+                
+                <Label Style="{StaticResource BoldSmallLabel}" 
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.AddTaskTipsSmallHeaderString}" />
+
+                <!--  tipsFrame 1  -->
+                <custom:PancakeView Style="{StaticResource TipsFrame}">
+                    <StackLayout>
+                        <Label Style="{StaticResource BoldSmallLabel}" 
+                               Text="{x:Static resources:AppResources.AddTaskTipHeader1}" />
+                        <Label
+                            Style="{StaticResource RegularSmallLabel}" 
+                            Text="{x:Static resources:AppResources.AddTaskTipContent1}" />
+                    </StackLayout>
+                </custom:PancakeView>
+
+                <!--  tipsFrame 2  -->
+                <custom:PancakeView Style="{StaticResource TipsFrame}">
+                    <StackLayout>
+                        <Label Style="{StaticResource BoldSmallLabel}" 
+                               Text="{x:Static resources:AppResources.AddTaskTipHeader2}" />
+                        <Label Style="{StaticResource RegularSmallLabel}"
+                               Text="{x:Static resources:AppResources.AddTaskTipContent2}" />
+                    </StackLayout>
+                </custom:PancakeView>
+
+                <!--  tipsFrame 3  -->
+                <custom:PancakeView Style="{StaticResource TipsFrame}">
+                    <StackLayout>
+                        <Label Style="{StaticResource BoldSmallLabel}" 
+                               Text="{x:Static resources:AppResources.AddTaskTipHeader3}" />
+                        <Label
+                            Style="{StaticResource RegularSmallLabel}"
+                            Text="{x:Static resources:AppResources.AddTaskTipContent3}" />
+                    </StackLayout>
+                </custom:PancakeView>
+            </StackLayout>
+            
+            <controls:PancakeButton
+                Command="{Binding MoveToMediaCommand}"
+                Style="{StaticResource PrimaryBtn}"
+                Text="{x:Static resources:AppResources.AddTaskGoToStep2Action}"
+                Margin="48, 0"
+                VerticalOptions="EndAndExpand" />
+            
+            <!-- progress indicator -->
+            <IndicatorView Margin="0,32"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource GrayTextColor}"
+                           SelectedIndicatorColor="{StaticResource LightGreen}"
+                           VerticalOptions="End"
+                           Count="5"
+                           Position="0">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+        </StackLayout>
+    </customRenderer:CustomScrollView>
+</ContentPage>

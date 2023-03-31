@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.CraftsmanEditOfferPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:behaviors="clr-namespace:Toolit.Behaviors;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    xmlns:contentViews="clr-namespace:Toolit.Views.ContentViews;assembly=Toolit">
+
+    <ContentPage.Resources>
+        <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+        <ResourceDictionary>
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorStack" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="84" />
+                <Setter Property="Padding" Value="0, 0, 0, 8" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,16,0,0" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="16, 12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <!--  Topbox  -->
+    <Grid Style="{StaticResource SmallTopGrid}"
+          RowDefinitions="Auto, *"
+          effects:SafeAreaEffect.SafeArea="True"
+          BackgroundColor="{StaticResource PageColorLight}">
+        <Grid Style="{StaticResource TopBoxSmall}">
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding HasSafeArea}"
+                             Value="True">
+                    <Setter Property="Margin" Value="0, -52, 0, 0" />
+                    <Setter Property="HeightRequest" Value="128" />
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+            <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+            <Label Style="{StaticResource TopBoxSmallHeader}"
+                   Text="{x:Static resources:AppResources.CraftsmanEditOfferPageTitle}"
+                   effects:SafeAreaEffect.SafeArea="True" />
+
+            <!--  BackBtn  -->
+            <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                         effects:SafeAreaEffect.SafeArea="True">
+
+                <!--  arrow  -->
+                <Image Style="{StaticResource ArrowLeft}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </Grid>
+
+        <!--  content  -->
+        <customRenderer:CustomScrollView
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Never">
+            <StackLayout
+                Padding="16,32,16,108"
+                Spacing="20">
+
+                <!--  header  -->
+                <Label Style="{StaticResource BoldSmallLabel}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.TapCardsToEditAction}" />
+
+                <!--  labor cost  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                    <StackLayout Spacing="0">
+
+                        <StackLayout Style="{StaticResource ErrorStack}">
+                            <Label Style="{StaticResource EditEntryHeader}"
+                                   Text="{x:Static resources:AppResources.NewBidLaborCostPrompt}" />
+
+                            <customRenderer:CustomEntry
+                                Keyboard="Numeric"
+                                Style="{StaticResource EditEntry}"
+                                Text="{Binding LaborCost.Value, Mode=TwoWay}"
+                                MaxLength="9">
+                                <customRenderer:CustomEntry.Behaviors>
+                                    <behaviors:NextEntryBehavior NextEntry="{x:Reference MaterialCostEntry}" />
+                                </customRenderer:CustomEntry.Behaviors>
+                            </customRenderer:CustomEntry>
+
+                        </StackLayout>
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                     IsVisible="{Binding LaborCost.IsInvalidAndChanged}">
+                            <Label Style="{StaticResource ErrorLabel}"
+                                   Text="{Binding LaborCost.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Price.IsInvalidAndChanged}"
+                            TargetType="custom:PancakeView"
+                            Value="True">
+                            <Setter Property="Border"
+                                    Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+
+                </custom:PancakeView>
+
+                <!--  Material Cost  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                    Margin="0, 12, 0, 0">
+                    <StackLayout Spacing="0">
+
+                        <StackLayout Style="{StaticResource ErrorStack}">
+                            <Label Style="{StaticResource EditEntryHeader}"
+                                   Text="{x:Static resources:AppResources.NewBidMaterialCostPrompt}" />
+
+                            <customRenderer:CustomEntry x:Name="MaterialCostEntry"
+                                                        Keyboard="Numeric"
+                                                        Style="{StaticResource EditEntry}"
+                                                        Text="{Binding MaterialCost.Value, Mode=TwoWay}"
+                                                        MaxLength="9"
+                                                        ReturnType="Done" />
+                        </StackLayout>
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                     IsVisible="{Binding MaterialCost.IsInvalidAndChanged}">
+                            <Label Style="{StaticResource ErrorLabel}"
+                                   Text="{Binding MaterialCost.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding MaterialCost.IsInvalidAndChanged}"
+                            TargetType="custom:PancakeView"
+                            Value="True">
+                            <Setter Property="Border"
+                                    Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                </custom:PancakeView>
+
+                <!-- bid cost info -->
+                <contentViews:BidCostView DisplayedBid="{Binding DisplayedBid}"
+                                          IsRotRut="{Binding DisplayedBid.Task.UseRotRut}"
+                                          IsInEditMode="False"
+                                          Margin="0, 16"
+                                          MoveToToSCommand="{Binding MoveToToSCommand}"
+                                          IsVisible="{Binding IsNewBidCostInfoVisible}" />
+
+                <!-- save button -->
+                <controls:PancakeButton
+                    Margin="40,0"
+                    Style="{StaticResource PrimaryBtn}"
+                    BackgroundColor="{StaticResource LightBlue}"
+                    Text="{x:Static resources:AppResources.SaveProfileDataAction}"
+                    Command="{Binding SaveCommand}"
+                    VerticalOptions="EndAndExpand" />
+
+            </StackLayout>
+        </customRenderer:CustomScrollView>
+    </Grid>
+</ContentPage>

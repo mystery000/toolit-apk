@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.AdPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    x:Name="Root">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <!--  Background  -->
+        <Grid BackgroundColor="{StaticResource PageColorLight}"
+              HeightRequest="220"
+              Margin="0, -20, 0, 0">
+
+            <!-- safe area compensator -->
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding HasSafeArea}"
+                             Value="True">
+                    <Setter Property="HeightRequest" Value="256" />
+                    <Setter Property="Margin" Value="0, -52, 0, 0" />
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <!--  spiral  -->
+            <Image
+                Margin="0,-105,-140,0"
+                HeightRequest="420"
+                HorizontalOptions="End"
+                Opacity="0.5"
+                Source="the_spiral"
+                VerticalOptions="Start" />
+            
+            <!--  green  -->
+            <Image
+                Margin="0,-165,-110,0"
+                HeightRequest="255"
+                HorizontalOptions="End"
+                Opacity="0.3"
+                Source="the_green_two"
+                VerticalOptions="Start" />
+            <!--  blue  -->
+            <Image
+                Margin="-180,-40,0,0"
+                HorizontalOptions="Center"
+                Opacity="0.3"
+                Source="blue_dotts"
+                VerticalOptions="Start"
+                WidthRequest="138" />
+            <!--  yellow  -->
+            <Image
+                Margin="-115,55,0,-0"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_yellow"
+                VerticalOptions="Start"
+                WidthRequest="161" />
+            <!--  orange  -->
+            <Image
+                Margin="-190,200,0,0"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_orange"
+                VerticalOptions="Center"
+                WidthRequest="200" />
+            <!--  blub  -->
+            <Image
+                Margin="-120,200,0,0"
+                HorizontalOptions="Center"
+                Opacity="0.3"
+                Source="the_blub"
+                VerticalOptions="Center"
+                WidthRequest="200" />
+            <!--  carrot  -->
+            <Image
+                Margin="0,-30,-30,0"
+                HorizontalOptions="End"
+                Opacity="0.1"
+                Source="the_carrot"
+                VerticalOptions="Center"
+                WidthRequest="180" />
+            <!--  Small red strips  -->
+            <Image
+                Margin="-30,200,0,0"
+                HorizontalOptions="Start"
+                Opacity="0.1"
+                Source="the_small_red_strips"
+                VerticalOptions="Center"
+                WidthRequest="240" />
+            <!--  Blue Spiral  -->
+            <Image
+                Margin="0,200,-30,0"
+                HorizontalOptions="End"
+                Opacity="0.1"
+                Source="the_blue_spiral"
+                VerticalOptions="Center"
+                WidthRequest="170" />
+            <!--  Strips  -->
+            <Image
+                Margin="0,0,-10,20"
+                HorizontalOptions="End"
+                Opacity="0.2"
+                Source="the_red_strips"
+                VerticalOptions="End"
+                WidthRequest="108" />
+            <!--  Green Down  -->
+            <Image
+                Margin="-100,0,0,-140"
+                HorizontalOptions="Start"
+                Opacity="0.3"
+                Source="the_geen_rounded"
+                VerticalOptions="End"
+                WidthRequest="258" />
+            
+            <local:CustomScrollView VerticalScrollBarVisibility="Never" 
+                                    Padding="0,0,0,40">
+                <StackLayout>
+                    <!--  TopImage  -->
+                    <custom:PancakeView BackgroundColor="AliceBlue" 
+                                        Style="{StaticResource TopBoxBig}"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="{Binding Source={x:Reference Root},
+                                            Path=Width}"
+                                        Padding="0, 24, 0, 0">
+                        <Grid>
+                            <!--  Bg Image  -->
+                            <forms:CachedImage
+                                Margin="-36"
+                                Aspect="AspectFill"
+                                Source="{Binding DisplayedAd.ImageUrl}" />
+                            
+                            <!--  BackBtn  -->
+                            <StackLayout Style="{StaticResource BigTopBackBtnStack}"
+                                         effects:SafeAreaEffect.SafeArea="True">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <!--  arrow  -->
+                                <Image Style="{StaticResource ArrowLeft}" />
+                                <Label Style="{StaticResource TopBoxSmallLeftBack}" 
+                                       Text="{x:Static resources:AppResources.BackAction}"
+                                       effects:ShadowEffect.Radius="4"
+                                       effects:ShadowEffect.OffsetX="8"
+                                       effects:ShadowEffect.OffsetY="8"
+                                       effects:ShadowEffect.Color="Black"/>
+                            </StackLayout>
+                        </Grid>
+                    </custom:PancakeView>
+
+                    <Label
+                        Style="{StaticResource BoldLargeLabel}"
+                        Text="{Binding DisplayedAd.Title}"
+                        Margin="36,16,36,16" />
+                    
+                    <Label Style="{StaticResource RegularSmallLabel}"
+                           Text="{Binding DisplayedAd.Text}"
+                           Margin="36,16,36,16" />
+                    
+                    <controls:PancakeButton
+                        Margin="56,24,56,32"
+                        Command="{Binding GoToUrlCommand}"
+                        Style="{StaticResource PrimaryBtn}"
+                        BackgroundColor="{StaticResource LightGreen}"
+                        Text="{x:Static resources:AppResources.GoToUrlAction}"
+                        VerticalOptions="EndAndExpand" />
+                </StackLayout>
+                
+            </local:CustomScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.AddTaskLocationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False">
+    <!--  Shell.PresentationMode="Modal"  -->
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolInvertConverter x:Key="BoolInvertConverter" />
+            <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <!--  Entry Frames And Text  -->
+            <Style x:Key="EntryWrapperFrame" TargetType="custom:PancakeView">
+                <Setter Property="HeightRequest" Value="52" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+            </Style>
+            <Style x:Key="Entry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="12,0,0,0" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+            <Style x:Key="SmallFrames" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+                <Setter Property="Padding" Value="10,0" />
+                <Setter Property="HeightRequest" Value="32" />
+            </Style>
+            <!--  Entry And Errors  -->
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="12,0,0,12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <local:CustomScrollView VerticalScrollBarVisibility="Never">
+
+        <!--  Topbox  -->
+        <StackLayout>
+            <Grid Style="{StaticResource TopBoxSmall}">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.NewJobPageTitle}"
+                       effects:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             effects:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout Padding="40,24,40,0" Spacing="24">
+                <Label
+                    Style="{StaticResource BoldLargeLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.AddTaskLocationHeaderString}" />
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskLocationSubHeaderString}" />
+
+                <!--  Entries  -->
+                <StackLayout Spacing="24">
+
+                    <!--  Address  -->
+                    <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                        BackgroundColor="{StaticResource PageColorLight}">
+                        <StackLayout Spacing="0">
+                            <customRenderer:CustomEntry
+                                Margin="16"
+                                Placeholder="{x:Static resources:AppResources.AddTaskLocationAddressPlaceholder}"
+                                Style="{StaticResource EditEntry}"
+                                Text="{Binding Address.Value}" />
+
+                            <!--  Error  -->
+                            <StackLayout BackgroundColor="{StaticResource Red}"
+                                         IsVisible="{Binding Address.IsInvalidAndChanged}">
+                                <Label Style="{StaticResource ErrorLabel}"
+                                       Text="{Binding Address.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <custom:PancakeView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Address.IsInvalidAndChanged}"
+                                TargetType="custom:PancakeView"
+                                Value="True">
+                                <Setter Property="Border"
+                                        Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                            </DataTrigger>
+                        </custom:PancakeView.Triggers>
+                    </custom:PancakeView>
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="15"
+                        RowSpacing="25">
+
+                        <!--  Postcode  -->
+                        <custom:PancakeView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource ValidationPancake}"
+                            BackgroundColor="{StaticResource PageColorLight}">
+                            <StackLayout Spacing="0">
+                                <customRenderer:CustomEntry
+                                    Margin="16"
+                                    Keyboard="Numeric"
+                                    Placeholder="{x:Static resources:AppResources.AddTaskLocationPostalCodePlaceholder}"
+                                    Style="{StaticResource EditEntry}"
+                                    Text="{Binding Postcode.Value}" />
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}"
+                                             IsVisible="{Binding Postcode.IsInvalidAndChanged}">
+                                    <Label Style="{StaticResource ErrorLabel}"
+                                           Text="{Binding Postcode.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Postcode.IsInvalidAndChanged}"
+                                    TargetType="custom:PancakeView"
+                                    Value="True">
+                                    <Setter Property="Border"
+                                            Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+
+                        <!--  City  -->
+                        <custom:PancakeView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource ValidationPancake}"
+                            BackgroundColor="{StaticResource PageColorLight}">
+                            <StackLayout Spacing="0">
+                                <customRenderer:CustomEntry
+                                    Margin="16"
+                                    Placeholder="{x:Static resources:AppResources.AddTaskLocationCityPlaceholder}"
+                                    Style="{StaticResource EditEntry}"
+                                    Text="{Binding City.Value}" />
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}"
+                                             IsVisible="{Binding City.IsInvalidAndChanged}">
+                                    <Label Style="{StaticResource ErrorLabel}"
+                                           Text="{Binding City.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding City.IsInvalidAndChanged}"
+                                    TargetType="custom:PancakeView"
+                                    Value="True">
+                                    <Setter Property="Border"
+                                            Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+                    </Grid>
+
+                </StackLayout>
+
+                <!--  is address saved  -->
+                <Grid>
+
+                    <!--  not saved  -->
+                    <StackLayout
+                        Margin="8,0,0,0"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <Image
+                            HeightRequest="16"
+                            Source="heart"
+                            VerticalOptions="Center">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Saved}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="heart_green" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+
+                        <Label
+                            Style="{StaticResource RegularXtraSmallLabel}"
+                            Text="{x:Static resources:AppResources.SaveAddressAction}"
+                            VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                             Binding="{Binding Saved}"
+                                             Value="True">
+                                    <Setter Property="TextColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </StackLayout>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleSaveBtnCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--  type of residence selector  -->
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskTypeOfObjectPrompt}" />
+
+                <StackLayout Margin="0,0,0,-16">
+
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        Spacing="16">
+
+                        <!--  House  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.AddTaskIsHouse}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsCondominium}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsCondominium}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleHouseBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+
+                        <!--  Condominium  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.AddTaskIsCondominium}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsCondominium}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsCondominium}"
+                                    TargetType="custom:PancakeView"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleCondominiumBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- rot/rut selector -->
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskRotRutPrompt}"
+                    Margin="0, 16, 0, 0" />
+
+                <Label
+                    Margin="0,-10,0,0"
+                    Style="{StaticResource RegularXtraSmallLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.LearnMoreAboutRotRutAction}"
+                    TextColor="{StaticResource GrayTextColor}"
+                    TextDecorations="Underline" />
+
+                <StackLayout Margin="0,0,0,-12">
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        Spacing="15">
+
+                        <!--  RotRutYesBtn  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.AddTaskRotRutYes}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsRotRut}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsRotRut}"
+                                    TargetType="custom:PancakeView"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRotRutYesBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+
+                        <!--  RotRutNoBtn  -->
+                        <custom:PancakeView Style="{StaticResource SmallFrames}">
+                            <Label
+                                HorizontalOptions="Center"
+                                Style="{StaticResource RegularXtraSmallLabel}"
+                                Text="{x:Static resources:AppResources.AddTaskRotRutNo}"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsRotRut}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsRotRut}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                            <custom:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRotRutNoBtnCommand}" />
+                            </custom:PancakeView.GestureRecognizers>
+                        </custom:PancakeView>
+                    </StackLayout>
+                </StackLayout>
+
+
+                <!--  apartment  -->
+                <StackLayout IsVisible="{Binding IsCondominium}"
+                             Spacing="24"
+                             Margin="0, 16, 0, 0">
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskForCondominiumsPrompt}" />
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="16"
+                        RowDefinitions="52"
+                        RowSpacing="24">
+                        <custom:PancakeView Grid.Row="0" Style="{StaticResource EntryWrapperFrame}">
+                            <customRenderer:CustomEntry
+                                Placeholder="{x:Static resources:AppResources.AddTaskCondominiumHousingNamePlaceholder}"
+                                Style="{StaticResource Entry}"
+                                Text="{Binding CondominiumHousingName.Value, Mode=TwoWay}" />
+                        </custom:PancakeView>
+                        <custom:PancakeView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource EntryWrapperFrame}">
+                            <customRenderer:CustomEntry
+                                Placeholder="{x:Static resources:AppResources.AddTaskCondominiumApartmentNumberPlaceholder}"
+                                Style="{StaticResource Entry}"
+                                Text="{Binding CondominiumApartmentNumber.Value, Mode=TwoWay}" />
+                        </custom:PancakeView>
+                    </Grid>
+                </StackLayout>
+
+                <!--  villa  -->
+                <StackLayout IsVisible="{Binding IsCondominium, Converter={StaticResource BoolInvertConverter}}"
+                             Spacing="24"
+                             Margin="0, 16, 0, 0">
+                    <Label
+                        Style="{StaticResource BoldSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskForHousesPrompt}" />
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="16"
+                        RowDefinitions="52"
+                        RowSpacing="24">
+                        <custom:PancakeView
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource EntryWrapperFrame}">
+
+                            <customRenderer:CustomEntry
+                                Placeholder="{x:Static resources:AppResources.AddTaskHousePropertyDesignationPlaceholder}"
+                                Style="{StaticResource Entry}"
+                                Text="{Binding HousePropertyDesignation.Value, Mode=TwoWay}" />
+                        </custom:PancakeView>
+                    </Grid>
+                </StackLayout>
+
+                <!--  is public checkbox  -->
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <CheckBox
+                        IsChecked="{Binding IsPublic, Mode=TwoWay}"
+                        VerticalOptions="Center"
+                        Color="Black" />
+                    <Label
+                        Style="{StaticResource RegularXtraSmallLabel}"
+                        Text="{x:Static resources:AppResources.AddTaskIsPublicPrompt}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+
+            <!-- create task -->
+            <controls:PancakeButton
+                Margin="64,16,64,32"
+                Command="{Binding SubmitTaskCommand}"
+                IsEnabled="{Binding Form.IsValid}"
+                Style="{StaticResource PrimaryBtnSmall}"
+                Text="{x:Static resources:AppResources.CreateTaskAction}"
+                VerticalOptions="EndAndExpand" />
+
+            <!-- progress indicator -->
+            <IndicatorView Margin="0,0, 0, 32"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource GrayTextColor}"
+                           SelectedIndicatorColor="{StaticResource LightGreen}"
+                           VerticalOptions="End"
+                           Count="5"
+                           Position="4">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+        </StackLayout>
+    </local:CustomScrollView>
+
+</ContentPage>

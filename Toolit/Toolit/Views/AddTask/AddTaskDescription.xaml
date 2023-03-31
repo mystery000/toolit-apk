@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Toolit.Views.AddTaskDescription"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}"
+    Shell.TabBarIsVisible="False">
+    <!--  Shell.PresentationMode="Modal"  -->
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+
+            <!--  Entry And Errors  -->
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="12,0,0,12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <customRenderer:CustomScrollView>
+
+        <!--  Topbox  -->
+        <Grid Style="{StaticResource SmallTopGrid}"
+              RowDefinitions="Auto, Auto">
+            <Grid Style="{StaticResource TopBoxSmall}">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasSafeArea}"
+                                 Value="True">
+                        <Setter Property="Margin" Value="0, -52, 0, 0" />
+                        <Setter Property="HeightRequest" Value="128" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Image Style="{StaticResource LeftTopBoxSmallImage}" />
+                <Image Style="{StaticResource RightTopBoxSmallImage}" />
+
+                <Label Style="{StaticResource TopBoxSmallHeader}"
+                       Text="{x:Static resources:AppResources.NewJobPageTitle}"
+                       xct:SafeAreaEffect.SafeArea="True" />
+
+                <!--  BackBtn  -->
+                <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                             xct:SafeAreaEffect.SafeArea="True">
+
+                    <!--  arrow  -->
+                    <Image Style="{StaticResource ArrowLeft}" />
+                    <Label Style="{StaticResource TopBoxSmallLeftBack}"
+                           Text="{x:Static resources:AppResources.BackAction}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+
+            <!--  content  -->
+            <StackLayout
+                Grid.Row="1"
+                Padding="40,40,40,60"
+                Spacing="24">
+
+                <Label
+                    Style="{StaticResource BoldLargeLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.AddTaskDescriptionHeaderString}" />
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskTitlePrompt}" />
+
+                <!--  Title  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                    BackgroundColor="{StaticResource PageColorLight}">
+                    <StackLayout Spacing="0">
+                        <customRenderer:CustomEntry
+                            Margin="16"
+                            Placeholder="{x:Static resources:AppResources.AddTaskTitlePlaceholder}"
+                            Style="{StaticResource EditEntry}"
+                            Text="{Binding Title.Value}" />
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                     IsVisible="{Binding Title.IsInvalidAndChanged}">
+                            <Label Style="{StaticResource ErrorLabel}"
+                                   Text="{Binding Title.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Title.IsInvalidAndChanged}"
+                            TargetType="custom:PancakeView"
+                            Value="True">
+                            <Setter Property="Border"
+                                    Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                </custom:PancakeView>
+
+                <Label
+                    Style="{StaticResource BoldSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskDescriptionPrompt}" />
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource RegularXtraSmallLabel}"
+                    Text="{x:Static resources:AppResources.AddTaskDescriptionTip}" />
+
+                <!--  Description  -->
+                <custom:PancakeView Style="{StaticResource ValidationPancake}"
+                                    BackgroundColor="{StaticResource PageColorLight}">
+                    <StackLayout Spacing="0">
+                        <Grid>
+                            <customRenderer:CustomEditor x:Name="DescriptionEditor"
+                                                         BackgroundColor="Transparent"
+                                                         Margin="16"
+                                                         FontSize="{StaticResource SmallFontSize}"
+                                                         HeightRequest="160"
+                                                         Text="{Binding Description.Value}"
+                                                         TextColor="{StaticResource BlackTextColor}" />
+
+                            <Label Style="{StaticResource RegularSmallLabel}"
+                                   Text="{Binding CraftMdl.LocalJobDescriptionPlaceholder}"
+                                   TextColor="{StaticResource GrayTextColor}"
+                                   InputTransparent="True"
+                                   IsVisible="False"
+                                   Margin="16">
+                                <Label.Triggers>
+                                    <MultiTrigger TargetType="Label">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition
+                                                Binding="{Binding IsFocused, Source={x:Reference DescriptionEditor}}"
+                                                Value="False" />
+                                            <BindingCondition
+                                                Binding="{Binding Description.Value, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                                Value="False" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </MultiTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+
+                        <!--  Error  -->
+                        <StackLayout BackgroundColor="{StaticResource Red}"
+                                     IsVisible="{Binding Description.IsInvalidAndChanged}">
+                            <Label Style="{StaticResource ErrorLabel}"
+                                   Text="{Binding Description.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <custom:PancakeView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Description.IsInvalidAndChanged}"
+                            TargetType="custom:PancakeView"
+                            Value="True">
+                            <Setter Property="Border"
+                                    Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                        </DataTrigger>
+                    </custom:PancakeView.Triggers>
+                </custom:PancakeView>
+
+                <!-- go to next step button -->
+                <controls:PancakeButton
+                    Margin="24,20,24,12"
+                    Command="{Binding MoveToLocationCommand}"
+                    IsEnabled="{Binding Form.IsValid}"
+                    Style="{StaticResource PrimaryBtnSmall}"
+                    Text="{x:Static resources:AppResources.AddTaskGoToStep5Action}"
+                    VerticalOptions="EndAndExpand" />
+            </StackLayout>
+
+            <!-- progress indicator -->
+            <IndicatorView Margin="0,0, 0, 32"
+                           Grid.Row="1"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource GrayTextColor}"
+                           SelectedIndicatorColor="{StaticResource LightGreen}"
+                           VerticalOptions="End"
+                           Count="5"
+                           Position="4">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="3" WidthRequest="48" />
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+
+        </Grid>
+    </customRenderer:CustomScrollView>
+</ContentPage>

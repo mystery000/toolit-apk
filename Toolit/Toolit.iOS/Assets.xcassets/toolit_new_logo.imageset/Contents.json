@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "toolit_new_logo.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

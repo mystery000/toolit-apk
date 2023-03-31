@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="http://rotorgames.com"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:resources="clr-namespace:Toolit.Resourses;assembly=Toolit"
+                 xmlns:toolit="clr-namespace:Toolit;assembly=Toolit"
+                 xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+                 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+                 xmlns:converters="clr-namespace:Toolit.Converters;assembly=Toolit"
+                 x:Class="Toolit.Views.Popups.UserTaskCompletedPopup"
+                 CloseWhenBackgroundIsClicked="False">
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:UserToInitialsConverter x:Key="UserToInitialsConverter" />
+
+            <Style x:Key="EditorAndLabelFrame" TargetType="pancakeView:PancakeView">
+                <Setter Property="HeightRequest" Value="140" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow"
+                        Value="{pancakeView:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+            </Style>
+            <Style x:Key="EditorFrameLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,16,0,0" />
+            </Style>
+            <Style x:Key="Editor" TargetType="Editor">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="Margin" Value="16" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+
+    <pages:PopupPage.Content>
+        <toolit:CustomScrollView>
+            <pancakeView:PancakeView
+                BackgroundColor="{StaticResource PageColorLight}"
+                CornerRadius="8"
+                Margin="24, 0"
+                VerticalOptions="Center">
+                <!--  Background  -->
+                <Grid>
+
+                    <Image Source="modal_pastel_background"
+                           Aspect="AspectFill"
+                           Margin="-8, 0" />
+
+                    <StackLayout Padding="36,16,36,48" Spacing="16">
+
+
+                        <controls:CachedAvatarView ImageUrl="{Binding BidCraftsmanUser.ImageUrl}"
+                                                   UserInitials="{Binding BidCraftsmanUser, 
+                                                        Converter={StaticResource UserToInitialsConverter}}"
+                                                   HorizontalOptions="Center"
+                                                   HeightRequest="72" />
+
+                        <!--  Header  -->
+                        <Label
+                            Style="{StaticResource RegularSmallLabel}"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding BidCraftsmanUser.FullName}" />
+
+                        <Label
+                            Style="{StaticResource BoldMediumLabel}"
+                            HorizontalTextAlignment="Center"
+                            Text="{x:Static resources:AppResources.UserCompletedTaskRatingPrompt}" />
+
+                        <!-- rating bar -->
+                        <controls:RatingBar HorizontalOptions="Center"
+                                            IsInDisplayMode="False"
+                                            Rating="{Binding SelectedRating, Mode=TwoWay}"
+                                            Margin="0, 16"
+                                            Scale="2" />
+
+                        <!--  Editor  -->
+                        <pancakeView:PancakeView Style="{StaticResource EditorAndLabelFrame}"
+                                                 HorizontalOptions="FillAndExpand">
+                            <StackLayout>
+                                <Label Style="{StaticResource EditorFrameLabel}"
+                                       Text="{x:Static resources:AppResources.UserCompletedTaskReviewPrompt}" />
+                                <toolit:CustomEditor
+                                    HeightRequest="200"
+                                    Placeholder="{x:Static resources:AppResources.UserCompletedTaskReviewPlaceholder}"
+                                    Style="{StaticResource Editor}"
+                                    Text="{Binding RatingText}" />
+                            </StackLayout>
+                        </pancakeView:PancakeView>
+
+                        <!-- close button -->
+                        <controls:PancakeButton
+                            Margin="0,20,0,0"
+                            Command="{Binding SubmitRatingCommand}"
+                            Style="{StaticResource PrimaryBtn}"
+                            BackgroundColor="{StaticResource LightBlue}"
+                            Text="{x:Static resources:AppResources.UserCompletedTaskSendRatingAction}"
+                            VerticalOptions="EndAndExpand"
+                            IsEnabled="{Binding CanSubmit}" />
+
+                    </StackLayout>
+
+                    <Image Style="{StaticResource CloseModalImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </pancakeView:PancakeView>
+        </toolit:CustomScrollView>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

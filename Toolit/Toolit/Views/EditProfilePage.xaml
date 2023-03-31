@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Toolit.Views.EditProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:customRenderer="clr-namespace:Toolit;assembly=Toolit"
+    xmlns:local="clr-namespace:Toolit"
+    xmlns:resources="clr-namespace:Toolit.Resourses"
+    xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:behaviors="clr-namespace:Toolit.Behaviors;assembly=Toolit"
+    xmlns:controls="clr-namespace:Toolit.Controls;assembly=Toolit"
+    BackgroundColor="{StaticResource PageColorLight}">
+
+    <ContentPage.Resources>
+        <local:BoolInvertConverter x:Key="BoolInvertConverter" />
+        <local:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        <ResourceDictionary>
+            <Style x:Key="ValidationPancake" TargetType="custom:PancakeView">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow" Value="{custom:ShadowMarkup Offset='2, 2', BlurRadius='4', Opacity='0.2'}" />
+            </Style>
+            <Style x:Key="ErrorStack" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="84" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColorLight}" />
+            </Style>
+            <Style x:Key="EditEntryHeader" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,12,0,0" />
+            </Style>
+            <Style x:Key="ErrorLabel" TargetType="Label"
+                   BasedOn="{StaticResource RegularXtraSmallLabel}">
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+            <Style x:Key="EditEntry" TargetType="customRenderer:CustomEntry">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="ReturnType" Value="Next" />
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <customRenderer:CustomScrollView>
+            <StackLayout>
+
+                <!--  Topbox  -->
+                <Grid Style="{StaticResource SmallTopGrid}"
+                      RowDefinitions="Auto, *">
+                    <Grid Style="{StaticResource TopBoxSmall}"
+                          Grid.Row="0">
+            
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid"
+                                         Binding="{Binding HasSafeArea}"
+                                         Value="True">
+                                <Setter Property="Margin" Value="0, -52, 0, 0" />
+                                <Setter Property="HeightRequest" Value="128" />
+                            </DataTrigger>
+                        </Grid.Triggers>
+                        
+                        <Image Style="{StaticResource LeftTopBoxSmallDownImage}" />
+                        <Image Style="{StaticResource TopBoxSmallDottsImage}" />
+                        <Label Style="{StaticResource TopBoxSmallHeader}" 
+                               Text="{x:Static resources:AppResources.EditProfileTitle}"
+                               effects:SafeAreaEffect.SafeArea="True" />
+
+                        <!--  BackBtn  -->
+                        <StackLayout Style="{StaticResource TopBoxBackBtnStack}"
+                                     effects:SafeAreaEffect.SafeArea="True">
+
+                            <!--  arrow  -->
+                            <Image Style="{StaticResource ArrowLeft}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+
+                    <!--  content  -->
+                    <StackLayout Grid.Row="1"
+                        Padding="16,32"
+                        Spacing="20">
+
+                        <!--  header  -->
+                        <Label Style="{StaticResource BoldSmallLabel}"
+                               HorizontalTextAlignment="Center"
+                               Text="{x:Static resources:AppResources.TapCardsToEditAction}" />
+
+                        <!--  Name  -->
+                        <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                            <StackLayout Spacing="0">
+                                <StackLayout Style="{StaticResource ErrorStack}">
+                                    <Label Style="{StaticResource EditEntryHeader}" 
+                                           Text="{x:Static resources:AppResources.FullNamePrompt}" />
+
+                                    <customRenderer:CustomEntry Style="{StaticResource EditEntry}" 
+                                                                Text="{Binding FullName.Value}">
+                                        <customRenderer:CustomEntry.Behaviors>
+                                            <behaviors:NextEntryBehavior NextEntry="{x:Reference AddressEntry}" /> 
+                                        </customRenderer:CustomEntry.Behaviors>
+                                    </customRenderer:CustomEntry>
+                                </StackLayout>
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}" 
+                                             IsVisible="{Binding FullName.IsValid, 
+                                                Converter={StaticResource BoolInvertConverter}}">
+                                    <Label Style="{StaticResource ErrorLabel}" 
+                                           Text="{Binding FullName.Errors, 
+                                            Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding FullName.IsValid}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+
+                        <!--  Address  -->
+                        <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                            <StackLayout Spacing="0">
+                                <StackLayout Style="{StaticResource ErrorStack}">
+                                    <Label Style="{StaticResource EditEntryHeader}" 
+                                           Text="{x:Static resources:AppResources.HomeAddressPrompt}" />
+                                    
+                                    <customRenderer:CustomEntry x:Name="AddressEntry"
+                                                                Style="{StaticResource EditEntry}" 
+                                                                Text="{Binding Address.Value}">
+                                        <customRenderer:CustomEntry.Behaviors>
+                                            <behaviors:NextEntryBehavior NextEntry="{x:Reference PhoneEntry}" /> 
+                                        </customRenderer:CustomEntry.Behaviors>
+                                    </customRenderer:CustomEntry>
+                                </StackLayout>
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}" 
+                                             IsVisible="{Binding Address.IsValid, 
+                                                Converter={StaticResource BoolInvertConverter}}">
+                                    <Label Style="{StaticResource ErrorLabel}" 
+                                           Text="{Binding Address.Errors, 
+                                                Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Address.IsValid}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+
+                        <!--  Email  -->
+                        <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                            <StackLayout Spacing="0">
+                                <StackLayout Style="{StaticResource ErrorStack}">
+                                    <Label Style="{StaticResource EditEntryHeader}" 
+                                           Text="{x:Static resources:AppResources.EmailAddressPrompt}" />
+                                    
+                                    <!-- need to use placeholder bc text color doesn't change on disabled entries on ios -->
+                                    <customRenderer:CustomEntry x:Name="EmailEntry"
+                                                                Style="{StaticResource EditEntry}" 
+                                                                Placeholder="{Binding Email.Value}"
+                                                                PlaceholderColor="{StaticResource GrayTextColor}"
+                                                                Keyboard="Email"
+                                                                IsEnabled="False">
+                                        <customRenderer:CustomEntry.Behaviors>
+                                            <behaviors:NextEntryBehavior NextEntry="{x:Reference PhoneEntry}" /> 
+                                        </customRenderer:CustomEntry.Behaviors>
+                                    </customRenderer:CustomEntry>
+                                </StackLayout>
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}" 
+                                             IsVisible="{Binding Email.IsValid, 
+                                                Converter={StaticResource BoolInvertConverter}}">
+                                    <Label Style="{StaticResource ErrorLabel}" 
+                                           Text="{Binding Email.Errors, 
+                                                Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Email.IsValid}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+
+                        <!--  Phone  -->
+                        <custom:PancakeView Style="{StaticResource ValidationPancake}">
+                            <StackLayout Spacing="0">
+                                <StackLayout Style="{StaticResource ErrorStack}">
+                                    <Label Style="{StaticResource EditEntryHeader}" 
+                                           Text="{x:Static resources:AppResources.PhoneNumberPrompt}" />
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="0">
+                                        <Label Style="{StaticResource RegularSmallLabel}"
+                                               Text="+46"
+                                               Margin="16, 8, 8, 8"
+                                               VerticalOptions="Center"/>
+                                        <customRenderer:CustomEntry x:Name="PhoneEntry"
+                                                                    Style="{StaticResource EditEntry}" 
+                                                                    Text="{Binding Phone.Value}"
+                                                                    ReturnType="Done"
+                                                                    Keyboard="Telephone"
+                                                                    Margin="0, 8, 16, 8"
+                                                                    HorizontalOptions="FillAndExpand" />
+                                        
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!--  Error  -->
+                                <StackLayout BackgroundColor="{StaticResource Red}" 
+                                             IsVisible="{Binding Phone.IsValid, 
+                                                Converter={StaticResource BoolInvertConverter}}">
+                                    <Label Style="{StaticResource ErrorLabel}" 
+                                           Text="{Binding Phone.Errors, 
+                                                Converter={StaticResource FirstValidationErrorConverter}}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <custom:PancakeView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Phone.IsValid}"
+                                    TargetType="custom:PancakeView"
+                                    Value="False">
+                                    <Setter Property="Border" Value="{custom:BorderMarkup Color={StaticResource Red}, Thickness='1'}" />
+                                </DataTrigger>
+                            </custom:PancakeView.Triggers>
+                        </custom:PancakeView>
+                        
+                        <!-- save button -->
+                        <controls:PancakeButton
+                            Margin="0,24,0,16"
+                            Style="{StaticResource PrimaryBtnSmall}"
+                            BackgroundColor="{StaticResource LightBlue}"
+                            Text="{x:Static resources:AppResources.SaveProfileDataAction}"
+                            Command="{Binding SaveCommand}" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </customRenderer:CustomScrollView>
+    </ContentPage.Content>
+</ContentPage>
